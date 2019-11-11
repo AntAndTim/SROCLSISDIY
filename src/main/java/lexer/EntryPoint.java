@@ -1,3 +1,5 @@
+package lexer;
+
 import java.io.EOFException;
 import java.io.IOException;
 import token.Token;

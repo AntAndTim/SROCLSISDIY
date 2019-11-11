@@ -15,6 +15,7 @@ public enum Delimiter implements TokenType {
     SINGLE_QUOTES_2("`"),
     COMMA(","),
     DOT("."),
+    COLON(";"),
     SEMICOLON(";"),
     NEWLINE("\n");
 

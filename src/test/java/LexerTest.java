@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
 import java.util.Scanner;
+
+import lexer.Lexer;
 import org.junit.Test;
 import token.Token;
 import token.type.Delimiter;
