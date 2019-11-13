@@ -1,4 +1,4 @@
-package parser;/* A Bison parser, made by GNU Bison 3.4.2.  */
+/* A Bison parser, made by GNU Bison 3.4.2.  */
 
 /* Skeleton implementation for Bison LALR(1) parsers in Java
 
@@ -63,243 +63,257 @@ class YYParser
 
 /* Tokens.  */
     /** Token number,to be returned by the scanner.  */
-    static final int NUM = 258;
+    static final int WHITESPACE = 258;
     /** Token number,to be returned by the scanner.  */
-    static final int INT = 259;
+    static final int OPENING_CURLY_BRACES = 259;
     /** Token number,to be returned by the scanner.  */
-    static final int WHITESPACE = 260;
+    static final int CLOSING_CURLY_BRACES = 260;
     /** Token number,to be returned by the scanner.  */
-    static final int OPENING_CURLY_BRACES = 261;
+    static final int OPENING_PARENTHESIS = 261;
     /** Token number,to be returned by the scanner.  */
-    static final int CLOSING_CURLY_BRACES = 262;
+    static final int CLOSING_PARENTHESIS = 262;
     /** Token number,to be returned by the scanner.  */
-    static final int OPENING_PARENTHESIS = 263;
+    static final int OPENING_BRACKETS = 263;
     /** Token number,to be returned by the scanner.  */
-    static final int CLOSING_PARENTHESIS = 264;
+    static final int CLOSING_BRACKETS = 264;
     /** Token number,to be returned by the scanner.  */
-    static final int OPENING_BRACKETS = 265;
+    static final int DOUBLE_QUOTES = 265;
     /** Token number,to be returned by the scanner.  */
-    static final int CLOSING_BRACKETS = 266;
+    static final int SINGLE_QUOTES = 266;
     /** Token number,to be returned by the scanner.  */
-    static final int DOUBLE_QUOTES = 267;
+    static final int SINGLE_QUOTES_2 = 267;
     /** Token number,to be returned by the scanner.  */
-    static final int SINGLE_QUOTES = 268;
+    static final int COMMA = 268;
     /** Token number,to be returned by the scanner.  */
-    static final int SINGLE_QUOTES_2 = 269;
+    static final int DOT = 269;
     /** Token number,to be returned by the scanner.  */
-    static final int COMMA = 270;
+    static final int SEMICOLON = 270;
     /** Token number,to be returned by the scanner.  */
-    static final int DOT = 271;
+    static final int NEWLINE = 271;
     /** Token number,to be returned by the scanner.  */
-    static final int SEMICOLON = 272;
+    static final int IDENTIFIER = 272;
     /** Token number,to be returned by the scanner.  */
-    static final int NEWLINE = 273;
+    static final int ABSTRACT = 273;
     /** Token number,to be returned by the scanner.  */
-    static final int IDENTIFIER = 274;
+    static final int ARGUMENTS = 274;
     /** Token number,to be returned by the scanner.  */
-    static final int ABSTRACT = 275;
+    static final int BOOLEAN = 275;
     /** Token number,to be returned by the scanner.  */
-    static final int ARGUMENTS = 276;
+    static final int BREAK = 276;
     /** Token number,to be returned by the scanner.  */
-    static final int BOOLEAN = 277;
+    static final int BYTE = 277;
     /** Token number,to be returned by the scanner.  */
-    static final int BREAK = 278;
+    static final int CASE = 278;
     /** Token number,to be returned by the scanner.  */
-    static final int BYTE = 279;
+    static final int CATCH = 279;
     /** Token number,to be returned by the scanner.  */
-    static final int CASE = 280;
+    static final int CHAR = 280;
     /** Token number,to be returned by the scanner.  */
-    static final int CATCH = 281;
+    static final int CONST = 281;
     /** Token number,to be returned by the scanner.  */
-    static final int CHAR = 282;
+    static final int CONTINUE = 282;
     /** Token number,to be returned by the scanner.  */
-    static final int CONST = 283;
+    static final int DEBUGGER = 283;
     /** Token number,to be returned by the scanner.  */
-    static final int CONTINUE = 284;
+    static final int DEFAULT = 284;
     /** Token number,to be returned by the scanner.  */
-    static final int DEBUGGER = 285;
+    static final int DELETE = 285;
     /** Token number,to be returned by the scanner.  */
-    static final int DEFAULT = 286;
+    static final int DO = 286;
     /** Token number,to be returned by the scanner.  */
-    static final int DELETE = 287;
+    static final int DOUBLE = 287;
     /** Token number,to be returned by the scanner.  */
-    static final int DO = 288;
+    static final int ELSE = 288;
     /** Token number,to be returned by the scanner.  */
-    static final int DOUBLE = 289;
+    static final int EVAL = 289;
     /** Token number,to be returned by the scanner.  */
-    static final int ELSE = 290;
+    static final int FALSE = 290;
     /** Token number,to be returned by the scanner.  */
-    static final int EVAL = 291;
+    static final int FINAL = 291;
     /** Token number,to be returned by the scanner.  */
-    static final int FALSE = 292;
+    static final int FINALLY = 292;
     /** Token number,to be returned by the scanner.  */
-    static final int FINAL = 293;
+    static final int FLOAT = 293;
     /** Token number,to be returned by the scanner.  */
-    static final int FINALLY = 294;
+    static final int FOR = 294;
     /** Token number,to be returned by the scanner.  */
-    static final int FLOAT = 295;
+    static final int FUNCTION = 295;
     /** Token number,to be returned by the scanner.  */
-    static final int FOR = 296;
+    static final int GOTO = 296;
     /** Token number,to be returned by the scanner.  */
-    static final int FUNCTION = 297;
+    static final int IF = 297;
     /** Token number,to be returned by the scanner.  */
-    static final int GOTO = 298;
+    static final int IMPLEMENTS = 298;
     /** Token number,to be returned by the scanner.  */
-    static final int IF = 299;
+    static final int IN = 299;
     /** Token number,to be returned by the scanner.  */
-    static final int IMPLEMENTS = 300;
+    static final int INSTANCEOF = 300;
     /** Token number,to be returned by the scanner.  */
-    static final int IN = 301;
+    static final int INT = 301;
     /** Token number,to be returned by the scanner.  */
-    static final int INSTANCEOF = 302;
+    static final int INTERFACE = 302;
     /** Token number,to be returned by the scanner.  */
-    static final int INTERFACE = 303;
+    static final int LET = 303;
     /** Token number,to be returned by the scanner.  */
-    static final int LET = 304;
+    static final int LONG = 304;
     /** Token number,to be returned by the scanner.  */
-    static final int LONG = 305;
+    static final int NATIVE = 305;
     /** Token number,to be returned by the scanner.  */
-    static final int NATIVE = 306;
+    static final int NEW = 306;
     /** Token number,to be returned by the scanner.  */
-    static final int NEW = 307;
+    static final int NULL = 307;
     /** Token number,to be returned by the scanner.  */
-    static final int NULL = 308;
+    static final int PACKAGE = 308;
     /** Token number,to be returned by the scanner.  */
-    static final int PACKAGE = 309;
+    static final int PRIVATE = 309;
     /** Token number,to be returned by the scanner.  */
-    static final int PRIVATE = 310;
+    static final int PROTECTED = 310;
     /** Token number,to be returned by the scanner.  */
-    static final int PROTECTED = 311;
+    static final int PUBLIC = 311;
     /** Token number,to be returned by the scanner.  */
-    static final int PUBLIC = 312;
+    static final int RETURN = 312;
     /** Token number,to be returned by the scanner.  */
-    static final int RETURN = 313;
+    static final int SHORT = 313;
     /** Token number,to be returned by the scanner.  */
-    static final int SHORT = 314;
+    static final int STATIC = 314;
     /** Token number,to be returned by the scanner.  */
-    static final int STATIC = 315;
+    static final int SWITCH = 315;
     /** Token number,to be returned by the scanner.  */
-    static final int SWITCH = 316;
+    static final int SYNCHRONIZED = 316;
     /** Token number,to be returned by the scanner.  */
-    static final int SYNCHRONIZED = 317;
+    static final int THIS = 317;
     /** Token number,to be returned by the scanner.  */
-    static final int THIS = 318;
+    static final int THROW = 318;
     /** Token number,to be returned by the scanner.  */
-    static final int THROW = 319;
+    static final int THROWS = 319;
     /** Token number,to be returned by the scanner.  */
-    static final int THROWS = 320;
+    static final int TRANSIENT = 320;
     /** Token number,to be returned by the scanner.  */
-    static final int TRANSIENT = 321;
+    static final int TRUE = 321;
     /** Token number,to be returned by the scanner.  */
-    static final int TRUE = 322;
+    static final int TRY = 322;
     /** Token number,to be returned by the scanner.  */
-    static final int TRY = 323;
+    static final int TYPEOF = 323;
     /** Token number,to be returned by the scanner.  */
-    static final int TYPEOF = 324;
+    static final int VAR = 324;
     /** Token number,to be returned by the scanner.  */
-    static final int VAR = 325;
+    static final int VOID = 325;
     /** Token number,to be returned by the scanner.  */
-    static final int VOID = 326;
+    static final int VOLATILE = 326;
     /** Token number,to be returned by the scanner.  */
-    static final int VOLATILE = 327;
+    static final int WHILE = 327;
     /** Token number,to be returned by the scanner.  */
-    static final int WHILE = 328;
+    static final int WITH = 328;
     /** Token number,to be returned by the scanner.  */
-    static final int WITH = 329;
+    static final int YIELD = 329;
     /** Token number,to be returned by the scanner.  */
-    static final int YIELD = 330;
+    static final int CLASS = 330;
     /** Token number,to be returned by the scanner.  */
-    static final int CLASS = 331;
+    static final int ENUM = 331;
     /** Token number,to be returned by the scanner.  */
-    static final int ENUM = 332;
+    static final int EXPORT = 332;
     /** Token number,to be returned by the scanner.  */
-    static final int EXPORT = 333;
+    static final int EXTENDS = 333;
     /** Token number,to be returned by the scanner.  */
-    static final int EXTENDS = 334;
+    static final int IMPORT = 334;
     /** Token number,to be returned by the scanner.  */
-    static final int IMPORT = 335;
+    static final int SUPER = 335;
     /** Token number,to be returned by the scanner.  */
-    static final int SUPER = 336;
+    static final int NUMBER_LITERAL = 336;
     /** Token number,to be returned by the scanner.  */
-    static final int NUMBER_LITERAL = 337;
+    static final int ASSIGNMENT = 337;
     /** Token number,to be returned by the scanner.  */
-    static final int ASSIGNMENT = 338;
+    static final int ASSIGNMENT_WITH_INCREASE = 338;
     /** Token number,to be returned by the scanner.  */
-    static final int ASSIGNMENT_WITH_INCREASE = 339;
+    static final int ASSIGNMENT_WITH_DECREASE = 339;
     /** Token number,to be returned by the scanner.  */
-    static final int ASSIGNMENT_WITH_DECREASE = 340;
+    static final int ASSIGNMENT_WITH_MULTIPLICATION = 340;
     /** Token number,to be returned by the scanner.  */
-    static final int ASSIGNMENT_WITH_MULTIPLICATION = 341;
+    static final int ASSIGNMENT_WITH_DIVISION = 341;
     /** Token number,to be returned by the scanner.  */
-    static final int ASSIGNMENT_WITH_DIVISION = 342;
+    static final int ASSIGNMENT_WITH_REMAINDER = 342;
     /** Token number,to be returned by the scanner.  */
-    static final int ASSIGNMENT_WITH_REMAINDER = 343;
+    static final int ASSIGNMENT_WITH_AND = 343;
     /** Token number,to be returned by the scanner.  */
-    static final int ASSIGNMENT_WITH_AND = 344;
+    static final int ASSIGNMENT_WITH_OR = 344;
     /** Token number,to be returned by the scanner.  */
-    static final int ASSIGNMENT_WITH_OR = 345;
+    static final int ASSIGNMENT_WITH_XOR = 345;
     /** Token number,to be returned by the scanner.  */
-    static final int ASSIGNMENT_WITH_XOR = 346;
+    static final int ASSIGNMENT_WITH_LEFT_SHIFT = 346;
     /** Token number,to be returned by the scanner.  */
-    static final int ASSIGNMENT_WITH_LEFT_SHIFT = 347;
+    static final int ASSIGNMENT_WITH_RIGHT_SHIFT = 347;
     /** Token number,to be returned by the scanner.  */
-    static final int ASSIGNMENT_WITH_RIGHT_SHIFT = 348;
+    static final int ASSIGNMENT_WITH_UNSIGNED_RIGHT_SHIFT = 348;
     /** Token number,to be returned by the scanner.  */
-    static final int ASSIGNMENT_WITH_UNSIGNED_RIGHT_SHIFT = 349;
+    static final int TYPELESS_EQUALITY = 349;
     /** Token number,to be returned by the scanner.  */
-    static final int TYPELESS_EQUALITY = 350;
+    static final int TYPELESS_INEQUALITY = 350;
     /** Token number,to be returned by the scanner.  */
-    static final int TYPELESS_INEQUALITY = 351;
+    static final int EQUALITY = 351;
     /** Token number,to be returned by the scanner.  */
-    static final int EQUALITY = 352;
+    static final int INEQUALITY = 352;
     /** Token number,to be returned by the scanner.  */
-    static final int INEQUALITY = 353;
+    static final int GREATER = 353;
     /** Token number,to be returned by the scanner.  */
-    static final int GREATER = 354;
+    static final int LESS = 354;
     /** Token number,to be returned by the scanner.  */
-    static final int LESS = 355;
+    static final int GREATER_OR_EQUAL = 355;
     /** Token number,to be returned by the scanner.  */
-    static final int GREATER_OR_EQUAL = 356;
+    static final int LESS_OR_EQUAL = 356;
     /** Token number,to be returned by the scanner.  */
-    static final int LESS_OR_EQUAL = 357;
+    static final int PLUS = 357;
     /** Token number,to be returned by the scanner.  */
-    static final int PLUS = 358;
+    static final int MINUS = 358;
     /** Token number,to be returned by the scanner.  */
-    static final int MINUS = 359;
+    static final int MILTIPLICATION = 359;
     /** Token number,to be returned by the scanner.  */
-    static final int MILTIPLICATION = 360;
+    static final int DIVISION = 360;
     /** Token number,to be returned by the scanner.  */
-    static final int DIVISION = 361;
+    static final int REMAINDER = 361;
     /** Token number,to be returned by the scanner.  */
-    static final int REMAINDER = 362;
+    static final int INCREMENT = 362;
     /** Token number,to be returned by the scanner.  */
-    static final int INCREMENT = 363;
+    static final int DECREMENT = 363;
     /** Token number,to be returned by the scanner.  */
-    static final int DECREMENT = 364;
+    static final int BITWISE_AND = 364;
     /** Token number,to be returned by the scanner.  */
-    static final int BITWISE_AND = 365;
+    static final int BITWISE_OR = 365;
     /** Token number,to be returned by the scanner.  */
-    static final int BITWISE_OR = 366;
+    static final int BITWISE_NOT = 366;
     /** Token number,to be returned by the scanner.  */
-    static final int BITWISE_NOT = 367;
+    static final int BITWISE_XOR = 367;
     /** Token number,to be returned by the scanner.  */
-    static final int BITWISE_XOR = 368;
+    static final int BITWISE_LEFT_SHIFT = 368;
     /** Token number,to be returned by the scanner.  */
-    static final int BITWISE_LEFT_SHIFT = 369;
+    static final int BITWISE_RIGHT_SHIFT = 369;
     /** Token number,to be returned by the scanner.  */
-    static final int BITWISE_RIGHT_SHIFT = 370;
+    static final int BITWISE_UNSIGNED_RIGHT_SHIFT = 370;
     /** Token number,to be returned by the scanner.  */
-    static final int BITWISE_UNSIGNED_RIGHT_SHIFT = 371;
+    static final int LOGICAL_AND = 371;
     /** Token number,to be returned by the scanner.  */
-    static final int LOGICAL_AND = 372;
+    static final int LOGICAL_OR = 372;
     /** Token number,to be returned by the scanner.  */
-    static final int LOGICAL_OR = 373;
+    static final int LOGICAL_NOT = 373;
     /** Token number,to be returned by the scanner.  */
-    static final int LOGICAL_NOT = 374;
+    static final int ARROW = 374;
     /** Token number,to be returned by the scanner.  */
-    static final int ARROW = 375;
+    static final int COLON = 375;
     /** Token number,to be returned by the scanner.  */
     static final int UNKNOWN = 376;
+    /** Token number,to be returned by the scanner.  */
+    static final int IS = 377;
+    /** Token number,to be returned by the scanner.  */
+    static final int END = 378;
+    /** Token number,to be returned by the scanner.  */
+    static final int LOOP = 379;
+    /** Token number,to be returned by the scanner.  */
+    static final int THEN = 380;
+    /** Token number,to be returned by the scanner.  */
+    static final int METHOD = 381;
+    /** Token number,to be returned by the scanner.  */
+    static final int INTEGER = 382;
+    /** Token number,to be returned by the scanner.  */
+    static final int REAL = 383;
 
 
     
@@ -535,7 +549,7 @@ class YYParser
     switch (yyn)
       {
         
-/* "parser.java":539  */
+/* "parser.java":553  */
 
         default: break;
       }
@@ -843,7 +857,7 @@ class YYParser
     return yyvalue == yytable_ninf_;
   }
 
-  private static final byte yypact_ninf_ = -123;
+  private static final byte yypact_ninf_ = -87;
   private static final byte yytable_ninf_ = -1;
 
   /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
@@ -853,8 +867,17 @@ class YYParser
   {
     return new byte[]
     {
-       3,  -123,     7,  -122,  -122,  -123,     3,     3,     5,     6,
-    -122,  -122,  -123,  -123
+     -50,    10,    34,   -87,   -50,   -87,   -43,   -87,   -87,    10,
+     -86,   -87,   -56,    31,    21,    22,   -83,   -56,   -87,   -87,
+     -87,     5,   -81,   -77,    31,   -87,   -87,   -87,   -76,    11,
+     -87,    -9,   -16,   -75,    10,   -87,    32,   -30,   -16,   -16,
+     -16,   -12,   -67,    -9,   -87,   -87,   -10,   -87,     9,   -87,
+     -87,   -87,   -87,   -87,   -87,   -87,   -87,   -87,   -87,   -87,
+      50,   -87,    48,   -54,   -87,   -87,   -16,   -59,   -87,   -53,
+     -87,   -87,   -87,   -87,    23,    55,    56,    50,   -87,   -87,
+      -9,   -87,    -9,    -9,   -87,    67,   -87,    69,   -87,   -47,
+     -31,   -46,   -87,    -7,   -87,   -87,    -9,   -87,   -87,   -87,
+     -87,    13,   -45,   -87,   -16,   -87,   -87
     };
   }
 
@@ -866,8 +889,17 @@ class YYParser
   {
     return new byte[]
     {
-       0,     6,     0,     2,     3,     1,     0,     0,     0,     0,
-       4,     5,     7,     8
+       3,     0,     0,     2,     3,     8,     6,     1,     4,     0,
+       0,     7,     9,     0,     0,     0,     0,     9,    11,    12,
+      13,     0,     0,     0,     0,     5,    10,    18,     0,     0,
+      20,    23,     0,    16,     0,    19,     0,    39,     0,    45,
+       0,    27,     0,    23,    25,    26,    29,    36,     0,    32,
+      33,    34,    35,    61,    58,    60,    55,    56,    59,    14,
+       0,    57,     0,     0,    22,    21,     0,     0,    46,     0,
+      28,    31,    24,    30,     0,     0,     0,    47,    48,    17,
+      23,    41,    23,    23,    37,     0,    40,     0,    49,     0,
+       0,     0,    38,     0,    50,    15,    23,    43,    42,    51,
+      53,     0,     0,    52,     0,    44,    54
     };
   }
 
@@ -877,7 +909,10 @@ class YYParser
   {
     return new byte[]
     {
-    -123,  -123,  -123,    -2
+     -87,   -87,    75,   -87,   -87,     8,    63,   -87,     4,   -87,
+     -87,   -13,   -87,    45,   -29,   -87,    41,    37,   -87,   -87,
+     -87,   -87,   -87,   -87,   -87,   -87,   -35,   -87,     7,   -87,
+     -87,   -87,   -87
     };
   }
 
@@ -887,7 +922,10 @@ class YYParser
   {
     return new byte[]
     {
-      -1,     2,     3,     4
+      -1,     2,     3,     4,    10,    58,    16,    17,    41,    19,
+      63,    22,    29,    30,    42,    43,    44,    45,    20,    46,
+      47,    48,    49,    50,    51,    52,    59,    77,    78,    94,
+     101,    60,    61
     };
   }
 
@@ -899,16 +937,40 @@ class YYParser
   {
     return new byte[]
     {
-       6,     7,     8,     9,    10,    11,     1,     5,    12,    13
+      99,     5,    96,    67,    68,    69,    13,    37,    37,     6,
+       5,    33,    27,    14,    72,    74,    18,    11,    35,    53,
+     103,    18,    28,    75,    36,     1,   104,     5,    53,    21,
+      84,    81,    38,    38,     7,     9,    12,    21,    23,    24,
+      25,    31,    64,    32,    34,    62,    54,    39,    39,    28,
+      55,    89,    66,    90,    91,    54,    71,    14,   100,    55,
+      14,    85,    40,    40,    76,    79,    82,   102,    80,   106,
+      15,    83,    86,    87,    92,    93,    95,    98,   105,     8,
+      26,    65,    70,    73,    88,     0,     0,     0,     0,     0,
+       0,     0,    97,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,    56,    57,     0,     0,     0,     0,     0,     0,     0,
+      56,    57
     };
   }
 
-private static final byte yycheck_[] = yycheck_init();
-  private static final byte[] yycheck_init()
+private static final short yycheck_[] = yycheck_init();
+  private static final short[] yycheck_init()
   {
-    return new byte[]
+    return new short[]
     {
-     122,   123,   124,   125,     6,     7,     3,     0,     3,     3
+       7,    17,    33,    38,    39,    40,    62,    17,    17,     1,
+      17,    24,     7,    69,    43,     6,    12,     9,     7,    35,
+       7,    17,    17,    14,    13,    75,    13,    17,    35,     6,
+       7,    66,    42,    42,     0,    78,   122,     6,    17,    17,
+     123,   122,    34,   120,   120,   120,    62,    57,    57,    17,
+      66,    80,    82,    82,    83,    62,   123,    69,    93,    66,
+      69,    74,    72,    72,    14,    17,   125,    96,   122,   104,
+     126,   124,    17,    17,     7,     6,   123,   123,   123,     4,
+      17,    36,    41,    46,    77,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,   123,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,   127,   128,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+     127,   128
     };
   }
 
@@ -919,8 +981,17 @@ private static final byte yycheck_[] = yycheck_init();
   {
     return new short[]
     {
-       0,     3,   127,   128,   129,     0,   122,   123,   124,   125,
-     129,   129,     3,     3
+       0,    75,   130,   131,   132,    17,   134,     0,   131,    78,
+     133,   134,   122,    62,    69,   126,   135,   136,   137,   138,
+     147,     6,   140,    17,    17,   123,   135,     7,    17,   141,
+     142,   122,   120,   140,   120,     7,    13,    17,    42,    57,
+      72,   137,   143,   144,   145,   146,   148,   149,   150,   151,
+     152,   153,   154,    35,    62,    66,   127,   128,   134,   155,
+     160,   161,   120,   139,   134,   142,    82,   155,   155,   155,
+     145,   123,   143,   146,     6,    14,    14,   156,   157,    17,
+     122,   155,   125,   124,     7,   140,    17,    17,   157,   143,
+     143,   143,     7,     6,   158,   123,    33,   123,   123,     7,
+     155,   159,   143,     7,    13,   123,   155
     };
   }
 
@@ -930,7 +1001,13 @@ private static final byte yycheck_[] = yycheck_init();
   {
     return new short[]
     {
-       0,   126,   127,   128,   128,   128,   129,   129,   129
+       0,   129,   130,   131,   131,   132,   133,   133,   134,   135,
+     135,   136,   136,   136,   137,   138,   139,   139,   140,   140,
+     141,   141,   142,   143,   143,   144,   144,   145,   145,   146,
+     146,   147,   148,   148,   148,   148,   148,   149,   149,   150,
+     150,   151,   152,   153,   153,   154,   154,   155,   156,   156,
+     157,   158,   158,   159,   159,   160,   160,   160,   160,   160,
+     161,   161
     };
   }
 
@@ -940,7 +1017,13 @@ private static final byte yycheck_[] = yycheck_init();
   {
     return new byte[]
     {
-       0,     2,     1,     1,     3,     3,     1,     3,     3
+       0,     2,     1,     0,     2,     6,     0,     2,     1,     0,
+       2,     1,     1,     1,     4,     7,     0,     2,     2,     3,
+       1,     3,     3,     0,     2,     1,     1,     0,     2,     0,
+       2,     5,     1,     1,     1,     1,     1,     3,     4,     1,
+       3,     3,     5,     5,     7,     1,     2,     2,     1,     2,
+       3,     2,     3,     1,     3,     1,     1,     1,     1,     1,
+       1,     1
     };
   }
 
@@ -963,7 +1046,7 @@ private static final byte yycheck_[] = yycheck_init();
      345,   346,   347,   348,   349,   350,   351,   352,   353,   354,
      355,   356,   357,   358,   359,   360,   361,   362,   363,   364,
      365,   366,   367,   368,   369,   370,   371,   372,   373,   374,
-     375,   376,    43,    45,    42,    47
+     375,   376,   377,   378,   379,   380,   381,   382,   383
     };
   }
 
@@ -974,32 +1057,41 @@ private static final byte yycheck_[] = yycheck_init();
   {
     return new String[]
     {
-  "$end", "error", "$undefined", "NUM", "INT", "WHITESPACE",
-  "OPENING_CURLY_BRACES", "CLOSING_CURLY_BRACES", "OPENING_PARENTHESIS",
-  "CLOSING_PARENTHESIS", "OPENING_BRACKETS", "CLOSING_BRACKETS",
-  "DOUBLE_QUOTES", "SINGLE_QUOTES", "SINGLE_QUOTES_2", "COMMA", "DOT",
-  "SEMICOLON", "NEWLINE", "IDENTIFIER", "ABSTRACT", "ARGUMENTS", "BOOLEAN",
-  "BREAK", "BYTE", "CASE", "CATCH", "CHAR", "CONST", "CONTINUE",
-  "DEBUGGER", "DEFAULT", "DELETE", "DO", "DOUBLE", "ELSE", "EVAL", "FALSE",
-  "FINAL", "FINALLY", "FLOAT", "FOR", "FUNCTION", "GOTO", "IF",
-  "IMPLEMENTS", "IN", "INSTANCEOF", "INTERFACE", "LET", "LONG", "NATIVE",
-  "NEW", "NULL", "PACKAGE", "PRIVATE", "PROTECTED", "PUBLIC", "RETURN",
-  "SHORT", "STATIC", "SWITCH", "SYNCHRONIZED", "THIS", "THROW", "THROWS",
-  "TRANSIENT", "TRUE", "TRY", "TYPEOF", "VAR", "VOID", "VOLATILE", "WHILE",
-  "WITH", "YIELD", "CLASS", "ENUM", "EXPORT", "EXTENDS", "IMPORT", "SUPER",
-  "NUMBER_LITERAL", "ASSIGNMENT", "ASSIGNMENT_WITH_INCREASE",
-  "ASSIGNMENT_WITH_DECREASE", "ASSIGNMENT_WITH_MULTIPLICATION",
-  "ASSIGNMENT_WITH_DIVISION", "ASSIGNMENT_WITH_REMAINDER",
-  "ASSIGNMENT_WITH_AND", "ASSIGNMENT_WITH_OR", "ASSIGNMENT_WITH_XOR",
-  "ASSIGNMENT_WITH_LEFT_SHIFT", "ASSIGNMENT_WITH_RIGHT_SHIFT",
-  "ASSIGNMENT_WITH_UNSIGNED_RIGHT_SHIFT", "TYPELESS_EQUALITY",
-  "TYPELESS_INEQUALITY", "EQUALITY", "INEQUALITY", "GREATER", "LESS",
-  "GREATER_OR_EQUAL", "LESS_OR_EQUAL", "PLUS", "MINUS", "MILTIPLICATION",
-  "DIVISION", "REMAINDER", "INCREMENT", "DECREMENT", "BITWISE_AND",
-  "BITWISE_OR", "BITWISE_NOT", "BITWISE_XOR", "BITWISE_LEFT_SHIFT",
-  "BITWISE_RIGHT_SHIFT", "BITWISE_UNSIGNED_RIGHT_SHIFT", "LOGICAL_AND",
-  "LOGICAL_OR", "LOGICAL_NOT", "ARROW", "UNKNOWN", "'+'", "'-'", "'*'",
-  "'/'", "$accept", "EVALUATE", "EXPR", "TERM", null
+  "$end", "error", "$undefined", "WHITESPACE", "OPENING_CURLY_BRACES",
+  "CLOSING_CURLY_BRACES", "OPENING_PARENTHESIS", "CLOSING_PARENTHESIS",
+  "OPENING_BRACKETS", "CLOSING_BRACKETS", "DOUBLE_QUOTES", "SINGLE_QUOTES",
+  "SINGLE_QUOTES_2", "COMMA", "DOT", "SEMICOLON", "NEWLINE", "IDENTIFIER",
+  "ABSTRACT", "ARGUMENTS", "BOOLEAN", "BREAK", "BYTE", "CASE", "CATCH",
+  "CHAR", "CONST", "CONTINUE", "DEBUGGER", "DEFAULT", "DELETE", "DO",
+  "DOUBLE", "ELSE", "EVAL", "FALSE", "FINAL", "FINALLY", "FLOAT", "FOR",
+  "FUNCTION", "GOTO", "IF", "IMPLEMENTS", "IN", "INSTANCEOF", "INT",
+  "INTERFACE", "LET", "LONG", "NATIVE", "NEW", "NULL", "PACKAGE",
+  "PRIVATE", "PROTECTED", "PUBLIC", "RETURN", "SHORT", "STATIC", "SWITCH",
+  "SYNCHRONIZED", "THIS", "THROW", "THROWS", "TRANSIENT", "TRUE", "TRY",
+  "TYPEOF", "VAR", "VOID", "VOLATILE", "WHILE", "WITH", "YIELD", "CLASS",
+  "ENUM", "EXPORT", "EXTENDS", "IMPORT", "SUPER", "NUMBER_LITERAL",
+  "ASSIGNMENT", "ASSIGNMENT_WITH_INCREASE", "ASSIGNMENT_WITH_DECREASE",
+  "ASSIGNMENT_WITH_MULTIPLICATION", "ASSIGNMENT_WITH_DIVISION",
+  "ASSIGNMENT_WITH_REMAINDER", "ASSIGNMENT_WITH_AND", "ASSIGNMENT_WITH_OR",
+  "ASSIGNMENT_WITH_XOR", "ASSIGNMENT_WITH_LEFT_SHIFT",
+  "ASSIGNMENT_WITH_RIGHT_SHIFT", "ASSIGNMENT_WITH_UNSIGNED_RIGHT_SHIFT",
+  "TYPELESS_EQUALITY", "TYPELESS_INEQUALITY", "EQUALITY", "INEQUALITY",
+  "GREATER", "LESS", "GREATER_OR_EQUAL", "LESS_OR_EQUAL", "PLUS", "MINUS",
+  "MILTIPLICATION", "DIVISION", "REMAINDER", "INCREMENT", "DECREMENT",
+  "BITWISE_AND", "BITWISE_OR", "BITWISE_NOT", "BITWISE_XOR",
+  "BITWISE_LEFT_SHIFT", "BITWISE_RIGHT_SHIFT",
+  "BITWISE_UNSIGNED_RIGHT_SHIFT", "LOGICAL_AND", "LOGICAL_OR",
+  "LOGICAL_NOT", "ARROW", "COLON", "UNKNOWN", "IS", "END", "LOOP", "THEN",
+  "METHOD", "INTEGER", "REAL", "$accept", "Program", "ClassDeclarations",
+  "ClassDeclaration", "Extends", "ClassName", "MemberDeclarations",
+  "MemberDeclaration", "VariableDeclaration", "MethodDeclaration",
+  "MethodReturnType", "Parameters", "ParameterDeclarations",
+  "ParameterDeclaration", "Body", "BodyMember", "VariableDeclarationGroup",
+  "StatementGroup", "ConstructorDeclaration", "Statement", "CallStatement",
+  "CompoundName", "Assignment", "WhileLoop", "IfStatement",
+  "ReturnStatement", "Expression", "ExpressionCallGroup",
+  "ExpressionCallGroupComponent", "Arguments", "ExpressionsList",
+  "Primary", "BooleanLiteral", null
     };
   }
 
@@ -1009,7 +1101,13 @@ private static final byte yycheck_[] = yycheck_init();
   {
     return new short[]
     {
-       0,   129,   129,   131,   132,   133,   136,   137,   138
+       0,   137,   137,   141,   142,   146,   150,   151,   155,   159,
+     160,   164,   165,   166,   170,   174,   178,   179,   183,   184,
+     188,   189,   193,   197,   198,   202,   203,   207,   208,   212,
+     213,   217,   221,   222,   223,   224,   225,   229,   230,   234,
+     235,   239,   243,   247,   248,   252,   253,   257,   262,   263,
+     267,   272,   273,   279,   280,   284,   285,   286,   287,   288,
+     292,   293
     };
   }
 
@@ -1035,16 +1133,16 @@ private static final byte yycheck_[] = yycheck_init();
 
   /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
      as returned by yylex, with out-of-bounds checking.  */
-  private static final byte yytranslate_table_[] = yytranslate_table_init();
-  private static final byte[] yytranslate_table_init()
+  private static final short yytranslate_table_[] = yytranslate_table_init();
+  private static final short[] yytranslate_table_init()
   {
-    return new byte[]
+    return new short[]
     {
        0,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,   124,   122,     2,   123,     2,   125,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
@@ -1077,11 +1175,12 @@ private static final byte yycheck_[] = yycheck_init();
       85,    86,    87,    88,    89,    90,    91,    92,    93,    94,
       95,    96,    97,    98,    99,   100,   101,   102,   103,   104,
      105,   106,   107,   108,   109,   110,   111,   112,   113,   114,
-     115,   116,   117,   118,   119,   120,   121
+     115,   116,   117,   118,   119,   120,   121,   122,   123,   124,
+     125,   126,   127,   128
     };
   }
 
-  private static final byte yytranslate_ (int t)
+  private static final short yytranslate_ (int t)
   {
     if (t >= 0 && t <= yyuser_token_number_max_)
       return yytranslate_table_[t];
@@ -1089,20 +1188,20 @@ private static final byte yycheck_[] = yycheck_init();
       return yyundef_token_;
   }
 
-  private static final int yylast_ = 9;
-  private static final int yynnts_ = 4;
+  private static final int yylast_ = 121;
+  private static final int yynnts_ = 33;
   private static final int yyempty_ = -2;
-  private static final int yyfinal_ = 5;
+  private static final int yyfinal_ = 7;
   private static final int yyterror_ = 1;
   private static final int yyerrcode_ = 256;
-  private static final int yyntokens_ = 126;
+  private static final int yyntokens_ = 129;
 
-  private static final int yyuser_token_number_max_ = 376;
+  private static final int yyuser_token_number_max_ = 383;
   private static final int yyundef_token_ = 2;
 
 /* User implementation code.  */
 
 }
 
-/* "parser.y":141  */
+/* "parser.y":296  */
 
