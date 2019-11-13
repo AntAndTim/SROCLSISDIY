@@ -159,7 +159,8 @@ ReturnStatement
     ;
 
 Expression
-    : Primary ExpressionCallGroup
+    : Primary
+    | Primary ExpressionCallGroup
     ;
 
 /* one or more */
