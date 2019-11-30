@@ -58,13 +58,17 @@ public class BodyNode extends Node {
             switch (actionTypes.get(i)) {
                 case VARIABLE_DECLARATION:
                     cil.append(action.generateCode());
+
+                    // TODO: This would look better in VariableDeclNode
                     int varId = vars.get(((VariableDeclNode) action).name);
                     cil.append(String.format("stloc.s %d\n", varId));
+
                     break;
                 case EXPRESSION:
                     cil.append(action.generateCode());
                     break;
                 case STATEMENT:
+                    cil.append(action.generateCode());
                     break;
                 default:
                     break;
