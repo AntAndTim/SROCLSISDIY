@@ -2,6 +2,7 @@
 
 ## 1. Indexing of classes and their members
 
+<<<<<<< HEAD
 1. Initialize symbol table with standard library classes
 2. Find available in the program classes and their members
 3. Check that none of them have the same to std lib name
@@ -9,6 +10,20 @@
 5. Ensure that generics are just single identifiers
 
 ## 2. Methods analysis
+=======
+1. [x] Initialize symbol table with standard library classes
+2. [x] Find available in the program classes and their members
+3. [x] Check that none of them have the same to std lib name
+4. [x] Ensure that fields are uninitialized
+5. [x] Ensure that generics are just single identifiers
+
+## 2. Updating AST
+
+1. [ ] Add methods from the parent for each inherited class 
+2. [ ] Add constructors from the parent for each inherited class
+
+## 3. Methods analysis
+>>>>>>> semantic_analyzer
 
 1. [ ] Check if used identifiers are available for each expression
 2. [ ] Check arguments types conformance
@@ -22,7 +37,11 @@
 10. [ ] (Until method hoisting is imlemented) Check if there is no usage of methods/variables defined below the current method
 11. [ ] Check if there is anything below return (optional)
 12. [ ] All variables should be initialized (description doesn't provide any default values)
+<<<<<<< HEAD
 
+=======
+13. [ ] Check if generics are set for object initialization requiring it
+>>>>>>> semantic_analyzer
  
  
  
