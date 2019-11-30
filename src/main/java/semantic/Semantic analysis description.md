@@ -2,11 +2,11 @@
 
 ## 1. Indexing of classes and their members
 
-1. Initialize symbol table with standard library classes
-2. Find available in the program classes and their members
-3. Check that none of them have the same to std lib name
-4. Ensure that fields are uninitialized
-5. Ensure that generics are just single identifiers
+1. [x] Initialize symbol table with standard library classes
+2. [x] Find available in the program classes and their members
+3. [x] Check that none of them have the same to std lib name
+4. [x] Ensure that fields are uninitialized
+5. [x] Ensure that generics are just single identifiers
 
 ## 2. Updating AST
 

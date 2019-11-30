@@ -13,6 +13,26 @@ public class TypeNode extends Node{
     }
 
     @Override
+    public boolean equals(Object o) {
+        TypeNode otherType = (TypeNode)o;
+        if (!otherType.ident.value.equals(this.ident.value)){
+            return false;
+        }
+
+        if (this.generics.size() != otherType.generics.size()){
+            return false;
+        }
+
+        for (int i=0;i<this.generics.size();i++){
+            if (!this.generics.get(i).equals(otherType.generics.get(i))){
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    @Override
     public String generateCode() {
         return null;
     }

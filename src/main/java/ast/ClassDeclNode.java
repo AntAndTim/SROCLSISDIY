@@ -15,7 +15,6 @@ public class ClassDeclNode extends Node{
     public ArrayList<String> parentGenerics;
     static final String defaultParentClass = "Class";
 
-    public int maxStack;
 
     @Override
     public String generateCode() {
@@ -101,5 +100,14 @@ public class ClassDeclNode extends Node{
         }
 
         this.methods.add(new MethodDeclNode(nameId, paramsDecl, returnTypeId, null));
+    }
+
+    public MethodDeclNode getMethod(String name){
+        for (MethodDeclNode m : this.methods){
+            if (name.equals(m.name)) {
+                return m;
+            }
+        }
+        return null;
     }
 }
