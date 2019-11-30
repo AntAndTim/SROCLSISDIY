@@ -8,7 +8,12 @@
 4. Ensure that fields are uninitialized
 5. Ensure that generics are just single identifiers
 
-## 2. Methods analysis
+## 2. Updating AST
+
+1. [ ] Add methods from the parent for each inherited class 
+2. [ ] Add constructors from the parent for each inherited class
+
+## 3. Methods analysis
 
 1. [ ] Check if used identifiers are available for each expression
 2. [ ] Check arguments types conformance
@@ -22,7 +27,7 @@
 10. [ ] (Until method hoisting is imlemented) Check if there is no usage of methods/variables defined below the current method
 11. [ ] Check if there is anything below return (optional)
 12. [ ] All variables should be initialized (description doesn't provide any default values)
-
+13. [ ] Check if generics are set for object initialization requiring it
  
  
  

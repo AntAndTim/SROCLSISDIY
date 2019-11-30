@@ -1,5 +1,7 @@
 package ast;
 
+import com.sun.org.apache.xerces.internal.dom.ParentNode;
+
 import java.util.ArrayList;
 
 public class ClassDeclNode extends Node{
@@ -11,6 +13,7 @@ public class ClassDeclNode extends Node{
     public ArrayList<ConstructorDeclNode> constructors;
     public String parent;
     public ArrayList<String> parentGenerics;
+    static final String defaultParentClass = "Class";
 
     public int maxStack;
 
@@ -50,5 +53,53 @@ public class ClassDeclNode extends Node{
                     constructors.add((ConstructorDeclNode)memberNode.declaration);
             }
         }
+    }
+
+    /**
+     * Sets parent class to default value
+     * @param cName
+     * @param members
+     */
+    public ClassDeclNode(ClassNameNode cName, ArrayList<MemberDeclNode> members) {
+        // Class identification
+        this.generics = new ArrayList<>();
+        name = cName.ident.value;
+        for (IdentNode genericIdent : cName.generics){
+            generics.add(genericIdent.value);
+        }
+
+        // Parent class identification
+        this.parentGenerics = new ArrayList<>();
+        this.parent = defaultParentClass;
+
+        // Class members
+        this.fields = new ArrayList<>();
+        this.methods = new ArrayList<>();
+        this.constructors = new ArrayList<>();
+        for (MemberDeclNode memberNode : members){
+            switch (memberNode.declType){
+                case FIELD:
+                    fields.add((FieldDeclNode)memberNode.declaration);
+                    break;
+                case METHOD:
+                    methods.add((MethodDeclNode)memberNode.declaration);
+                    break;
+                case CONSTRUCTOR:
+                    constructors.add((ConstructorDeclNode)memberNode.declaration);
+            }
+        }
+    }
+
+    public void addStubMethod(String name, String[] args, String[] argTypes, String retType){
+        IdentNode nameId = new IdentNode(name);
+        IdentNode returnTypeId = new IdentNode(retType);
+        ArrayList<ParamsDeclNode> paramsDecl = new ArrayList<>();
+
+        for (int i=0;i<args.length;i++){
+            paramsDecl.add(new ParamsDeclNode(new IdentNode(args[i]),
+                        new TypeNode(new IdentNode(argTypes[i]), new ArrayList<>())));
+        }
+
+        this.methods.add(new MethodDeclNode(nameId, paramsDecl, returnTypeId, null));
     }
 }
