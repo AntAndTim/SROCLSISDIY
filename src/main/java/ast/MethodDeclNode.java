@@ -17,8 +17,6 @@ public class MethodDeclNode extends Node {
     public BodyNode body;
 
     public int maxStack;
-    public Map<String, Integer> nameToIndex;    // Indexes start from 1
-    public Map<Integer, String> indexToType;
     public List<Pair<String, String>> localInit;    // First -> type, second -> name
 
     public MethodDeclNode(IdentNode nameId, ArrayList<ParamsDeclNode> paramsDecls, IdentNode retTypeNameId, BodyNode body) {
@@ -30,10 +28,6 @@ public class MethodDeclNode extends Node {
 
     public boolean compareSignature(MethodDeclNode other){
         return false; // TODO
-    }
-
-    public int getLocalIndexByName(String name){
-        return 0; // TODO
     }
 
     @Override

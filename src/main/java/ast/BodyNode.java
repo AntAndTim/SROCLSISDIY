@@ -1,11 +1,17 @@
 package ast;
 
+import utils.Pair;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class BodyNode extends Node {
 
     public ArrayList<Node> actions;
     public ArrayList<ActionType> actionTypes;
+
+    public int maxStack;
+    public List<Pair<String, String>> localInit;    // First -> type, second -> name
 
     enum ActionType {
         VARIABLE_DECLARATION,
@@ -32,5 +38,9 @@ public class BodyNode extends Node {
     @Override
     public String generateCode() {
         return null;
+    }
+
+    public int getLocalIndexByName(String name){
+        return 0; // TODO
     }
 }
