@@ -37,6 +37,7 @@ public class BodyNode extends Node {
         StringBuilder cil = new StringBuilder();
         HashMap<String, Integer> vars = new HashMap<>();
         // Declaring local variables
+        // TODO: Apparently body nodes are not only in actual bodies but also in statements, move declarations
         int declarations = 0;
         for (int i = 0; i < actionTypes.size(); i++) {
             vars.put(((VariableDeclNode) actions.get(i)).name, declarations);
