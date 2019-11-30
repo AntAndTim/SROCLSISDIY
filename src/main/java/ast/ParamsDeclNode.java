@@ -12,6 +12,11 @@ public class ParamsDeclNode extends Node {
 
     @Override
     public String generateCode() {
-        return null;
+        StringBuilder cil = new StringBuilder();
+        cil.append(paramType);
+        cil.append(" ");
+        cil.append(name);
+
+        return cil.toString();
     }
 }

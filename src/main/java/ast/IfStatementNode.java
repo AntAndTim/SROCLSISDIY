@@ -20,6 +20,15 @@ public class IfStatementNode extends StatementNode {
 
     @Override
     public String generateCode() {
-        return null;
+        StringBuilder cil = new StringBuilder();
+        cil.append(condition.generateCode());
+        // Skip the true branch and jump directly to false if condition is not true
+        // TODO: Change FALSE to a global label that won't repeat
+        cil.append("brfalse.s FALSE\n");
+        cil.append(trueBranch.generateCode());
+        cil.append("FALSE: ");
+        if (falseBranch != null) cil.append(falseBranch.generateCode());
+        else cil.append("nop\n");
+        return cil.toString();
     }
 }

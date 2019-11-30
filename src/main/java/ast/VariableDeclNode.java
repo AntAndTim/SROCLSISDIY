@@ -3,15 +3,18 @@ package ast;
 public class VariableDeclNode extends Node{
 
     public String name;
-    public ExpressionNode intialization;
+    public ExpressionNode initialization;
 
-    public VariableDeclNode(IdentNode nameId, ExpressionNode intialization) {
+    public VariableDeclNode(IdentNode nameId, ExpressionNode initialization) {
         this.name = nameId.value;
-        this.intialization = intialization;
+        this.initialization = initialization;
     }
 
     @Override
     public String generateCode() {
-        return null;
+        StringBuilder cil = new StringBuilder();
+        cil.append(initialization.generateCode());
+
+        return cil.toString();
     }
 }

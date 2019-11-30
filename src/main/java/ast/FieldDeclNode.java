@@ -12,6 +12,13 @@ public class FieldDeclNode extends Node {
 
     @Override
     public String generateCode() {
-        return null;
+        StringBuilder cil = new StringBuilder();
+        cil.append(".field public ");
+        cil.append(fieldType);
+        cil.append(" ");
+        cil.append(name);
+        cil.append("\n");
+
+        return cil.toString();
     }
 }

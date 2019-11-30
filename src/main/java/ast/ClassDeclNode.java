@@ -1,10 +1,9 @@
 package ast;
 
-import com.sun.org.apache.xerces.internal.dom.ParentNode;
-
 import java.util.ArrayList;
 
 public class ClassDeclNode extends Node{
+    static final String defaultParentClass = "Class";
 
     public String name;
     public ArrayList<String> generics;
@@ -13,12 +12,28 @@ public class ClassDeclNode extends Node{
     public ArrayList<ConstructorDeclNode> constructors;
     public String parent;
     public ArrayList<String> parentGenerics;
-    static final String defaultParentClass = "Class";
 
+    public int maxStack;
 
     @Override
     public String generateCode() {
-        return null;
+        StringBuilder cil = new StringBuilder();
+        cil.append("{\n");
+
+        // Fields
+        for (int i = 0; i < fields.size(); i++) {
+            cil.append(fields.get(i).generateCode());
+        }
+
+        // Methods
+        for (int i = 0; i < methods.size(); i++) {
+            cil.append(methods.get(i).generateCode());
+        }
+
+        cil.append("}");
+        cil.append("\n");
+
+        return cil.toString();
     }
 
     public ClassDeclNode(ClassNameNode cName, ClassNameNode parentName, ArrayList<MemberDeclNode> members) {

@@ -10,6 +10,6 @@ public class IdentNode extends Node{
 
     @Override
     public String generateCode() {
-        return null;
+        return value;
     }
 }

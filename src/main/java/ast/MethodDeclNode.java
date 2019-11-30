@@ -26,12 +26,36 @@ public class MethodDeclNode extends Node {
         this.body = body;
     }
 
+    @Override
+    public String generateCode() {
+        StringBuilder cil = new StringBuilder();
+        cil.append(".method public hidebysig instance ");
+        cil.append(retTypeName);
+        cil.append(" ");
+        cil.append(name);
+        cil.append("(");
+        if (params.size() > 0) {
+            cil.append(params.get(0).generateCode());
+            for (int i = 1; i < params.size(); i++) {
+                cil.append(", ");
+                cil.append(params.get(i).generateCode());
+            }
+        }
+        cil.append(")");
+        // cil.append(" cil");
+        // cil.append(" managed");
+        cil.append("\n{");
+        cil.append(body.generateCode());
+        cil.append("}\n");
+
+        return cil.toString();
+    }
+
     public boolean compareSignature(MethodDeclNode other){
         return false; // TODO
     }
 
-    @Override
-    public String generateCode() {
-        return null;
+    public int getLocalIndexByName(String name){
+        return 0; // TODO
     }
 }
