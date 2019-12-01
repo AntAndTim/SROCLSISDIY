@@ -10,6 +10,9 @@ public class ReturnStatement extends StatementNode {
 
     @Override
     public String generateCode() {
-        return null;
+        StringBuilder cil = new StringBuilder();
+        cil.append(returnVal);
+        cil.append("ret\n");
+        return cil.toString();
     }
 }
