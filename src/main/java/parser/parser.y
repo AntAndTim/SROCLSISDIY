@@ -1,135 +1,180 @@
 %language "Java"
-%define api.value.type {token.Token}
+%code imports
+{
+package parser;
 
-%token OPENING_CURLY_BRACES
-%token CLOSING_CURLY_BRACES
-%token OPENING_PARENTHESIS
-%token CLOSING_PARENTHESIS
-%token OPENING_BRACKETS
-%token CLOSING_BRACKETS
-%token COMMA
-%token DOT
-%token IDENTIFIER
-%token ELSE
-%token FALSE
-%token IF
-%token IN
-%token THIS
-%token TRUE
-%token VAR
-%token WHILE
-%token CLASS
-%token EXTENDS
-%token ASSIGNMENT
-%token COLON
-%token UNKNOWN
-%token RETURN
+import ast.*;
+import utils.Pair;
+
+import java.util.ArrayList;
+}
+
+%code {public ProgramNode root;}
+
+
+%token <token.Token> OPENING_CURLY_BRACES
+%token <token.Token> CLOSING_CURLY_BRACES
+%token <token.Token> OPENING_PARENTHESIS
+%token <token.Token> CLOSING_PARENTHESIS
+%token <token.Token> OPENING_BRACKETS
+%token <token.Token> CLOSING_BRACKETS
+%token <token.Token> COMMA
+%token <token.Token> DOT
+%token <token.Token> IDENTIFIER
+%token <token.Token> ELSE
+%token <token.Token> FALSE
+%token <token.Token> IF
+%token <token.Token> IN
+%token <token.Token> THIS
+%token <token.Token> TRUE
+%token <token.Token> VAR
+%token <token.Token> WHILE
+%token <token.Token> CLASS
+%token <token.Token> EXTENDS
+%token <token.Token> ASSIGNMENT
+%token <token.Token> COLON
+%token <token.Token> UNKNOWN
+%token <token.Token> RETURN
 
 /*todo tokens*/
-%token IS      /* is  */
-%token END     /* end */
+%token <token.Token> IS      /* is  */
+%token <token.Token> END     /* end */
                /* todo ASSIGNMENT(':=') */
-%token LOOP    /* loop */
-%token THEN    /* then */
-%token METHOD  /* method */
-%token INTEGER /* regular int: 1,2,3 ..*/
-%token REAL    /* fp value: 1.1 ,1.2, 5.5 ... */
+%token <token.Token> LOOP    /* loop */
+%token <token.Token> THEN    /* then */
+%token <token.Token> METHOD  /* method */
+%token <token.Token> INTEGER /* regular int: 1,2,3 ..*/
+%token <token.Token> REAL    /* fp value: 1.1 ,1.2, 5.5 ... */
+
+
+/* %type <ast.IfStatementNode> IfStatement */
+%type <ArrayList<ClassDeclNode>> ClassDeclarations
+%type <ast.ClassDeclNode> ClassDeclaration
+%type <ast.ClassNameNode> Extends
+%type <ast.ClassNameNode> ClassName
+%type <ArrayList<MemberDeclNode>> MemberDeclarations
+%type <ast.MemberDeclNode> MemberDeclaration
+%type <ast.VariableDeclNode> VariableDeclaration
+%type <ast.MethodDeclNode> MethodDeclaration
+%type <ast.ConstructorDeclNode> ConstructorDeclaration
+%type <ast.IdentNode> MethodReturnType
+%type <ArrayList<ParamsDeclNode>> Parameters
+%type <ArrayList<ParamsDeclNode>> ParameterDeclarations
+%type <ast.ParamsDeclNode> ParameterDeclaration
+%type <ArrayList<ast.Node>> Body
+%type <ArrayList<ast.Node>> BodyMember
+%type <ArrayList<ast.Node>> VariableDeclarationGroup
+%type <ArrayList<ast.Node>> StatementGroup
+%type <ast.Node> Statement
+%type <ast.AssignmentNode> Assignment
+%type <ast.WhileLoopNode> WhileLoop
+%type <ast.IfStatementNode> IfStatement
+%type <ast.ReturnStatement> ReturnStatement
+%type <ast.ExpressionNode> Expression
+%type <ArrayList<Pair<IdentNode, ArrayList<ExpressionNode>>>> ExpressionCallGroup
+%type <Pair<IdentNode, ArrayList<ExpressionNode>>> ExpressionCallGroupComponent
+%type <ArrayList<ExpressionNode>> Arguments
+%type <ArrayList<ExpressionNode>> ExpressionsList
+%type <ast.Node> Primary
+%type <ast.BooleanLitNode> BooleanLiteral
+
 
 %%
 
 Program
-    : ClassDeclarations
+    : ClassDeclarations {root = new ProgramNode($1);}
     ;
 
 ClassDeclarations
-    : /* empty */
-    | ClassDeclaration ClassDeclarations
+    : /* empty */                        {$$ = new ArrayList<ClassDeclNode>();}
+    | ClassDeclaration ClassDeclarations { $2.add($1); $$=$2; }
     ;
 
 ClassDeclaration
-    : CLASS ClassName Extends IS MemberDeclarations END
+    : CLASS ClassName Extends IS MemberDeclarations END {$$ = new ClassDeclNode($2, $3, $5);}
     ;
 
 Extends
-    : /* empty */
-    | EXTENDS ClassName
+    : /* empty */ {$$ = null;}
+    | EXTENDS ClassName {$$ = $2;}
     ;
 
 ClassName
-    : IDENTIFIER /* no generics*/
-    | IDENTIFIER OPENING_BRACKETS ClassName CLOSING_BRACKETS
+    : IDENTIFIER /* no generics*/ {$$ = new ast.ClassNameNode(new ast.IdentNode($1.getValue()), null);}
+    | IDENTIFIER OPENING_BRACKETS ClassName CLOSING_BRACKETS {$$ = new ast.ClassNameNode(new ast.IdentNode($1.getValue()), $3);}
     ;
 
 MemberDeclarations
-    : /* empty */
-    | MemberDeclaration MemberDeclarations
+    : /* empty */ {$$ = new ArrayList<MemberDeclNode>();}
+    | MemberDeclaration MemberDeclarations {$2.add($1); $$ = $2;}
     ;
 
 MemberDeclaration
-    : VariableDeclaration
-    | MethodDeclaration
-    | ConstructorDeclaration
+    : VariableDeclaration {MemberDeclNode node = new MemberDeclNode(); node.declaration = $1; node.declType = MemberDeclNode.memberType.FIELD; $$ = node;}
+    | MethodDeclaration {MemberDeclNode node = new MemberDeclNode(); node.declaration = $1; node.declType = MemberDeclNode.memberType.FIELD; $$ = node;}
+    | ConstructorDeclaration {MemberDeclNode node = new MemberDeclNode(); node.declaration = $1; node.declType = MemberDeclNode.memberType.FIELD; $$ = node;}
     ;
 
 VariableDeclaration
-    : VAR IDENTIFIER COLON Expression
+    : VAR IDENTIFIER COLON Expression {$$ = new ast.VariableDeclNode(new IdentNode($2.getValue()),$4);}
     ;
 
 MethodDeclaration
-    : METHOD IDENTIFIER Parameters MethodReturnType IS Body END
+    : METHOD IDENTIFIER Parameters MethodReturnType IS Body END {$$ = new ast.MethodDeclNode(new ast.IdentNode($2.getValue()),$3,$4,new ast.BodyNode($6));}
     ;
 
 MethodReturnType
-    : /* empty */
-    | COLON IDENTIFIER
+    : /* empty */ {$$ = null;}
+    | COLON IDENTIFIER {$$ = new IdentNode($2.getValue());}
     ;
 
 Parameters
-    : OPENING_PARENTHESIS                       CLOSING_PARENTHESIS
-    | OPENING_PARENTHESIS ParameterDeclarations CLOSING_PARENTHESIS
+    : OPENING_PARENTHESIS                       CLOSING_PARENTHESIS {$$ = new ArrayList<ParamsDeclNode>();}
+    | OPENING_PARENTHESIS ParameterDeclarations CLOSING_PARENTHESIS {$$ = $2;}
     ;
 
 ParameterDeclarations
-    : ParameterDeclaration
-    | ParameterDeclarations COMMA ParameterDeclaration
+    : ParameterDeclaration {ArrayList<ParamsDeclNode> params = new ArrayList<ParamsDeclNode>(); params.add($1); $$ = params;}
+    | ParameterDeclarations COMMA ParameterDeclaration { $1.add($3); }
     ;
 
 ParameterDeclaration
-    : IDENTIFIER COLON ClassName
+    : IDENTIFIER COLON ClassName {$$ = new ParamsDeclNode(new IdentNode($1.getValue()), new TypeNode($3.ident, $3.generics));}
     ;
 
 Body
-    : /* empty */
-    | BodyMember Body
+    : /* empty */ {$$ = new ArrayList<Node>();}
+    | BodyMember Body {$2.addAll($1);}
     ;
 
 BodyMember
-    : VariableDeclarationGroup
-    | StatementGroup
+    : VariableDeclarationGroup {$$ = $1;}
+    | StatementGroup {$$ = $1;}
     ;
 
 VariableDeclarationGroup
-    : /* empty */
-    | VariableDeclaration VariableDeclarationGroup
+    : /* empty */ {$$ = new ArrayList<ast.Node>();}
+    | VariableDeclaration VariableDeclarationGroup {$2.add($1); $$ = $2;}
     ;
 
 StatementGroup
-    : /* empty */
-    | Statement StatementGroup
+    : /* empty */ {$$ = new ArrayList<ast.Node>();}
+    | Statement StatementGroup {$2.add($1); $$ = $2;}
     ;
 
 ConstructorDeclaration
-    : THIS Parameters IS Body END
+    : THIS Parameters IS Body END {$$ = new ast.ConstructorDeclNode($2,new BodyNode($4));}
     ;
 
 Statement
-    : Assignment
-    | WhileLoop
-    | IfStatement
-    | ReturnStatement
-    | CallStatement
+    : Assignment {$$ = $1;}
+    | WhileLoop {$$ = $1;}
+    | IfStatement {$$ = $1;}
+    | ReturnStatement {$$ = $1;}
+    | Expression {$$ = $1;}
     ;
 
+/*
 CallStatement
     : CompoundName OPENING_PARENTHESIS             CLOSING_PARENTHESIS
     | CompoundName OPENING_PARENTHESIS Parameters  CLOSING_PARENTHESIS
@@ -138,65 +183,65 @@ CallStatement
 CompoundName
     :                  IDENTIFIER
     | CompoundName DOT IDENTIFIER
-    ;
+    ;*/
 
 Assignment
-    : IDENTIFIER ASSIGNMENT Expression
+    : IDENTIFIER ASSIGNMENT Expression {$$ = new AssignmentNode(new IdentNode($1.getValue()), $3);}
     ;
 
 WhileLoop
-    : WHILE Expression LOOP Body END
+    : WHILE Expression LOOP Body END {$$ = new WhileLoopNode($2, $4);}
     ;
 
 IfStatement
-    : IF Expression THEN Body END
-    | IF Expression THEN Body ELSE Body END
+    : IF Expression THEN Body END {$$ = new IfStatementNode($2, $4);}
+    | IF Expression THEN Body ELSE Body END {$$ = new IfStatementNode($2, $4, $6);}
     ;
 
 ReturnStatement
-    : RETURN
-    | RETURN Expression
+    : RETURN {$$ = new ReturnStatement(null);}
+    | RETURN Expression {$$ = new ReturnStatement($2);}
     ;
 
 Expression
-    : Primary
-    | Primary ExpressionCallGroup
+    : Primary {$$ = new ExpressionNode($1, null)}
+    | Primary ExpressionCallGroup {$$ = new ExpressionNode($1, $2)}
     ;
 
 /* one or more */
 ExpressionCallGroup
-    :                      ExpressionCallGroupComponent
-    | ExpressionCallGroup  ExpressionCallGroupComponent
+    :                      ExpressionCallGroupComponent {list = new ArrayList<Pair<IdentNode, ArrayList<ExpressionNode>>>(); list.add($1); $$ = list;}
+    | ExpressionCallGroup  ExpressionCallGroupComponent {$1.add($2); $$ = $1;}
     ;
 
 ExpressionCallGroupComponent
-    : DOT IDENTIFIER Arguments
+    : DOT IDENTIFIER Arguments {Pair<IdentNode, ArrayList<ExpressionNode>> component = new Pair<IdentNode, ArrayList<ExpressionNode>>(new IdentNode($2.getValue()), $3); $$ = component;}
     ;
 
 /* zero or more */
 Arguments
-    : OPENING_PARENTHESIS    /* empty */  CLOSING_PARENTHESIS
-    | OPENING_PARENTHESIS ExpressionsList CLOSING_PARENTHESIS
+    : OPENING_PARENTHESIS    /* empty */  CLOSING_PARENTHESIS {$$ = new ArrayList<ExpressionNode>();}
+    | OPENING_PARENTHESIS ExpressionsList CLOSING_PARENTHESIS {$$ = $2;}
     ;
 
 /*one or more*/
 /* expression, expression, expression */
 ExpressionsList
-    :                       Expression
-    | ExpressionsList COMMA Expression
+    :                       Expression {ArrayList<ExpressionNode> list = new ArrayList<ExpressionNode>(); list.add($1); $$ = list;}
+    | ExpressionsList COMMA Expression {$1.add($3); $$ = $1;}
     ;
 
 Primary
-    : INTEGER
-    | REAL
-    | BooleanLiteral
-    | THIS
-    | ClassName
+    : INTEGER {$$ = new IntegerLitNode($1.getValue());}
+    | REAL    {$$ = new RealLitNode($1.getValue());}
+    | BooleanLiteral {$$ = $1}
+    | THIS {$$ = null;}
+    | ClassName {$$ = $1;}
     ;
 
 BooleanLiteral
-    : TRUE
-    | FALSE
+    : TRUE {$$ = new BooleanLitNode("True");}
+    | FALSE {$$ = new BooleanLitNode("False");}
     ;
 
 %%
