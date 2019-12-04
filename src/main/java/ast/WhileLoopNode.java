@@ -12,6 +12,13 @@ public class WhileLoopNode extends StatementNode {
 
     @Override
     public String generateCode() {
-        return null;
+        StringBuilder cil = new StringBuilder();
+        cil.append("WHILE_START: nop\n");
+        cil.append(condition.generateCode());
+        cil.append("brtrue.s WHILE_END\n");
+        cil.append(body.generateCode());
+        cil.append("br.s WHILE_START\n");
+        cil.append("WHILE_END: nop\n");
+        return cil.toString();
     }
 }
