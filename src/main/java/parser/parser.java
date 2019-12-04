@@ -629,21 +629,21 @@ class YYParser
   case 39:
   if (yyn == 39)
     /* "parser.y":193  */
-    {yyval = new WhileLoopNode(((ast.ExpressionNode)(yystack.valueAt (3))), ((ArrayList<ast.Node>)(yystack.valueAt (1))));};
+    {yyval = new WhileLoopNode(((ast.ExpressionNode)(yystack.valueAt (3))), new BodyNode(((ArrayList<ast.Node>)(yystack.valueAt (1)))));};
   break;
     
 
   case 40:
   if (yyn == 40)
     /* "parser.y":197  */
-    {yyval = new IfStatementNode(((ast.ExpressionNode)(yystack.valueAt (3))), ((ArrayList<ast.Node>)(yystack.valueAt (1))));};
+    {yyval = new IfStatementNode(((ast.ExpressionNode)(yystack.valueAt (3))), new BodyNode(((ArrayList<ast.Node>)(yystack.valueAt (1)))));};
   break;
     
 
   case 41:
   if (yyn == 41)
     /* "parser.y":198  */
-    {yyval = new IfStatementNode(((ast.ExpressionNode)(yystack.valueAt (5))), ((ArrayList<ast.Node>)(yystack.valueAt (3))), ((ArrayList<ast.Node>)(yystack.valueAt (1))));};
+    {yyval = new IfStatementNode(((ast.ExpressionNode)(yystack.valueAt (5))), new BodyNode(((ArrayList<ast.Node>)(yystack.valueAt (3)))), new BodyNode(((ArrayList<ast.Node>)(yystack.valueAt (1)))));};
   break;
     
 
@@ -678,7 +678,7 @@ class YYParser
   case 46:
   if (yyn == 46)
     /* "parser.y":213  */
-    {list = new ArrayList<Pair<IdentNode, ArrayList<ExpressionNode>>>(); list.add(((Pair<IdentNode, ArrayList<ExpressionNode>>)(yystack.valueAt (0)))); yyval = list;};
+    {ArrayList<Pair<IdentNode, ArrayList<ExpressionNode>>> list = new ArrayList<Pair<IdentNode, ArrayList<ExpressionNode>>>(); list.add(((Pair<IdentNode, ArrayList<ExpressionNode>>)(yystack.valueAt (0)))); yyval = list;};
   break;
     
 

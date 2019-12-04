@@ -190,12 +190,12 @@ Assignment
     ;
 
 WhileLoop
-    : WHILE Expression LOOP Body END {$$ = new WhileLoopNode($2, $4);}
+    : WHILE Expression LOOP Body END {$$ = new WhileLoopNode($2, new BodyNode($4));}
     ;
 
 IfStatement
-    : IF Expression THEN Body END {$$ = new IfStatementNode($2, $4);}
-    | IF Expression THEN Body ELSE Body END {$$ = new IfStatementNode($2, $4, $6);}
+    : IF Expression THEN Body END {$$ = new IfStatementNode($2, new BodyNode($4));}
+    | IF Expression THEN Body ELSE Body END {$$ = new IfStatementNode($2, new BodyNode($4), new BodyNode($6));}
     ;
 
 ReturnStatement
@@ -210,7 +210,7 @@ Expression
 
 /* one or more */
 ExpressionCallGroup
-    :                      ExpressionCallGroupComponent {list = new ArrayList<Pair<IdentNode, ArrayList<ExpressionNode>>>(); list.add($1); $$ = list;}
+    :                      ExpressionCallGroupComponent {ArrayList<Pair<IdentNode, ArrayList<ExpressionNode>>> list = new ArrayList<Pair<IdentNode, ArrayList<ExpressionNode>>>(); list.add($1); $$ = list;}
     | ExpressionCallGroup  ExpressionCallGroupComponent {$1.add($2); $$ = $1;}
     ;
 
