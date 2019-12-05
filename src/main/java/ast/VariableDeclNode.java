@@ -16,10 +16,9 @@ public class VariableDeclNode extends CommandNode{
     public String generateCode() throws SemanticException {
         StringBuilder cil = new StringBuilder();
         cil.append(initialization.generateCode());
-
-//        // TODO: INITIALIZE VAR
-//        int varId = vars.get(((VariableDeclNode) action).name);
-//        cil.append(String.format("stloc.s %d\n", varId));
+        
+        int varId = getIndexByName(name);
+        cil.append(String.format("stloc.s %d\n", varId));
 
         return cil.toString();
     }

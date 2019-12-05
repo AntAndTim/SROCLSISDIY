@@ -24,7 +24,7 @@ public class MethodDeclNode extends Node {
     public MethodContext context;
 
 
-    private ArrayList<String> getLocalsInit(){
+    private ArrayList<String> getLocalsInit() throws SemanticException{
         for (Map.Entry<String, Integer> entry : this.context.variableIndexes.entrySet()){
             String name = entry.getKey();
             String index = entry.getValue().toString();
