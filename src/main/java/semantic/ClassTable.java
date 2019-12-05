@@ -9,9 +9,9 @@ public class ClassTable {
 
     LinkedHashMap <String, ClassDeclNode> table;
     HashSet <String> predefined;
-    HashMap <String, Map<String, ArrayList<MethodDeclNode>>> methods;
-    HashMap <String, Map<String, FieldDeclNode>> fields;
-    HashMap <String, ArrayList<ConstructorDeclNode>> constructors;
+    public HashMap <String, Map<String, ArrayList<MethodDeclNode>>> methods;
+    public HashMap <String, Map<String, FieldDeclNode>> fields;
+    public HashMap <String, ArrayList<ConstructorDeclNode>> constructors;
 
     public void addStubClass(String name, String parent, ArrayList<String> generics){
         ClassDeclNode res = new ClassDeclNode(new ClassNameNode(new IdentNode(name), new ArrayList<>()),

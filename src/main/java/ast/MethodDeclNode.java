@@ -1,6 +1,6 @@
 package ast;
 
-import com.sun.org.apache.xpath.internal.Arg;
+// import com.sun.org.apache.xpath.internal.Arg;
 import semantic.MethodContext;
 import utils.Pair;
 
@@ -59,25 +59,22 @@ public class MethodDeclNode extends Node {
         cil.append(")");
         // cil.append(" cil");
         // cil.append(" managed");
-        cil.append("\n{");
+        cil.append("\n{\n");
 
         // MAX STACK
         // LOCALS INIT
-        // Declaring local variables
-        // TODO: Apparently body nodes are not only in actual bodies but also in statements, move declarations
-//        int declarations = 0;
-//        for (int i = 0; i < actionTypes.size(); i++) {
-//            vars.put(((VariableDeclNode) actions.get(i)).name, declarations);
-//            if (actionTypes.get(i) == ActionType.VARIABLE_DECLARATION) declarations++;
-//        }
-//        if (declarations > 0) {
-//            cil.append(String.format(".maxstack %d\n", declarations));
-//            cil.append(".locals init (int32 a_0"); // TODO: REPLACE int32 WITH ACTUAL DATA TYPES
-//            for (int i = 1; i < declarations; i++) { //               |
-//                cil.append(String.format(", int32 a_%d", i)); // Here as well
-//            }
-//            cil.append(")\n");
-//        }
+
+        cil.append(String.format(".maxstack %d\n", 100));
+        ArrayList<String> locals = getLocalsInit();
+        if (locals == null) {
+            System.err.println(".locals init is null!");
+        } else {
+            cil.append(".locals init (");
+            for (int i = 1; i < locals.size(); i++) { //               |
+                cil.append(String.format(", %s", locals.get(i))); // Here as well
+            }
+            cil.append(")\n");
+        }
 
         cil.append(body.generateCode());
         cil.append("}\n");

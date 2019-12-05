@@ -41,6 +41,14 @@ public class ExpressionNode extends CommandNode{
 
     @Override
     public String generateCode() {
-        return null;
+        StringBuilder cil = new StringBuilder();
+        cil.append(primary.generateCode());
+        for (int i = 0; i < callNames.size(); i++) {
+            if (callArgs.get(i) == null) {
+                cil.append("ldfld ");
+                context.classTable.fields[]
+            }
+        }
+        return cil.toString();
     }
 }
