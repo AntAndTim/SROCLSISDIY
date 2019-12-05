@@ -96,4 +96,15 @@ public class ClassTable {
         }
 
     }
+
+    public boolean checkIfParentOf(String child, String parent){
+        String currParent = this.table.get(child).parent;
+        while (currParent != null){
+            if (currParent.equals(parent)){
+                return true;
+            }
+            currParent = this.table.get(currParent).parent;
+        }
+        return false;
+    }
 }
