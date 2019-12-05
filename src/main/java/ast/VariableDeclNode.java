@@ -15,6 +15,10 @@ public class VariableDeclNode extends CommandNode{
         StringBuilder cil = new StringBuilder();
         cil.append(initialization.generateCode());
 
+//        // TODO: INITIALIZE VAR
+//        int varId = vars.get(((VariableDeclNode) action).name);
+//        cil.append(String.format("stloc.s %d\n", varId));
+
         return cil.toString();
     }
 }

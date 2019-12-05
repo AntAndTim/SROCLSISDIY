@@ -1,6 +1,7 @@
 package ast;
 
-import com.sun.org.apache.xpath.internal.Arg;
+// import com.sun.org.apache.xpath.internal.Arg;
+import semantic.MethodContext;
 import utils.Pair;
 
 import javax.xml.stream.FactoryConfigurationError;
@@ -21,6 +22,18 @@ public class MethodDeclNode extends Node {
     public int maxStack;
     public List<Pair<String, String>> localInit;    // First -> type, second -> name
 
+    public MethodContext context;
+
+
+    private ArrayList<String> getLocalsInit(){
+        for (Map.Entry<String, Integer> entry : this.context.variableIndexes.entrySet()){
+            String name = entry.getKey();
+            String index = entry.getValue().toString();
+            String type = this.context.localVariables.get(name).initialization.getType();
+        }
+        return null;
+    }
+
     public MethodDeclNode(IdentNode nameId, ArrayList<ParamsDeclNode> paramsDecls, IdentNode retTypeNameId, BodyNode body) {
         this.name = nameId.value;
         this.params = paramsDecls;
@@ -31,7 +44,7 @@ public class MethodDeclNode extends Node {
     @Override
     public String generateCode() {
         StringBuilder cil = new StringBuilder();
-        cil.append(".method public hidebysig instance ");
+        cil.append(".method public hidebysig virtual ");
         cil.append(retTypeName);
         cil.append(" ");
         cil.append(name);
@@ -46,7 +59,23 @@ public class MethodDeclNode extends Node {
         cil.append(")");
         // cil.append(" cil");
         // cil.append(" managed");
-        cil.append("\n{");
+        cil.append("\n{\n");
+
+        // MAX STACK
+        // LOCALS INIT
+
+        cil.append(String.format(".maxstack %d\n", 100));
+        ArrayList<String> locals = getLocalsInit();
+        if (locals == null) {
+            System.err.println(".locals init is null!");
+        } else {
+            cil.append(String.format(".locals init (%s", locals.get(0)));
+            for (int i = 1; i < locals.size(); i++) { //               |
+                cil.append(String.format(", %s", locals.get(i))); // Here as well
+            }
+            cil.append(")\n");
+        }
+
         cil.append(body.generateCode());
         cil.append("}\n");
 

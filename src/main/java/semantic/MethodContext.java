@@ -13,13 +13,13 @@ import java.util.Map;
 public class MethodContext {
 
     // TODO : localinit, generics, class table
-    HashMap <String, VariableDeclNode> localVariables;
-    HashMap <String, Integer> variableIndexes;
+    public HashMap <String, VariableDeclNode> localVariables;
+    public HashMap <String, Integer> variableIndexes;
     private HashMap <String, Integer> scope;
-    HashMap <String, Integer> generics;
-    ClassTable classTable;
-    ClassDeclNode myClass;
-    ArrayList<Integer> currentScopesList;
+    public HashMap <String, Integer> generics;
+    public ClassTable classTable;
+    public ClassDeclNode myClass;
+    public ArrayList<Integer> currentScopesList;
 
     int lastVariableIndex = -1;
     private int currScope = 0;
@@ -44,7 +44,7 @@ public class MethodContext {
     }
 
     /**
-     * Returns index in locals init or -1 if it is generic
+     * Returns index in locals init or -1 there is no such name
      *
      * @param name
      * @param scopesList
@@ -59,6 +59,16 @@ public class MethodContext {
             }
         }
         throw new SemanticException(String.format("Variable %s is undefined", name), "-");
+    }
+
+    public VariableDeclNode getVarDeclByName(String name, ArrayList<Integer> scopesList) throws SemanticException{
+        for (int i=scopesList.size()-1; i>=0; i--){
+            String localVarName = String.format("%s_%d", name, scopesList.get(i));
+            if (this.localVariables.containsKey(localVarName)){
+                return this.localVariables.get(localVarName);
+            }
+        }
+        throw new SemanticException(String.format("Variable %s is not defined, but passed to codegen", name), "-");
     }
 
     private boolean findVariable(String name){

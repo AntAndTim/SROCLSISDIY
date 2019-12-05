@@ -20,6 +20,8 @@ public class IntegerLitNode extends LiteralNode {
 
     @Override
     public String generateCode() {
-        return null;
+        StringBuilder cil = new StringBuilder();
+        cil.append(String.format("ldc.i4 %d\n", Integer.parseInt(getValue())));
+        return cil.toString();
     }
 }

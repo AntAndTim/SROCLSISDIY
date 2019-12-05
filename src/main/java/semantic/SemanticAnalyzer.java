@@ -85,14 +85,16 @@ public class SemanticAnalyzer {
     public void updateMethodsContexts(ProgramNode root){
         for (ClassDeclNode currClass : root.programClasses){
             for (MethodDeclNode currMethod : currClass.methods){
-                
+                // TODO : Add context to method
             }
+            // TODO : Add constructors
         }
     }
 
-    private void buildContext(BodyNode body, MethodContext context){
+    private void buildContext(BodyNode body, MethodContext context) throws SemanticException{
         for (CommandNode command : body.actions){
             command.setContext(context);
+            command.scopesList = new ArrayList<>(context.currentScopesList);
             if (command instanceof IfStatementNode){
                 IfStatementNode statement = (IfStatementNode)command;
                 context.addNewScope();
@@ -105,8 +107,28 @@ public class SemanticAnalyzer {
                 WhileLoopNode statement = (WhileLoopNode) command;
                 context.addNewScope();
                 buildContext(statement.body, context);
+                context.killPreviousScope();
+            } else if (command instanceof AssignmentNode){
+                AssignmentNode statement = (AssignmentNode) command;
+                this.checkExpression(statement.varValue, context);
+            } else if (command instanceof ExpressionNode){
+                this.checkExpression((ExpressionNode)command, context);
+            } else if (command instanceof VariableDeclNode){
+                this.checkExpression(((VariableDeclNode) command).initialization, context);
+                context.addVariable((VariableDeclNode)command);
+            } else {
+                throw new SemanticException("Undefined node type %s", command.getStartPosition());
             }
-            // TODO : REST
         }
+    }
+
+    public boolean checkExpression(ExpressionNode mainExpr, MethodContext context) throws SemanticException{
+        for (ExpressionNode expr : mainExpr.getAllNestedExpressions()){
+            if (expr.primary instanceof IdentNode) {
+                // Just try to find this variable, it will throw semantic error if it is not defined
+                context.getVarDeclByName(((IdentNode) expr.primary).value, context.currentScopesList);
+            }
+        }
+        return true;
     }
 }
