@@ -1,8 +1,10 @@
-package token;
+package bison;
 
 public interface TokenType {
 
-    String getValue();
+    String getName();
+
+    int getValue();
 
     default TokenType getType() {
         return this;

@@ -1,4 +1,4 @@
-package parser;/* A Bison parser, made by GNU Bison 3.4.2.  */
+package bison;/* A Bison parser, made by GNU Bison 3.4.2.  */
 
 /* Skeleton implementation for Bison LALR(1) parsers in Java
 
@@ -54,342 +54,6 @@ class YYParser
   
 
   /**
-   * Communication interface between the scanner and the Bison-generated
-   * parser <tt>YYParser</tt>.
-   */
-  public interface Lexer {
-    /** Token returned by the scanner to signal the end of its input.  */
-    public static final int EOF = 0;
-
-/* Tokens.  */
-    /** Token number,to be returned by the scanner.  */
-    static final int OPENING_CURLY_BRACES = 258;
-    /** Token number,to be returned by the scanner.  */
-    static final int CLOSING_CURLY_BRACES = 259;
-    /** Token number,to be returned by the scanner.  */
-    static final int OPENING_PARENTHESIS = 260;
-    /** Token number,to be returned by the scanner.  */
-    static final int CLOSING_PARENTHESIS = 261;
-    /** Token number,to be returned by the scanner.  */
-    static final int OPENING_BRACKETS = 262;
-    /** Token number,to be returned by the scanner.  */
-    static final int CLOSING_BRACKETS = 263;
-    /** Token number,to be returned by the scanner.  */
-    static final int COMMA = 264;
-    /** Token number,to be returned by the scanner.  */
-    static final int DOT = 265;
-    /** Token number,to be returned by the scanner.  */
-    static final int IDENTIFIER = 266;
-    /** Token number,to be returned by the scanner.  */
-    static final int ELSE = 267;
-    /** Token number,to be returned by the scanner.  */
-    static final int FALSE = 268;
-    /** Token number,to be returned by the scanner.  */
-    static final int IF = 269;
-    /** Token number,to be returned by the scanner.  */
-    static final int IN = 270;
-    /** Token number,to be returned by the scanner.  */
-    static final int THIS = 271;
-    /** Token number,to be returned by the scanner.  */
-    static final int TRUE = 272;
-    /** Token number,to be returned by the scanner.  */
-    static final int VAR = 273;
-    /** Token number,to be returned by the scanner.  */
-    static final int WHILE = 274;
-    /** Token number,to be returned by the scanner.  */
-    static final int CLASS = 275;
-    /** Token number,to be returned by the scanner.  */
-    static final int EXTENDS = 276;
-    /** Token number,to be returned by the scanner.  */
-    static final int ASSIGNMENT = 277;
-    /** Token number,to be returned by the scanner.  */
-    static final int COLON = 278;
-    /** Token number,to be returned by the scanner.  */
-    static final int UNKNOWN = 279;
-    /** Token number,to be returned by the scanner.  */
-    static final int RETURN = 280;
-    /** Token number,to be returned by the scanner.  */
-    static final int IS = 281;
-    /** Token number,to be returned by the scanner.  */
-    static final int END = 282;
-    /** Token number,to be returned by the scanner.  */
-    static final int LOOP = 283;
-    /** Token number,to be returned by the scanner.  */
-    static final int THEN = 284;
-    /** Token number,to be returned by the scanner.  */
-    static final int METHOD = 285;
-    /** Token number,to be returned by the scanner.  */
-    static final int INTEGER = 286;
-    /** Token number,to be returned by the scanner.  */
-    static final int REAL = 287;
-
-
-    
-
-    /**
-     * Method to retrieve the semantic value of the last scanned token.
-     * @return the semantic value of the last scanned token.
-     */
-    token.Token getLVal ();
-
-    /**
-     * Entry point for the scanner.  Returns the token identifier corresponding
-     * to the next token and prepares to return the semantic value
-     * of the token.
-     * @return the token identifier corresponding to the next token.
-     */
-    int yylex () throws java.io.IOException;
-
-    /**
-     * Entry point for error reporting.  Emits an error
-     * in a user-defined way.
-     *
-     * 
-     * @param msg The string for the error message.
-     */
-     void yyerror (String msg);
-  }
-
-  /**
-   * The object doing lexical analysis for us.
-   */
-  private Lexer yylexer;
-  
-  
-
-
-
-  /**
-   * Instantiates the Bison-generated parser.
-   * @param yylexer The scanner that will supply tokens to the parser.
-   */
-  public YYParser (Lexer yylexer) 
-  {
-    
-    this.yylexer = yylexer;
-    
-  }
-
-  private java.io.PrintStream yyDebugStream = System.err;
-
-  /**
-   * Return the <tt>PrintStream</tt> on which the debugging output is
-   * printed.
-   */
-  public final java.io.PrintStream getDebugStream () { return yyDebugStream; }
-
-  /**
-   * Set the <tt>PrintStream</tt> on which the debug output is printed.
-   * @param s The stream that is used for debugging output.
-   */
-  public final void setDebugStream(java.io.PrintStream s) { yyDebugStream = s; }
-
-  private int yydebug = 0;
-
-  /**
-   * Answer the verbosity of the debugging output; 0 means that all kinds of
-   * output from the parser are suppressed.
-   */
-  public final int getDebugLevel() { return yydebug; }
-
-  /**
-   * Set the verbosity of the debugging output; 0 means that all kinds of
-   * output from the parser are suppressed.
-   * @param level The verbosity level for debugging output.
-   */
-  public final void setDebugLevel(int level) { yydebug = level; }
-
-  /**
-   * Print an error message via the lexer.
-   *
-   * @param msg The error message.
-   */
-  public final void yyerror (String msg)
-  {
-    yylexer.yyerror (msg);
-  }
-
-
-  protected final void yycdebug (String s) {
-    if (yydebug > 0)
-      yyDebugStream.println (s);
-  }
-
-  private final class YYStack {
-    private int[] stateStack = new int[16];
-    
-    private token.Token[] valueStack = new token.Token[16];
-
-    public int size = 16;
-    public int height = -1;
-
-    public final void push (int state, token.Token value                            ) {
-      height++;
-      if (size == height)
-        {
-          int[] newStateStack = new int[size * 2];
-          System.arraycopy (stateStack, 0, newStateStack, 0, height);
-          stateStack = newStateStack;
-          
-
-          token.Token[] newValueStack = new token.Token[size * 2];
-          System.arraycopy (valueStack, 0, newValueStack, 0, height);
-          valueStack = newValueStack;
-
-          size *= 2;
-        }
-
-      stateStack[height] = state;
-      
-      valueStack[height] = value;
-    }
-
-    public final void pop () {
-      pop (1);
-    }
-
-    public final void pop (int num) {
-      // Avoid memory leaks... garbage collection is a white lie!
-      if (num > 0) {
-        java.util.Arrays.fill (valueStack, height - num + 1, height + 1, null);
-        
-      }
-      height -= num;
-    }
-
-    public final int stateAt (int i) {
-      return stateStack[height - i];
-    }
-
-    public final token.Token valueAt (int i) {
-      return valueStack[height - i];
-    }
-
-    // Print the state stack on the debug stream.
-    public void print (java.io.PrintStream out) {
-      out.print ("Stack now");
-
-      for (int i = 0; i <= height; i++)
-        {
-          out.print (' ');
-          out.print (stateStack[i]);
-        }
-      out.println ();
-    }
-  }
-
-  /**
-   * Returned by a Bison action in order to stop the parsing process and
-   * return success (<tt>true</tt>).
-   */
-  public static final int YYACCEPT = 0;
-
-  /**
-   * Returned by a Bison action in order to stop the parsing process and
-   * return failure (<tt>false</tt>).
-   */
-  public static final int YYABORT = 1;
-
-
-
-  /**
-   * Returned by a Bison action in order to start error recovery without
-   * printing an error message.
-   */
-  public static final int YYERROR = 2;
-
-  /**
-   * Internal return codes that are not supported for user semantic
-   * actions.
-   */
-  private static final int YYERRLAB = 3;
-  private static final int YYNEWSTATE = 4;
-  private static final int YYDEFAULT = 5;
-  private static final int YYREDUCE = 6;
-  private static final int YYERRLAB1 = 7;
-  private static final int YYRETURN = 8;
-
-
-  private int yyerrstatus_ = 0;
-
-
-  /**
-   * Return whether error recovery is being done.  In this state, the parser
-   * reads token until it reaches a known state, and then restarts normal
-   * operation.
-   */
-  public final boolean recovering ()
-  {
-    return yyerrstatus_ == 0;
-  }
-
-  /** Compute post-reduction state.
-   * @param yystate   the current state
-   * @param yysym     the nonterminal to push on the stack
-   */
-  private int yy_lr_goto_state_ (int yystate, int yysym)
-  {
-    int yyr = yypgoto_[yysym - yyntokens_] + yystate;
-    if (0 <= yyr && yyr <= yylast_ && yycheck_[yyr] == yystate)
-      return yytable_[yyr];
-    else
-      return yydefgoto_[yysym - yyntokens_];
-  }
-
-  private int yyaction (int yyn, YYStack yystack, int yylen) 
-  {
-    token.Token yyval;
-    
-
-    /* If YYLEN is nonzero, implement the default value of the action:
-       '$$ = $1'.  Otherwise, use the top of the stack.
-
-       Otherwise, the following line sets YYVAL to garbage.
-       This behavior is undocumented and Bison
-       users should not rely upon it.  */
-    if (yylen > 0)
-      yyval = yystack.valueAt (yylen - 1);
-    else
-      yyval = yystack.valueAt (0);
-
-    yy_reduce_print (yyn, yystack);
-
-    switch (yyn)
-      {
-        
-/* "parser.java":361  */
-
-        default: break;
-      }
-
-    yy_symbol_print ("-> $$ =", yyr1_[yyn], yyval);
-
-    yystack.pop (yylen);
-    yylen = 0;
-
-    /* Shift the result of the reduction.  */
-    int yystate = yy_lr_goto_state_ (yystack.stateAt (0), yyr1_[yyn]);
-    yystack.push (yystate, yyval);
-    return YYNEWSTATE;
-  }
-
-
-
-  /*--------------------------------.
-  | Print this symbol on YYOUTPUT.  |
-  `--------------------------------*/
-
-  private void yy_symbol_print (String s, int yytype,
-                                 token.Token yyvaluep                                 )
-  {
-    if (yydebug > 0)
-    yycdebug (s + (yytype < yyntokens_ ? " token " : " nterm ")
-              + yytname_[yytype] + " ("
-              + (yyvaluep == null ? "(null)" : yyvaluep.toString ()) + ")");
-  }
-
-
-  /**
    * Parse input from the scanner that was specified at object construction
    * time.  Return whether the end of the input was reached successfully.
    *
@@ -399,7 +63,7 @@ class YYParser
    public boolean parse () throws java.io.IOException
 
   {
-    
+
 
 
     /* Lookahead and lookahead in internal form.  */
@@ -415,10 +79,10 @@ class YYParser
 
     /* Error handling.  */
     int yynerrs_ = 0;
-    
+
 
     /* Semantic value of the lookahead.  */
-    token.Token yylval = null;
+    Token yylval = null;
 
     yycdebug ("Starting parse\n");
     yyerrstatus_ = 0;
@@ -545,7 +209,6 @@ class YYParser
             yyerror (yysyntax_error (yystate, yytoken));
           }
 
-        
         if (yyerrstatus_ == 3)
           {
         /* If just tried and failed to reuse lookahead token after an
@@ -571,7 +234,7 @@ class YYParser
       `-------------------------------------------------*/
       case YYERROR:
 
-        
+
         /* Do not reclaim the symbols of the rule which action triggered
            this YYERROR.  */
         yystack.pop (yylen);
@@ -605,7 +268,6 @@ class YYParser
             if (yystack.height == 0)
               return false;
 
-            
             yystack.pop ();
             yystate = yystack.stateAt (0);
             if (yydebug > 0)
@@ -628,21 +290,413 @@ class YYParser
         break;
 
         /* Accept.  */
-      case YYACCEPT:
-        return true;
+        case YYACCEPT:
+          return true;
 
         /* Abort.  */
-      case YYABORT:
-        return false;
+        case YYABORT:
+          return false;
       }
-}
+  }
+
+  /**
+   * The object doing lexical analysis for us.
+   */
+  private Lexer yylexer;
+
+  /**
+   * Instantiates the Bison-generated parser.
+   *
+   * @param yylexer The scanner that will supply tokens to the parser.
+   */
+  public YYParser(Lexer yylexer) {
+
+    this.yylexer = yylexer;
+
+  }
+
+  private java.io.PrintStream yyDebugStream = System.err;
+
+  /**
+   * Return the <tt>PrintStream</tt> on which the debugging output is
+   * printed.
+   */
+  public final java.io.PrintStream getDebugStream() {
+    return yyDebugStream;
+  }
+
+  /**
+   * Set the <tt>PrintStream</tt> on which the debug output is printed.
+   *
+   * @param s The stream that is used for debugging output.
+   */
+  public final void setDebugStream(java.io.PrintStream s) {
+    yyDebugStream = s;
+  }
+
+  private int yydebug = 0;
+
+  /**
+   * Answer the verbosity of the debugging output; 0 means that all kinds of
+   * output from the parser are suppressed.
+   */
+  public final int getDebugLevel() {
+    return yydebug;
+  }
+
+  /**
+   * Set the verbosity of the debugging output; 0 means that all kinds of
+   * output from the parser are suppressed.
+   *
+   * @param level The verbosity level for debugging output.
+   */
+  public final void setDebugLevel(int level) {
+    yydebug = level;
+  }
+
+  /**
+   * Print an error message via the lexer.
+   *
+   * @param msg The error message.
+   */
+  public final void yyerror(String msg) {
+    yylexer.yyerror(msg);
+  }
+
+  protected final void yycdebug(String s) {
+    if (yydebug > 0) {
+      yyDebugStream.println(s);
+    }
+  }
+
+  private void yy_symbol_print(String s, int yytype,
+                               Token yyvaluep) {
+    if (yydebug > 0) {
+      yycdebug(s + (yytype < yyntokens_ ? " token " : " nterm ")
+                   + yytname_[yytype] + " ("
+                   + (yyvaluep == null ? "(null)" : yyvaluep.toString()) + ")");
+    }
+  }
+
+  /**
+   * Returned by a Bison action in order to stop the parsing process and
+   * return success (<tt>true</tt>).
+   */
+  public static final int YYACCEPT = 0;
+
+  /**
+   * Returned by a Bison action in order to stop the parsing process and
+   * return failure (<tt>false</tt>).
+   */
+  public static final int YYABORT = 1;
+
+  /**
+   * Returned by a Bison action in order to start error recovery without
+   * printing an error message.
+   */
+  public static final int YYERROR = 2;
+
+  /**
+   * Internal return codes that are not supported for user semantic
+   * actions.
+   */
+  private static final int YYERRLAB = 3;
+  private static final int YYNEWSTATE = 4;
+  private static final int YYDEFAULT = 5;
+  private static final int YYREDUCE = 6;
+  private static final int YYERRLAB1 = 7;
+  private static final int YYRETURN = 8;
+
+  private int yyerrstatus_ = 0;
+
+  /**
+   * Return whether error recovery is being done.  In this state, the parser
+   * reads token until it reaches a known state, and then restarts normal
+   * operation.
+   */
+  public final boolean recovering() {
+    return yyerrstatus_ == 0;
+  }
+
+  /**
+   * Compute post-reduction state.
+   *
+   * @param yystate the current state
+   * @param yysym the nonterminal to push on the stack
+   */
+  private int yy_lr_goto_state_(int yystate, int yysym) {
+    int yyr = yypgoto_[yysym - yyntokens_] + yystate;
+    if (0 <= yyr && yyr <= yylast_ && yycheck_[yyr] == yystate) {
+      return yytable_[yyr];
+    } else {
+      return yydefgoto_[yysym - yyntokens_];
+    }
+  }
+
+  private int yyaction(int yyn, YYStack yystack, int yylen) {
+    Token yyval;
+    
+
+    /* If YYLEN is nonzero, implement the default value of the action:
+       '$$ = $1'.  Otherwise, use the top of the stack.
+
+       Otherwise, the following line sets YYVAL to garbage.
+       This behavior is undocumented and Bison
+       users should not rely upon it.  */
+    if (yylen > 0) {
+      yyval = yystack.valueAt(yylen - 1);
+    } else {
+      yyval = yystack.valueAt(0);
+    }
+
+    yy_reduce_print(yyn, yystack);
+
+    switch (yyn) {
+
+      /* "parser.java":361  */
+
+      default:
+        break;
+    }
+
+    yy_symbol_print("-> $$ =", yyr1_[yyn], yyval);
+
+    yystack.pop(yylen);
+    yylen = 0;
+
+    /* Shift the result of the reduction.  */
+    int yystate = yy_lr_goto_state_(yystack.stateAt(0), yyr1_[yyn]);
+    yystack.push(yystate, yyval);
+    return YYNEWSTATE;
+  }
 
 
 
+  /*--------------------------------.
+  | Print this symbol on YYOUTPUT.  |
+  `--------------------------------*/
+
+  /**
+   * Communication interface between the scanner and the Bison-generated
+   * parser <tt>YYParser</tt>.
+   */
+  public interface Lexer {
+
+    /**
+     * Token returned by the scanner to signal the end of its input.
+     */
+    public static final int EOF = 0;
+
+    /* Tokens.  */
+    /**
+     * Token number,to be returned by the scanner.
+     */
+    static final int OPENING_CURLY_BRACES = 258;
+    /**
+     * Token number,to be returned by the scanner.
+     */
+    static final int CLOSING_CURLY_BRACES = 259;
+    /**
+     * Token number,to be returned by the scanner.
+     */
+    static final int OPENING_PARENTHESIS = 260;
+    /**
+     * Token number,to be returned by the scanner.
+     */
+    static final int CLOSING_PARENTHESIS = 261;
+    /**
+     * Token number,to be returned by the scanner.
+     */
+    static final int OPENING_BRACKETS = 262;
+    /**
+     * Token number,to be returned by the scanner.
+     */
+    static final int CLOSING_BRACKETS = 263;
+    /**
+     * Token number,to be returned by the scanner.
+     */
+    static final int COMMA = 264;
+    /**
+     * Token number,to be returned by the scanner.
+     */
+    static final int DOT = 265;
+    /**
+     * Token number,to be returned by the scanner.
+     */
+    static final int IDENTIFIER = 266;
+    /**
+     * Token number,to be returned by the scanner.
+     */
+    static final int ELSE = 267;
+    /**
+     * Token number,to be returned by the scanner.
+     */
+    static final int FALSE = 268;
+    /**
+     * Token number,to be returned by the scanner.
+     */
+    static final int IF = 269;
+    /**
+     * Token number,to be returned by the scanner.
+     */
+    static final int IN = 270;
+    /**
+     * Token number,to be returned by the scanner.
+     */
+    static final int THIS = 271;
+    /**
+     * Token number,to be returned by the scanner.
+     */
+    static final int TRUE = 272;
+    /**
+     * Token number,to be returned by the scanner.
+     */
+    static final int VAR = 273;
+    /**
+     * Token number,to be returned by the scanner.
+     */
+    static final int WHILE = 274;
+    /**
+     * Token number,to be returned by the scanner.
+     */
+    static final int CLASS = 275;
+    /**
+     * Token number,to be returned by the scanner.
+     */
+    static final int EXTENDS = 276;
+    /**
+     * Token number,to be returned by the scanner.
+     */
+    static final int ASSIGNMENT = 277;
+    /**
+     * Token number,to be returned by the scanner.
+     */
+    static final int COLON = 278;
+    /**
+     * Token number,to be returned by the scanner.
+     */
+    static final int UNKNOWN = 279;
+    /**
+     * Token number,to be returned by the scanner.
+     */
+    static final int RETURN = 280;
+    /**
+     * Token number,to be returned by the scanner.
+     */
+    static final int IS = 281;
+    /**
+     * Token number,to be returned by the scanner.
+     */
+    static final int END = 282;
+    /**
+     * Token number,to be returned by the scanner.
+     */
+    static final int LOOP = 283;
+    /**
+     * Token number,to be returned by the scanner.
+     */
+    static final int THEN = 284;
+    /**
+     * Token number,to be returned by the scanner.
+     */
+    static final int METHOD = 285;
+    /**
+     * Token number,to be returned by the scanner.
+     */
+    static final int INTEGER = 286;
+    /**
+     * Token number,to be returned by the scanner.
+     */
+    static final int REAL = 287;
+
+    /**
+     * Method to retrieve the semantic value of the last scanned token.
+     *
+     * @return the semantic value of the last scanned token.
+     */
+    Token getLVal();
+
+    /**
+     * Entry point for the scanner.  Returns the token identifier corresponding
+     * to the next token and prepares to return the semantic value
+     * of the token.
+     *
+     * @return the token identifier corresponding to the next token.
+     */
+    int yylex() throws java.io.IOException;
+
+    /**
+     * Entry point for error reporting.  Emits an error
+     * in a user-defined way.
+     *
+     * @param msg The string for the error message.
+     */
+    void yyerror(String msg);
+  }
+
+  private final class YYStack {
+
+    private int[] stateStack = new int[16];
+
+    private Token[] valueStack = new Token[16];
+
+    public int size = 16;
+    public int height = -1;
+
+    public final void push(int state, Token value) {
+      height++;
+      if (size == height) {
+        int[] newStateStack = new int[size * 2];
+        System.arraycopy(stateStack, 0, newStateStack, 0, height);
+        stateStack = newStateStack;
+
+        Token[] newValueStack = new Token[size * 2];
+        System.arraycopy(valueStack, 0, newValueStack, 0, height);
+        valueStack = newValueStack;
+
+        size *= 2;
+      }
+
+      stateStack[height] = state;
+
+      valueStack[height] = value;
+    }
+
+    public final void pop() {
+      pop(1);
+    }
+
+    public final void pop(int num) {
+      // Avoid memory leaks... garbage collection is a white lie!
+      if (num > 0) {
+        java.util.Arrays.fill(valueStack, height - num + 1, height + 1, null);
+
+      }
+      height -= num;
+    }
+
+    public final int stateAt(int i) {
+      return stateStack[height - i];
+    }
+
+    public final Token valueAt(int i) {
+      return valueStack[height - i];
+    }
+
+    // Print the state stack on the debug stream.
+    public void print(java.io.PrintStream out) {
+      out.print("Stack now");
+
+      for (int i = 0; i <= height; i++) {
+        out.print(' ');
+        out.print(stateStack[i]);
+      }
+      out.println();
+    }
+  }
 
   // Generate an error message.
-  private String yysyntax_error (int yystate, int tok)
-  {
+  private String yysyntax_error(int yystate, int tok) {
     return "syntax error";
   }
 
@@ -650,8 +704,7 @@ class YYParser
    * Whether the given <code>yypact_</code> value indicates a defaulted state.
    * @param yyvalue   the value to check
    */
-  private static boolean yy_pact_value_is_default_ (int yyvalue)
-  {
+  private static boolean yy_pact_value_is_default_(int yyvalue) {
     return yyvalue == yypact_ninf_;
   }
 
