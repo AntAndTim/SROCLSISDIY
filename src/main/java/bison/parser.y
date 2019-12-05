@@ -50,7 +50,6 @@ import java.util.ArrayList;
 /* %type <ast.IfStatementNode> IfStatement */
 %type <ArrayList<ClassDeclNode>> ClassDeclarations
 %type <ast.ClassDeclNode> ClassDeclaration
-%type <ast.ClassNameNode> Extends
 %type <ast.ClassNameNode> ClassName
 %type <ArrayList<MemberDeclNode>> MemberDeclarations
 %type <ast.MemberDeclNode> MemberDeclaration
@@ -94,12 +93,8 @@ ClassDeclarations
     ;
 
 ClassDeclaration
-    : CLASS ClassName Extends IS MemberDeclarations END {$$ = new ClassDeclNode($2, $3, $5);}
-    ;
-
-Extends
-    : /* empty */ {$$ = new ArrayList<ast.ClassNameNode>();}
-    | EXTENDS ClassName {$$ = $2;}
+    : CLASS ClassName IS MemberDeclarations END {$$ = new ClassDeclNode($2, $4);}
+    | CLASS ClassName EXTENDS ClassName IS MemberDeclarations END {$$ = new ClassDeclNode($2, $4, $6);}
     ;
 
 ClassName
@@ -226,16 +221,26 @@ ReturnStatement
 Expression
     : Primary {$$ = new ExpressionNode($1, new ArrayList<Pair<IdentNode, ArrayList<ExpressionNode>>>());}
     | Primary ExpressionCallGroup {$$ = new ExpressionNode($1, $2);}
+    | ClassName Arguments
+    {ArrayList<Pair<IdentNode, ArrayList<ExpressionNode>>> list = new ArrayList<Pair<IdentNode, ArrayList<ExpressionNode>>>();
+     list.add(new Pair<IdentNode, ArrayList<ExpressionNode>>($1.ident, $2));
+     $$ = new ExpressionNode($1, list);}
+    | ClassName Arguments ExpressionCallGroup
+    {ArrayList<Pair<IdentNode, ArrayList<ExpressionNode>>> list = new ArrayList<Pair<IdentNode, ArrayList<ExpressionNode>>>();
+    list.add(new Pair<IdentNode, ArrayList<ExpressionNode>>($1.ident, $2));
+    list.addAll($3);
+    $$ = new ExpressionNode($1, list);}
     ;
 
 /* one or more */
 ExpressionCallGroup
     :                      ExpressionCallGroupComponent {ArrayList<Pair<IdentNode, ArrayList<ExpressionNode>>> list = new ArrayList<Pair<IdentNode, ArrayList<ExpressionNode>>>(); list.add($1); $$ = list;}
-    | ExpressionCallGroup  ExpressionCallGroupComponent {$1.add($2); $$ = $1;}
+    | ExpressionCallGroupComponent ExpressionCallGroup   {$2.add($1); $$ = $2;}
     ;
 
 ExpressionCallGroupComponent
-    : DOT IDENTIFIER Arguments {Pair<IdentNode, ArrayList<ExpressionNode>> component = new Pair<IdentNode, ArrayList<ExpressionNode>>(new IdentNode($2.getValue()), $3); $$ = component;}
+    : DOT IDENTIFIER {Pair<IdentNode, ArrayList<ExpressionNode>> component = new Pair<IdentNode, ArrayList<ExpressionNode>>(new IdentNode($2.getValue()), new ArrayList<ExpressionNode>()); $$ = component;}
+    | DOT IDENTIFIER Arguments {Pair<IdentNode, ArrayList<ExpressionNode>> component = new Pair<IdentNode, ArrayList<ExpressionNode>>(new IdentNode($2.getValue()), $3); $$ = component;}
     ;
 
 /* zero or more */

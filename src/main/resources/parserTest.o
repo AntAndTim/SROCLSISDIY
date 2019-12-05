@@ -2,11 +2,38 @@ class test extends stuff is
     var kek : zalupa
     var lol : chlen
 
-    method huy ( ) : a is
-    var golovka : s
+    method huy() : a is
+
+    var golovka : Integer
     if True then golovka := 1 else golovka := 2 end
     var kek : k
     var qeq : q
+    kek := Integer(1).Minify()
 
     end
+
+
+
+    method MaxInt(a: Array[Integer]) : Integer is
+        var max : Integer
+        var i : Integer
+
+        max := Integer.Min()
+        i := Integer(1)
+        while i.Less(a.Length) loop
+           if a.get(i).Greater(max) then max := get(i) end
+           i := i.Plus(1)
+        end
+
+        var a : Array[Integer]
+
+
+        return max
+    end
+
+end
+
+
+class C[T] is
+    var m : T
 end
