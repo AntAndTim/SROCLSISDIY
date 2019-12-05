@@ -1,5 +1,7 @@
 package ast;
 
+import errors.SemanticException;
+
 import java.util.ArrayList;
 
 public class ProgramNode extends Node {
@@ -11,7 +13,7 @@ public class ProgramNode extends Node {
     }
 
     @Override
-    public String generateCode() {
+    public String generateCode() throws SemanticException {
         StringBuilder cil = new StringBuilder();
         cil.append(".method static void Main()\n" +
                 "{\n" +

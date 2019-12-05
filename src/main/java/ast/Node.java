@@ -19,5 +19,5 @@ public abstract class Node {
         return endLine.toString() + " " + endOffset.toString();
     }
 
-    abstract public String generateCode();
+    abstract public String generateCode() throws SemanticException;
 }

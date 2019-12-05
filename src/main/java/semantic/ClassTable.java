@@ -7,6 +7,8 @@ import java.util.*;
 
 public class ClassTable {
 
+    // TODO : Check forbidden names like this and class names
+
     public LinkedHashMap <String, ClassDeclNode> table;
     public HashSet <String> predefined;
     public HashMap <String, Map<String, ArrayList<MethodDeclNode>>> methods;

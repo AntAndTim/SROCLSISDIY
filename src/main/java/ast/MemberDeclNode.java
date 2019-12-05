@@ -1,5 +1,7 @@
 package ast;
 
+import errors.SemanticException;
+
 public class MemberDeclNode extends Node {
 
     public Node declaration;
@@ -12,7 +14,7 @@ public class MemberDeclNode extends Node {
     }
 
     @Override
-    public String generateCode() {
+    public String generateCode() throws SemanticException {
         if (declType == memberType.METHOD){
             MethodDeclNode method = (MethodDeclNode)this.declaration;
         }

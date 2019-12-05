@@ -1,11 +1,10 @@
 package ast;
 
+import errors.SemanticException;
 import utils.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.HashMap;
-import java.util.Map;
 
 public class BodyNode extends Node {
 
@@ -43,7 +42,7 @@ public class BodyNode extends Node {
     }
 
     @Override
-    public String generateCode() {
+    public String generateCode() throws SemanticException {
         StringBuilder cil = new StringBuilder();
 
         // Processing actions

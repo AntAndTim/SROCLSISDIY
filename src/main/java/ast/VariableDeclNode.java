@@ -1,5 +1,7 @@
 package ast;
 
+import errors.SemanticException;
+
 public class VariableDeclNode extends CommandNode{
 
     public String name;
@@ -11,7 +13,7 @@ public class VariableDeclNode extends CommandNode{
     }
 
     @Override
-    public String generateCode() {
+    public String generateCode() throws SemanticException {
         StringBuilder cil = new StringBuilder();
         cil.append(initialization.generateCode());
 

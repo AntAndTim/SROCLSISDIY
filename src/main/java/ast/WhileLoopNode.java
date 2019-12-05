@@ -1,5 +1,7 @@
 package ast;
 
+import errors.SemanticException;
+
 public class WhileLoopNode extends StatementNode {
 
     public ExpressionNode condition;
@@ -11,7 +13,7 @@ public class WhileLoopNode extends StatementNode {
     }
 
     @Override
-    public String generateCode() {
+    public String generateCode() throws SemanticException {
         StringBuilder cil = new StringBuilder();
         cil.append("WHILE_START: nop\n");
         cil.append(condition.generateCode());

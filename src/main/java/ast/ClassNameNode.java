@@ -1,5 +1,7 @@
 package ast;
 
+import errors.SemanticException;
+
 import java.util.ArrayList;
 
 public class ClassNameNode extends Node{
@@ -13,7 +15,7 @@ public class ClassNameNode extends Node{
     }
 
     @Override
-    public String generateCode() {
+    public String generateCode() throws SemanticException {
         StringBuilder cil = new StringBuilder();
         cil.append(".class public auto ansi ");
 
