@@ -78,6 +78,8 @@ import java.util.ArrayList;
 %type <ast.Node> Primary
 %type <ast.BooleanLitNode> BooleanLiteral
 %type <ArrayList<IdentNode>> ClassGenerics
+%type <ast.TypeNode> TypeName
+%type <ArrayList<ast.TypeNode>> TypeNameList
 
 
 %%
@@ -104,6 +106,16 @@ ClassName
     : IDENTIFIER /* no generics*/ {$$ = new ast.ClassNameNode(new ast.IdentNode($1.getValue()), null);}
     | IDENTIFIER OPENING_BRACKETS ClassGenerics CLOSING_BRACKETS {$$ = new ast.ClassNameNode(new ast.IdentNode($1.getValue()), $3);}
     ;
+
+
+TypeName
+    : IDENTIFIER /* no generics*/ {$$ = new ast.TypeNode(new ast.IdentNode($1.getValue()), null);}
+    | IDENTIFIER OPENING_BRACKETS TypeNameList CLOSING_BRACKETS {$$ = new ast.TypeNode(new ast.IdentNode($1.getValue()), $3);}
+    ;
+
+TypeNameList
+    :                     TypeName {ArrayList<TypeNode> list = new ArrayList<TypeNode>(); list.add($1); $$ = list;}
+    | TypeNameList COMMA TypeName {$1.add($3); $$ = $1;}
 
 ClassGenerics
     :                     IDENTIFIER {ArrayList<IdentNode> list = new ArrayList<IdentNode>(); list.add(new IdentNode($1.getValue())); $$ = list;}
@@ -144,7 +156,7 @@ ParameterDeclarations
     ;
 
 ParameterDeclaration
-    : IDENTIFIER COLON ClassName {$$ = new ParamsDeclNode(new IdentNode($1.getValue()), new TypeNode($3.ident, $3.generics));}
+    : IDENTIFIER COLON TypeName {$$ = new ParamsDeclNode(new IdentNode($1.getValue()), $3);}
     ;
 
 Body
@@ -239,7 +251,7 @@ ExpressionsList
 Primary
     : INTEGER {$$ = new IntegerLitNode($1.getValue());}
     | REAL    {$$ = new RealLitNode($1.getValue());}
-    | BooleanLiteral {$$ = $1}
+    | BooleanLiteral {$$ = $1;}
     | THIS {$$ = null;}
     | ClassName {$$ = $1;}
     ;
