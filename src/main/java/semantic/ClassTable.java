@@ -7,8 +7,8 @@ import java.util.*;
 
 public class ClassTable {
 
-    LinkedHashMap <String, ClassDeclNode> table;
-    HashSet <String> predefined;
+    public LinkedHashMap <String, ClassDeclNode> table;
+    public HashSet <String> predefined;
     public HashMap <String, Map<String, ArrayList<MethodDeclNode>>> methods;
     public HashMap <String, Map<String, FieldDeclNode>> fields;
     public HashMap <String, ArrayList<ConstructorDeclNode>> constructors;

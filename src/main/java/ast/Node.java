@@ -1,5 +1,7 @@
 package ast;
 
+import errors.SemanticException;
+
 public abstract class Node {
     private Integer startLine;
     private Integer startOffset;
