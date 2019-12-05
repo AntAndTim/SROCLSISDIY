@@ -117,12 +117,13 @@ public class ClassDeclNode extends Node{
         this.methods.add(new MethodDeclNode(nameId, paramsDecl, returnTypeId, null));
     }
 
-    public MethodDeclNode getMethod(String name){
+    public ArrayList<MethodDeclNode> getMethod(String name){
+        ArrayList<MethodDeclNode> res = new ArrayList<>();
         for (MethodDeclNode m : this.methods){
             if (name.equals(m.name)) {
-                return m;
+                res.add(m);
             }
         }
-        return null;
+        return res;
     }
 }

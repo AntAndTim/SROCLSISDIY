@@ -4,7 +4,7 @@ import utils.Pair;
 
 import java.util.ArrayList;
 
-public class ExpressionNode extends Node{
+public class ExpressionNode extends CommandNode{
 
     public Node primary;
     public ArrayList<String> callNames;
