@@ -1,7 +1,7 @@
 var a : Array[Integer](10)
 a.set(i) := 55
 x := a.get(i.Plus(1))
-var i is 1
+var i is 1.543
 while i.LessEqual(a.Size) loop
 x := a.get(i)
 a.set(i,x.Mult(x))

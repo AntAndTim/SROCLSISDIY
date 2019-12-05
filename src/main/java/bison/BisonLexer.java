@@ -96,12 +96,26 @@ public class BisonLexer implements YYParser.Lexer {
             }
 
             if (numberLiteral && !newSymbolValue.matches("[0-9]")) {
+                if (newSymbolValue.equals(".")) {
+                    String c = String.valueOf(readSymbol());
+                    StringBuilder newSymbolValueBuilder = new StringBuilder(value + newSymbolValue);
+                    while (c.matches("[0-9]")) {
+                        newSymbolValueBuilder.append(c);
+                        c = String.valueOf(readSymbol());
+                    }
+                    lastUnhandled = c;
+                    return getDouble(newSymbolValueBuilder.toString());
+                }
                 lastUnhandled = newSymbolValue;
                 return getNumberLiteral(value);
             }
 
             value += newSymbolValue;
         }
+    }
+
+    private Token getDouble(String value) {
+        return new Token(Tokens.REAL, value, currentPosition - value.length() - 1, currentLine);
     }
 
     private boolean checkValue(String value) {
