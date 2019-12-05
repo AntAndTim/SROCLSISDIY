@@ -69,7 +69,7 @@ public class MethodDeclNode extends Node {
         if (locals == null) {
             System.err.println(".locals init is null!");
         } else {
-            cil.append(".locals init (");
+            cil.append(String.format(".locals init (%s", locals.get(0)));
             for (int i = 1; i < locals.size(); i++) { //               |
                 cil.append(String.format(", %s", locals.get(i))); // Here as well
             }

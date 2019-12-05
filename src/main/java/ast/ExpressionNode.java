@@ -34,19 +34,42 @@ public class ExpressionNode extends CommandNode{
             return ((LiteralNode)this.primary).getTypeName();
         } else {
 
-            this.primary
+            //this.primary
         }
 
+        return null;
     }
 
     @Override
     public String generateCode() {
         StringBuilder cil = new StringBuilder();
         cil.append(primary.generateCode());
+
+        String lastObjectType = getType(); // так незя
+
         for (int i = 0; i < callNames.size(); i++) {
-            if (callArgs.get(i) == null) {
-                cil.append("ldfld ");
-                context.classTable.fields[]
+            String callName = callNames.get(i);
+            var args = callArgs.get(i);
+            if (args == null) {
+                String varType = getVarDeclByName(callName).initialization.getType();
+                cil.append(String.format("ldfld %s %s::%s\n", varType, lastObjectType, callName));
+                lastObjectType = varType;
+            } else {
+                for (var arg : args) {
+                    arg.generateCode();
+                }
+                var methods = context.classTable.methods.get(lastObjectType).get(callName);
+                int methodIndex = 0; // TODO: use correct method
+                var method = methods.get(methodIndex);
+                cil.append(String.format("callvirt instance %s %s::%s(", method.retTypeName, lastObjectType, callName));
+                boolean first = false;
+                for (var param : method.params) {
+                    if (!first) {
+                        cil.append(param.paramType.ident.value);
+                        first = true;
+                    } else cil.append(", " + param.paramType.ident.value);
+                }
+                cil.append(")\n");
             }
         }
         return cil.toString();

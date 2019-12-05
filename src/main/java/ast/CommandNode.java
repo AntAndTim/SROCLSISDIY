@@ -12,11 +12,11 @@ public abstract class CommandNode extends Node {
     public MethodContext context;
     public ArrayList<Integer> scopesList;
 
-    private int getIndexByName(String name) throws SemanticException{
+    public int getIndexByName(String name) throws SemanticException{
         return this.context.getIndexByName(name, this.scopesList);
     }
 
-    private VariableDeclNode getVarDeclByName(String name) throws SemanticException{
+    public VariableDeclNode getVarDeclByName(String name) throws SemanticException{
         return this.context.getVarDeclByName(name, this.scopesList);
     }
 
