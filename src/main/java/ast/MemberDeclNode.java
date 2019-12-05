@@ -5,7 +5,7 @@ public class MemberDeclNode extends Node {
     public Node declaration;
     public memberType declType;
 
-    enum memberType {
+    public enum memberType {
         FIELD,
         METHOD,
         CONSTRUCTOR,

@@ -1,29 +1,21 @@
-package lexer;
+package bison;
 
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import token.Token;
-import token.TokenType;
-import token.type.Delimiter;
-import token.type.Identifier;
-import token.type.Keyword;
-import token.type.NumberLiteral;
-import token.type.Operator;
-import token.type.Unknown;
+import lombok.SneakyThrows;
 
-public class Lexer {
+public class BisonLexer implements YYParser.Lexer {
 
-    private static final Map<String, TokenType> LANGUAGE_ELEMENTS = Stream
-        .of(Keyword.values(), Operator.values(), Delimiter.values())
-        .flatMap(Arrays::stream)
-        .collect(Collectors.toMap(anEnum -> anEnum.getValue(), anEnum -> anEnum));
+    private static final Map<String, Integer> LANGUAGE_ELEMENT_VALUES = Arrays.stream(Tokens.values())
+        .collect(Collectors.toMap(Tokens::getName, Tokens::getValue));
+    private static final Map<String, TokenType> LANGUAGE_ELEMENTS = Arrays.stream(Tokens.values())
+        .collect(Collectors.toMap(Tokens::getName, token -> token));
     private static final char EOF = (char) -1;
 
     private final InputStreamReader jsFileStream;
@@ -31,9 +23,36 @@ public class Lexer {
     private int currentLine = 1;
     private boolean startFromNextLine;
     private String lastUnhandled = null;
+    Token nextToken = null;
 
-    Lexer(InputStream jsFileStream) {
-        this.jsFileStream = new InputStreamReader(jsFileStream, Charset.forName("UTF-8"));
+    public BisonLexer(InputStream jsFileStream) {
+        this.jsFileStream = new InputStreamReader(jsFileStream, StandardCharsets.UTF_8);
+    }
+
+    @Override
+    @SneakyThrows
+    public Token getLVal() {
+        Token nextToken = this.nextToken;
+        this.nextToken = null;
+        return nextToken;
+    }
+
+    @Override
+    public int yylex() throws IOException {
+        if (nextToken != null) {
+            return nextToken.getType().getValue();
+        }
+        try {
+            nextToken = getToken();
+            return nextToken.getType().getValue();
+        } catch (EOFException e) {
+            return -1;
+        }
+    }
+
+    @Override
+    public void yyerror(String msg) {
+
     }
 
     Token getToken() throws IOException {
@@ -82,12 +101,12 @@ public class Lexer {
         }
     }
 
-    private Token getNumberLiteral(String value) {
-        return new Token(NumberLiteral.NUMBER_LITERAL, value, currentPosition - value.length() - 1, currentLine);
+    private boolean checkValue(String value) {
+        return LANGUAGE_ELEMENT_VALUES.containsKey(value);
     }
 
     private Token getIdentifier(String value) {
-        return new Token(Identifier.IDENTIFIER, value, currentPosition - value.length() - 1, currentLine);
+        return new Token(Tokens.IDENTIFIER, value, currentPosition - value.length() - 1, currentLine);
     }
 
     private Token getElement(String value) {
@@ -97,15 +116,15 @@ public class Lexer {
                          currentLine);
     }
 
+    private Token getNumberLiteral(String value) {
+        return new Token(Tokens.INTEGER, value, currentPosition - value.length() - 1, currentLine);
+    }
+
     private Token getUnknown(String value) {
-        return new Token(Unknown.UNKNOWN,
+        return new Token(Tokens.UNKNOWN,
                          value.equals("\n") ? "\\n" : value,
                          currentPosition - value.length(),
                          currentLine);
-    }
-
-    private boolean checkValue(String value) {
-        return LANGUAGE_ELEMENTS.keySet().contains(value);
     }
 
     private char readSymbol() throws IOException {

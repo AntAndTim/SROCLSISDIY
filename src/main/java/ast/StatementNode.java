@@ -1,5 +1,5 @@
 package ast;
 
-public abstract class StatementNode extends Node{
+public abstract class StatementNode extends CommandNode{
 
 }
