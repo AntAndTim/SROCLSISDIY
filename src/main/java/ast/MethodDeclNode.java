@@ -1,5 +1,6 @@
 package ast;
 
+import com.sun.org.apache.xpath.internal.Arg;
 import utils.Pair;
 
 import javax.xml.stream.FactoryConfigurationError;
@@ -16,6 +17,7 @@ public class MethodDeclNode extends Node {
     public String retTypeName;
     public BodyNode body;
 
+    // TODO : CALCULATE FROM
     public int maxStack;
     public List<Pair<String, String>> localInit;    // First -> type, second -> name
 
@@ -52,7 +54,21 @@ public class MethodDeclNode extends Node {
     }
 
     public boolean compareSignature(MethodDeclNode other){
-        return false; // TODO
+//        return false; // TODO
+        // compare name
+        if (!this.name.equals(other.name)){
+            return false;
+        }
+        // compare types of arguments
+        if (this.params.size() != other.params.size()){
+            return false;
+        }
+        for (int i=0; i<this.params.size(); i++){
+            if (!this.params.get(i).paramType.equals(other.params.get(i).paramType)){
+                return false;
+            }
+        }
+        return true;
     }
 
     public int getLocalIndexByName(String name){

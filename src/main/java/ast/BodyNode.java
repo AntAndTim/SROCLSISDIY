@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class BodyNode extends Node {
 
-    public ArrayList<Node> actions;
+    public ArrayList<CommandNode> actions;
     public ArrayList<ActionType> actionTypes;
 
     public int maxStack;
@@ -22,7 +22,10 @@ public class BodyNode extends Node {
     }
 
     public BodyNode(ArrayList<Node> actions) {
-        this.actions = actions;
+//        this.actions = actions;
+        for (Node currAction : actions){
+            this.actions.add((CommandNode)currAction);
+        }
         this.actionTypes = new ArrayList<>();
         for (Node act : actions){
             if (act instanceof VariableDeclNode){
