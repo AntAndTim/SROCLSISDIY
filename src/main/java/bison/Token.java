@@ -1,4 +1,4 @@
-package token;
+package bison;
 
 import java.util.StringJoiner;
 

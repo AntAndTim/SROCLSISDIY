@@ -1,5 +1,5 @@
 %language "Java"
-%define api.value.type {token.Token}
+%define api.value.type {bison.Token}
 
 %token OPENING_CURLY_BRACES
 %token CLOSING_CURLY_BRACES
