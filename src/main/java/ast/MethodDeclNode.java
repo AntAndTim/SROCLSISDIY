@@ -1,6 +1,6 @@
 package ast;
 
-import com.sun.org.apache.xpath.internal.Arg;
+// import com.sun.org.apache.xpath.internal.Arg;
 import utils.Pair;
 
 import javax.xml.stream.FactoryConfigurationError;
@@ -51,7 +51,7 @@ public class MethodDeclNode extends Node {
         // MAX STACK
         // LOCALS INIT
         // Declaring local variables
-        // TODO: Apparently body nodes are not only in actual bodies but also in statements, move declarations
+        // TODO: MAXSTACK & LOCALS INIT
 //        int declarations = 0;
 //        for (int i = 0; i < actionTypes.size(); i++) {
 //            vars.put(((VariableDeclNode) actions.get(i)).name, declarations);

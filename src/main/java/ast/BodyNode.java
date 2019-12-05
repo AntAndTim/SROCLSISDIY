@@ -46,7 +46,6 @@ public class BodyNode extends Node {
     public String generateCode() {
         StringBuilder cil = new StringBuilder();
 
-
         // Processing actions
         for (int i = 0; i < actions.size(); i++) {
             Node action = actions.get(i);
