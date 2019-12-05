@@ -6,13 +6,23 @@ public class ConstructorDeclNode extends Node {
 
     // Signature
     public ArrayList<ParamsDeclNode> params;
-    public String retTypeName;
     public BodyNode body;
 
-    public ConstructorDeclNode(ArrayList<ParamsDeclNode> paramsDecls, IdentNode retTypeNameId, BodyNode body) {
+    public ConstructorDeclNode(ArrayList<ParamsDeclNode> paramsDecls, BodyNode body) {
         this.params = paramsDecls;
-        this.retTypeName = retTypeNameId.value;
         this.body = body;
+    }
+
+    public boolean compareSignatures(ConstructorDeclNode other){
+        if (this.params.size() != other.params.size()){
+            return false;
+        }
+        for (int i=0;i<this.params.size();i++){
+            if (!this.params.get(i).paramType.equals(other.params.get(i).paramType)){
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override

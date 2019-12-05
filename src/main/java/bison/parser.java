@@ -1,4 +1,4 @@
-package parser;/* A Bison parser, made by GNU Bison 3.4.2.  */
+/* A Bison parser, made by GNU Bison 3.4.2.  */
 
 /* Skeleton implementation for Bison LALR(1) parsers in Java
 
@@ -33,6 +33,17 @@ package parser;/* A Bison parser, made by GNU Bison 3.4.2.  */
 
 
 
+/* "%code imports" blocks.  */
+/* "parser.y":3  */
+
+package bison;
+
+import ast.*;
+import utils.Pair;
+
+import java.util.ArrayList;
+
+/* "parser.java":47  */
 
 /**
  * A Bison parser, automatically generated from <tt>parser.y</tt>.
@@ -63,243 +74,65 @@ class YYParser
 
 /* Tokens.  */
     /** Token number,to be returned by the scanner.  */
-    static final int NUM = 258;
+    static final int OPENING_CURLY_BRACES = 258;
     /** Token number,to be returned by the scanner.  */
-    static final int INT = 259;
+    static final int CLOSING_CURLY_BRACES = 259;
     /** Token number,to be returned by the scanner.  */
-    static final int WHITESPACE = 260;
+    static final int OPENING_PARENTHESIS = 260;
     /** Token number,to be returned by the scanner.  */
-    static final int OPENING_CURLY_BRACES = 261;
+    static final int CLOSING_PARENTHESIS = 261;
     /** Token number,to be returned by the scanner.  */
-    static final int CLOSING_CURLY_BRACES = 262;
+    static final int OPENING_BRACKETS = 262;
     /** Token number,to be returned by the scanner.  */
-    static final int OPENING_PARENTHESIS = 263;
+    static final int CLOSING_BRACKETS = 263;
     /** Token number,to be returned by the scanner.  */
-    static final int CLOSING_PARENTHESIS = 264;
+    static final int COMMA = 264;
     /** Token number,to be returned by the scanner.  */
-    static final int OPENING_BRACKETS = 265;
+    static final int DOT = 265;
     /** Token number,to be returned by the scanner.  */
-    static final int CLOSING_BRACKETS = 266;
+    static final int IDENTIFIER = 266;
     /** Token number,to be returned by the scanner.  */
-    static final int DOUBLE_QUOTES = 267;
+    static final int ELSE = 267;
     /** Token number,to be returned by the scanner.  */
-    static final int SINGLE_QUOTES = 268;
+    static final int FALSE = 268;
     /** Token number,to be returned by the scanner.  */
-    static final int SINGLE_QUOTES_2 = 269;
+    static final int IF = 269;
     /** Token number,to be returned by the scanner.  */
-    static final int COMMA = 270;
+    static final int IN = 270;
     /** Token number,to be returned by the scanner.  */
-    static final int DOT = 271;
+    static final int THIS = 271;
     /** Token number,to be returned by the scanner.  */
-    static final int SEMICOLON = 272;
+    static final int TRUE = 272;
     /** Token number,to be returned by the scanner.  */
-    static final int NEWLINE = 273;
+    static final int VAR = 273;
     /** Token number,to be returned by the scanner.  */
-    static final int IDENTIFIER = 274;
+    static final int WHILE = 274;
     /** Token number,to be returned by the scanner.  */
-    static final int ABSTRACT = 275;
+    static final int CLASS = 275;
     /** Token number,to be returned by the scanner.  */
-    static final int ARGUMENTS = 276;
+    static final int EXTENDS = 276;
     /** Token number,to be returned by the scanner.  */
-    static final int BOOLEAN = 277;
+    static final int ASSIGNMENT = 277;
     /** Token number,to be returned by the scanner.  */
-    static final int BREAK = 278;
+    static final int COLON = 278;
     /** Token number,to be returned by the scanner.  */
-    static final int BYTE = 279;
+    static final int UNKNOWN = 279;
     /** Token number,to be returned by the scanner.  */
-    static final int CASE = 280;
+    static final int RETURN = 280;
     /** Token number,to be returned by the scanner.  */
-    static final int CATCH = 281;
+    static final int IS = 281;
     /** Token number,to be returned by the scanner.  */
-    static final int CHAR = 282;
+    static final int END = 282;
     /** Token number,to be returned by the scanner.  */
-    static final int CONST = 283;
+    static final int LOOP = 283;
     /** Token number,to be returned by the scanner.  */
-    static final int CONTINUE = 284;
+    static final int THEN = 284;
     /** Token number,to be returned by the scanner.  */
-    static final int DEBUGGER = 285;
+    static final int METHOD = 285;
     /** Token number,to be returned by the scanner.  */
-    static final int DEFAULT = 286;
+    static final int INTEGER = 286;
     /** Token number,to be returned by the scanner.  */
-    static final int DELETE = 287;
-    /** Token number,to be returned by the scanner.  */
-    static final int DO = 288;
-    /** Token number,to be returned by the scanner.  */
-    static final int DOUBLE = 289;
-    /** Token number,to be returned by the scanner.  */
-    static final int ELSE = 290;
-    /** Token number,to be returned by the scanner.  */
-    static final int EVAL = 291;
-    /** Token number,to be returned by the scanner.  */
-    static final int FALSE = 292;
-    /** Token number,to be returned by the scanner.  */
-    static final int FINAL = 293;
-    /** Token number,to be returned by the scanner.  */
-    static final int FINALLY = 294;
-    /** Token number,to be returned by the scanner.  */
-    static final int FLOAT = 295;
-    /** Token number,to be returned by the scanner.  */
-    static final int FOR = 296;
-    /** Token number,to be returned by the scanner.  */
-    static final int FUNCTION = 297;
-    /** Token number,to be returned by the scanner.  */
-    static final int GOTO = 298;
-    /** Token number,to be returned by the scanner.  */
-    static final int IF = 299;
-    /** Token number,to be returned by the scanner.  */
-    static final int IMPLEMENTS = 300;
-    /** Token number,to be returned by the scanner.  */
-    static final int IN = 301;
-    /** Token number,to be returned by the scanner.  */
-    static final int INSTANCEOF = 302;
-    /** Token number,to be returned by the scanner.  */
-    static final int INTERFACE = 303;
-    /** Token number,to be returned by the scanner.  */
-    static final int LET = 304;
-    /** Token number,to be returned by the scanner.  */
-    static final int LONG = 305;
-    /** Token number,to be returned by the scanner.  */
-    static final int NATIVE = 306;
-    /** Token number,to be returned by the scanner.  */
-    static final int NEW = 307;
-    /** Token number,to be returned by the scanner.  */
-    static final int NULL = 308;
-    /** Token number,to be returned by the scanner.  */
-    static final int PACKAGE = 309;
-    /** Token number,to be returned by the scanner.  */
-    static final int PRIVATE = 310;
-    /** Token number,to be returned by the scanner.  */
-    static final int PROTECTED = 311;
-    /** Token number,to be returned by the scanner.  */
-    static final int PUBLIC = 312;
-    /** Token number,to be returned by the scanner.  */
-    static final int RETURN = 313;
-    /** Token number,to be returned by the scanner.  */
-    static final int SHORT = 314;
-    /** Token number,to be returned by the scanner.  */
-    static final int STATIC = 315;
-    /** Token number,to be returned by the scanner.  */
-    static final int SWITCH = 316;
-    /** Token number,to be returned by the scanner.  */
-    static final int SYNCHRONIZED = 317;
-    /** Token number,to be returned by the scanner.  */
-    static final int THIS = 318;
-    /** Token number,to be returned by the scanner.  */
-    static final int THROW = 319;
-    /** Token number,to be returned by the scanner.  */
-    static final int THROWS = 320;
-    /** Token number,to be returned by the scanner.  */
-    static final int TRANSIENT = 321;
-    /** Token number,to be returned by the scanner.  */
-    static final int TRUE = 322;
-    /** Token number,to be returned by the scanner.  */
-    static final int TRY = 323;
-    /** Token number,to be returned by the scanner.  */
-    static final int TYPEOF = 324;
-    /** Token number,to be returned by the scanner.  */
-    static final int VAR = 325;
-    /** Token number,to be returned by the scanner.  */
-    static final int VOID = 326;
-    /** Token number,to be returned by the scanner.  */
-    static final int VOLATILE = 327;
-    /** Token number,to be returned by the scanner.  */
-    static final int WHILE = 328;
-    /** Token number,to be returned by the scanner.  */
-    static final int WITH = 329;
-    /** Token number,to be returned by the scanner.  */
-    static final int YIELD = 330;
-    /** Token number,to be returned by the scanner.  */
-    static final int CLASS = 331;
-    /** Token number,to be returned by the scanner.  */
-    static final int ENUM = 332;
-    /** Token number,to be returned by the scanner.  */
-    static final int EXPORT = 333;
-    /** Token number,to be returned by the scanner.  */
-    static final int EXTENDS = 334;
-    /** Token number,to be returned by the scanner.  */
-    static final int IMPORT = 335;
-    /** Token number,to be returned by the scanner.  */
-    static final int SUPER = 336;
-    /** Token number,to be returned by the scanner.  */
-    static final int NUMBER_LITERAL = 337;
-    /** Token number,to be returned by the scanner.  */
-    static final int ASSIGNMENT = 338;
-    /** Token number,to be returned by the scanner.  */
-    static final int ASSIGNMENT_WITH_INCREASE = 339;
-    /** Token number,to be returned by the scanner.  */
-    static final int ASSIGNMENT_WITH_DECREASE = 340;
-    /** Token number,to be returned by the scanner.  */
-    static final int ASSIGNMENT_WITH_MULTIPLICATION = 341;
-    /** Token number,to be returned by the scanner.  */
-    static final int ASSIGNMENT_WITH_DIVISION = 342;
-    /** Token number,to be returned by the scanner.  */
-    static final int ASSIGNMENT_WITH_REMAINDER = 343;
-    /** Token number,to be returned by the scanner.  */
-    static final int ASSIGNMENT_WITH_AND = 344;
-    /** Token number,to be returned by the scanner.  */
-    static final int ASSIGNMENT_WITH_OR = 345;
-    /** Token number,to be returned by the scanner.  */
-    static final int ASSIGNMENT_WITH_XOR = 346;
-    /** Token number,to be returned by the scanner.  */
-    static final int ASSIGNMENT_WITH_LEFT_SHIFT = 347;
-    /** Token number,to be returned by the scanner.  */
-    static final int ASSIGNMENT_WITH_RIGHT_SHIFT = 348;
-    /** Token number,to be returned by the scanner.  */
-    static final int ASSIGNMENT_WITH_UNSIGNED_RIGHT_SHIFT = 349;
-    /** Token number,to be returned by the scanner.  */
-    static final int TYPELESS_EQUALITY = 350;
-    /** Token number,to be returned by the scanner.  */
-    static final int TYPELESS_INEQUALITY = 351;
-    /** Token number,to be returned by the scanner.  */
-    static final int EQUALITY = 352;
-    /** Token number,to be returned by the scanner.  */
-    static final int INEQUALITY = 353;
-    /** Token number,to be returned by the scanner.  */
-    static final int GREATER = 354;
-    /** Token number,to be returned by the scanner.  */
-    static final int LESS = 355;
-    /** Token number,to be returned by the scanner.  */
-    static final int GREATER_OR_EQUAL = 356;
-    /** Token number,to be returned by the scanner.  */
-    static final int LESS_OR_EQUAL = 357;
-    /** Token number,to be returned by the scanner.  */
-    static final int PLUS = 358;
-    /** Token number,to be returned by the scanner.  */
-    static final int MINUS = 359;
-    /** Token number,to be returned by the scanner.  */
-    static final int MILTIPLICATION = 360;
-    /** Token number,to be returned by the scanner.  */
-    static final int DIVISION = 361;
-    /** Token number,to be returned by the scanner.  */
-    static final int REMAINDER = 362;
-    /** Token number,to be returned by the scanner.  */
-    static final int INCREMENT = 363;
-    /** Token number,to be returned by the scanner.  */
-    static final int DECREMENT = 364;
-    /** Token number,to be returned by the scanner.  */
-    static final int BITWISE_AND = 365;
-    /** Token number,to be returned by the scanner.  */
-    static final int BITWISE_OR = 366;
-    /** Token number,to be returned by the scanner.  */
-    static final int BITWISE_NOT = 367;
-    /** Token number,to be returned by the scanner.  */
-    static final int BITWISE_XOR = 368;
-    /** Token number,to be returned by the scanner.  */
-    static final int BITWISE_LEFT_SHIFT = 369;
-    /** Token number,to be returned by the scanner.  */
-    static final int BITWISE_RIGHT_SHIFT = 370;
-    /** Token number,to be returned by the scanner.  */
-    static final int BITWISE_UNSIGNED_RIGHT_SHIFT = 371;
-    /** Token number,to be returned by the scanner.  */
-    static final int LOGICAL_AND = 372;
-    /** Token number,to be returned by the scanner.  */
-    static final int LOGICAL_OR = 373;
-    /** Token number,to be returned by the scanner.  */
-    static final int LOGICAL_NOT = 374;
-    /** Token number,to be returned by the scanner.  */
-    static final int ARROW = 375;
-    /** Token number,to be returned by the scanner.  */
-    static final int UNKNOWN = 376;
+    static final int REAL = 287;
 
 
     
@@ -308,7 +141,7 @@ class YYParser
      * Method to retrieve the semantic value of the last scanned token.
      * @return the semantic value of the last scanned token.
      */
-    token.Token getLVal ();
+    Object getLVal ();
 
     /**
      * Entry point for the scanner.  Returns the token identifier corresponding
@@ -396,12 +229,12 @@ class YYParser
   private final class YYStack {
     private int[] stateStack = new int[16];
     
-    private token.Token[] valueStack = new token.Token[16];
+    private Object[] valueStack = new Object[16];
 
     public int size = 16;
     public int height = -1;
 
-    public final void push (int state, token.Token value                            ) {
+    public final void push (int state, Object value                            ) {
       height++;
       if (size == height)
         {
@@ -410,7 +243,7 @@ class YYParser
           stateStack = newStateStack;
           
 
-          token.Token[] newValueStack = new token.Token[size * 2];
+          Object[] newValueStack = new Object[size * 2];
           System.arraycopy (valueStack, 0, newValueStack, 0, height);
           valueStack = newValueStack;
 
@@ -439,7 +272,7 @@ class YYParser
       return stateStack[height - i];
     }
 
-    public final token.Token valueAt (int i) {
+    public final Object valueAt (int i) {
       return valueStack[height - i];
     }
 
@@ -516,7 +349,7 @@ class YYParser
 
   private int yyaction (int yyn, YYStack yystack, int yylen) 
   {
-    token.Token yyval;
+    Object yyval;
     
 
     /* If YYLEN is nonzero, implement the default value of the action:
@@ -534,8 +367,463 @@ class YYParser
 
     switch (yyn)
       {
-        
-/* "parser.java":539  */
+          case 2:
+  if (yyn == 2)
+    /* "parser.y":88  */
+    {root = new ProgramNode(((ArrayList<ClassDeclNode>)(yystack.valueAt (0))));};
+  break;
+    
+
+  case 3:
+  if (yyn == 3)
+    /* "parser.y":92  */
+    {yyval = new ArrayList<ClassDeclNode>();};
+  break;
+    
+
+  case 4:
+  if (yyn == 4)
+    /* "parser.y":93  */
+    { ((ArrayList<ClassDeclNode>)(yystack.valueAt (0))).add(((ast.ClassDeclNode)(yystack.valueAt (1)))); yyval=((ArrayList<ClassDeclNode>)(yystack.valueAt (0))); };
+  break;
+    
+
+  case 5:
+  if (yyn == 5)
+    /* "parser.y":97  */
+    {yyval = new ClassDeclNode(((ast.ClassNameNode)(yystack.valueAt (4))), ((ast.ClassNameNode)(yystack.valueAt (3))), ((ArrayList<MemberDeclNode>)(yystack.valueAt (1))));};
+  break;
+    
+
+  case 6:
+  if (yyn == 6)
+    /* "parser.y":101  */
+    {yyval = new ArrayList<ast.ClassNameNode>();};
+  break;
+    
+
+  case 7:
+  if (yyn == 7)
+    /* "parser.y":102  */
+    {yyval = ((ast.ClassNameNode)(yystack.valueAt (0)));};
+  break;
+    
+
+  case 8:
+  if (yyn == 8)
+    /* "parser.y":106  */
+    {yyval = new ast.ClassNameNode(new ast.IdentNode(((bison.Token)(yystack.valueAt (0))).getValue()), new ArrayList<IdentNode>());};
+  break;
+    
+
+  case 9:
+  if (yyn == 9)
+    /* "parser.y":107  */
+    {yyval = new ast.ClassNameNode(new ast.IdentNode(((bison.Token)(yystack.valueAt (3))).getValue()), ((ArrayList<IdentNode>)(yystack.valueAt (1))));};
+  break;
+    
+
+  case 10:
+  if (yyn == 10)
+    /* "parser.y":112  */
+    {yyval = new ast.TypeNode(new ast.IdentNode(((bison.Token)(yystack.valueAt (0))).getValue()), new ArrayList<TypeNode>());};
+  break;
+    
+
+  case 11:
+  if (yyn == 11)
+    /* "parser.y":113  */
+    {yyval = new ast.TypeNode(new ast.IdentNode(((bison.Token)(yystack.valueAt (3))).getValue()), ((ArrayList<ast.TypeNode>)(yystack.valueAt (1))));};
+  break;
+    
+
+  case 12:
+  if (yyn == 12)
+    /* "parser.y":117  */
+    {ArrayList<TypeNode> list = new ArrayList<TypeNode>(); list.add(((ast.TypeNode)(yystack.valueAt (0)))); yyval = list;};
+  break;
+    
+
+  case 13:
+  if (yyn == 13)
+    /* "parser.y":118  */
+    {((ArrayList<ast.TypeNode>)(yystack.valueAt (2))).add(((ast.TypeNode)(yystack.valueAt (0)))); yyval = ((ArrayList<ast.TypeNode>)(yystack.valueAt (2)));};
+  break;
+    
+
+  case 14:
+  if (yyn == 14)
+    /* "parser.y":121  */
+    {ArrayList<IdentNode> list = new ArrayList<IdentNode>(); list.add(new IdentNode(((bison.Token)(yystack.valueAt (0))).getValue())); yyval = list;};
+  break;
+    
+
+  case 15:
+  if (yyn == 15)
+    /* "parser.y":122  */
+    {((ArrayList<IdentNode>)(yystack.valueAt (2))).add(new IdentNode(((bison.Token)(yystack.valueAt (0))).getValue())); yyval = ((ArrayList<IdentNode>)(yystack.valueAt (2)));};
+  break;
+    
+
+  case 16:
+  if (yyn == 16)
+    /* "parser.y":125  */
+    {yyval = new ArrayList<MemberDeclNode>();};
+  break;
+    
+
+  case 17:
+  if (yyn == 17)
+    /* "parser.y":126  */
+    {((ArrayList<MemberDeclNode>)(yystack.valueAt (0))).add(((ast.MemberDeclNode)(yystack.valueAt (1)))); yyval = ((ArrayList<MemberDeclNode>)(yystack.valueAt (0)));};
+  break;
+    
+
+  case 18:
+  if (yyn == 18)
+    /* "parser.y":130  */
+    {MemberDeclNode node = new MemberDeclNode(); node.declaration = ((ast.FieldDeclNode)(yystack.valueAt (0))); node.declType = MemberDeclNode.memberType.FIELD; yyval = node;};
+  break;
+    
+
+  case 19:
+  if (yyn == 19)
+    /* "parser.y":131  */
+    {MemberDeclNode node = new MemberDeclNode(); node.declaration = ((ast.MethodDeclNode)(yystack.valueAt (0))); node.declType = MemberDeclNode.memberType.METHOD; yyval = node;};
+  break;
+    
+
+  case 20:
+  if (yyn == 20)
+    /* "parser.y":132  */
+    {MemberDeclNode node = new MemberDeclNode(); node.declaration = ((ast.ConstructorDeclNode)(yystack.valueAt (0))); node.declType = MemberDeclNode.memberType.CONSTRUCTOR; yyval = node;};
+  break;
+    
+
+  case 21:
+  if (yyn == 21)
+    /* "parser.y":136  */
+    {yyval = new ast.FieldDeclNode(new IdentNode(((bison.Token)(yystack.valueAt (2))).getValue()),((ast.ClassNameNode)(yystack.valueAt (0))));};
+  break;
+    
+
+  case 22:
+  if (yyn == 22)
+    /* "parser.y":139  */
+    {yyval = new ast.VariableDeclNode(new IdentNode(((bison.Token)(yystack.valueAt (2))).getValue()),((ast.ExpressionNode)(yystack.valueAt (0))));};
+  break;
+    
+
+  case 23:
+  if (yyn == 23)
+    /* "parser.y":143  */
+    {yyval = new ast.MethodDeclNode(new ast.IdentNode(((bison.Token)(yystack.valueAt (5))).getValue()),((ArrayList<ParamsDeclNode>)(yystack.valueAt (4))),((ast.IdentNode)(yystack.valueAt (3))),new ast.BodyNode(((ArrayList<ast.Node>)(yystack.valueAt (1)))));};
+  break;
+    
+
+  case 24:
+  if (yyn == 24)
+    /* "parser.y":147  */
+    {yyval = null;};
+  break;
+    
+
+  case 25:
+  if (yyn == 25)
+    /* "parser.y":148  */
+    {yyval = new IdentNode(((bison.Token)(yystack.valueAt (0))).getValue());};
+  break;
+    
+
+  case 26:
+  if (yyn == 26)
+    /* "parser.y":152  */
+    {yyval = new ArrayList<ParamsDeclNode>();};
+  break;
+    
+
+  case 27:
+  if (yyn == 27)
+    /* "parser.y":153  */
+    {yyval = ((ArrayList<ParamsDeclNode>)(yystack.valueAt (1)));};
+  break;
+    
+
+  case 28:
+  if (yyn == 28)
+    /* "parser.y":157  */
+    {ArrayList<ParamsDeclNode> params = new ArrayList<ParamsDeclNode>(); params.add(((ast.ParamsDeclNode)(yystack.valueAt (0)))); yyval = params;};
+  break;
+    
+
+  case 29:
+  if (yyn == 29)
+    /* "parser.y":158  */
+    { ((ArrayList<ParamsDeclNode>)(yystack.valueAt (2))).add(((ast.ParamsDeclNode)(yystack.valueAt (0)))); };
+  break;
+    
+
+  case 30:
+  if (yyn == 30)
+    /* "parser.y":162  */
+    {yyval = new ParamsDeclNode(new IdentNode(((bison.Token)(yystack.valueAt (2))).getValue()), ((ast.TypeNode)(yystack.valueAt (0))));};
+  break;
+    
+
+  case 31:
+  if (yyn == 31)
+    /* "parser.y":166  */
+    {yyval = new ArrayList<Node>();};
+  break;
+    
+
+  case 32:
+  if (yyn == 32)
+    /* "parser.y":167  */
+    {((ArrayList<ast.Node>)(yystack.valueAt (0))).addAll(((ArrayList<ast.Node>)(yystack.valueAt (1)))); yyval = ((ArrayList<ast.Node>)(yystack.valueAt (0)));};
+  break;
+    
+
+  case 33:
+  if (yyn == 33)
+    /* "parser.y":171  */
+    {yyval = ((ArrayList<ast.Node>)(yystack.valueAt (0)));};
+  break;
+    
+
+  case 34:
+  if (yyn == 34)
+    /* "parser.y":172  */
+    {yyval = ((ArrayList<ast.Node>)(yystack.valueAt (0)));};
+  break;
+    
+
+  case 35:
+  if (yyn == 35)
+    /* "parser.y":176  */
+    {yyval = new ArrayList<ast.Node>();};
+  break;
+    
+
+  case 36:
+  if (yyn == 36)
+    /* "parser.y":177  */
+    {((ArrayList<ast.Node>)(yystack.valueAt (0))).add(((ast.VariableDeclNode)(yystack.valueAt (1)))); yyval = ((ArrayList<ast.Node>)(yystack.valueAt (0)));};
+  break;
+    
+
+  case 37:
+  if (yyn == 37)
+    /* "parser.y":181  */
+    {yyval = new ArrayList<ast.Node>();};
+  break;
+    
+
+  case 38:
+  if (yyn == 38)
+    /* "parser.y":182  */
+    {((ArrayList<ast.Node>)(yystack.valueAt (0))).add(((ast.Node)(yystack.valueAt (1)))); yyval = ((ArrayList<ast.Node>)(yystack.valueAt (0)));};
+  break;
+    
+
+  case 39:
+  if (yyn == 39)
+    /* "parser.y":186  */
+    {yyval = new ast.ConstructorDeclNode(((ArrayList<ParamsDeclNode>)(yystack.valueAt (3))),new BodyNode(((ArrayList<ast.Node>)(yystack.valueAt (1)))));};
+  break;
+    
+
+  case 40:
+  if (yyn == 40)
+    /* "parser.y":190  */
+    {yyval = ((ast.AssignmentNode)(yystack.valueAt (0)));};
+  break;
+    
+
+  case 41:
+  if (yyn == 41)
+    /* "parser.y":191  */
+    {yyval = ((ast.WhileLoopNode)(yystack.valueAt (0)));};
+  break;
+    
+
+  case 42:
+  if (yyn == 42)
+    /* "parser.y":192  */
+    {yyval = ((ast.IfStatementNode)(yystack.valueAt (0)));};
+  break;
+    
+
+  case 43:
+  if (yyn == 43)
+    /* "parser.y":193  */
+    {yyval = ((ast.ReturnStatement)(yystack.valueAt (0)));};
+  break;
+    
+
+  case 44:
+  if (yyn == 44)
+    /* "parser.y":194  */
+    {yyval = ((ast.ExpressionNode)(yystack.valueAt (0)));};
+  break;
+    
+
+  case 45:
+  if (yyn == 45)
+    /* "parser.y":209  */
+    {yyval = new AssignmentNode(new IdentNode(((bison.Token)(yystack.valueAt (2))).getValue()), ((ast.ExpressionNode)(yystack.valueAt (0))));};
+  break;
+    
+
+  case 46:
+  if (yyn == 46)
+    /* "parser.y":213  */
+    {yyval = new WhileLoopNode(((ast.ExpressionNode)(yystack.valueAt (3))), new BodyNode(((ArrayList<ast.Node>)(yystack.valueAt (1)))));};
+  break;
+    
+
+  case 47:
+  if (yyn == 47)
+    /* "parser.y":217  */
+    {yyval = new IfStatementNode(((ast.ExpressionNode)(yystack.valueAt (3))), new BodyNode(((ArrayList<ast.Node>)(yystack.valueAt (1)))));};
+  break;
+    
+
+  case 48:
+  if (yyn == 48)
+    /* "parser.y":218  */
+    {yyval = new IfStatementNode(((ast.ExpressionNode)(yystack.valueAt (5))), new BodyNode(((ArrayList<ast.Node>)(yystack.valueAt (3)))), new BodyNode(((ArrayList<ast.Node>)(yystack.valueAt (1)))));};
+  break;
+    
+
+  case 49:
+  if (yyn == 49)
+    /* "parser.y":222  */
+    {yyval = new ReturnStatement(null);};
+  break;
+    
+
+  case 50:
+  if (yyn == 50)
+    /* "parser.y":223  */
+    {yyval = new ReturnStatement(((ast.ExpressionNode)(yystack.valueAt (0))));};
+  break;
+    
+
+  case 51:
+  if (yyn == 51)
+    /* "parser.y":227  */
+    {yyval = new ExpressionNode(((ast.Node)(yystack.valueAt (0))), new ArrayList<Pair<IdentNode, ArrayList<ExpressionNode>>>());};
+  break;
+    
+
+  case 52:
+  if (yyn == 52)
+    /* "parser.y":228  */
+    {yyval = new ExpressionNode(((ast.Node)(yystack.valueAt (1))), ((ArrayList<Pair<IdentNode, ArrayList<ExpressionNode>>>)(yystack.valueAt (0))));};
+  break;
+    
+
+  case 53:
+  if (yyn == 53)
+    /* "parser.y":233  */
+    {ArrayList<Pair<IdentNode, ArrayList<ExpressionNode>>> list = new ArrayList<Pair<IdentNode, ArrayList<ExpressionNode>>>(); list.add(((Pair<IdentNode, ArrayList<ExpressionNode>>)(yystack.valueAt (0)))); yyval = list;};
+  break;
+    
+
+  case 54:
+  if (yyn == 54)
+    /* "parser.y":234  */
+    {((ArrayList<Pair<IdentNode, ArrayList<ExpressionNode>>>)(yystack.valueAt (1))).add(((Pair<IdentNode, ArrayList<ExpressionNode>>)(yystack.valueAt (0)))); yyval = ((ArrayList<Pair<IdentNode, ArrayList<ExpressionNode>>>)(yystack.valueAt (1)));};
+  break;
+    
+
+  case 55:
+  if (yyn == 55)
+    /* "parser.y":238  */
+    {Pair<IdentNode, ArrayList<ExpressionNode>> component = new Pair<IdentNode, ArrayList<ExpressionNode>>(new IdentNode(((bison.Token)(yystack.valueAt (1))).getValue()), ((ArrayList<ExpressionNode>)(yystack.valueAt (0)))); yyval = component;};
+  break;
+    
+
+  case 56:
+  if (yyn == 56)
+    /* "parser.y":243  */
+    {yyval = new ArrayList<ExpressionNode>();};
+  break;
+    
+
+  case 57:
+  if (yyn == 57)
+    /* "parser.y":244  */
+    {yyval = ((ArrayList<ExpressionNode>)(yystack.valueAt (1)));};
+  break;
+    
+
+  case 58:
+  if (yyn == 58)
+    /* "parser.y":250  */
+    {ArrayList<ExpressionNode> list = new ArrayList<ExpressionNode>(); list.add(((ast.ExpressionNode)(yystack.valueAt (0)))); yyval = list;};
+  break;
+    
+
+  case 59:
+  if (yyn == 59)
+    /* "parser.y":251  */
+    {((ArrayList<ExpressionNode>)(yystack.valueAt (2))).add(((ast.ExpressionNode)(yystack.valueAt (0)))); yyval = ((ArrayList<ExpressionNode>)(yystack.valueAt (2)));};
+  break;
+    
+
+  case 60:
+  if (yyn == 60)
+    /* "parser.y":255  */
+    {yyval = new IntegerLitNode(((bison.Token)(yystack.valueAt (0))).getValue());};
+  break;
+    
+
+  case 61:
+  if (yyn == 61)
+    /* "parser.y":256  */
+    {yyval = new RealLitNode(((bison.Token)(yystack.valueAt (0))).getValue());};
+  break;
+    
+
+  case 62:
+  if (yyn == 62)
+    /* "parser.y":257  */
+    {yyval = ((ast.BooleanLitNode)(yystack.valueAt (0)));};
+  break;
+    
+
+  case 63:
+  if (yyn == 63)
+    /* "parser.y":258  */
+    {yyval = null;};
+  break;
+    
+
+  case 64:
+  if (yyn == 64)
+    /* "parser.y":259  */
+    {yyval = ((ast.ClassNameNode)(yystack.valueAt (0)));};
+  break;
+    
+
+  case 65:
+  if (yyn == 65)
+    /* "parser.y":263  */
+    {yyval = new BooleanLitNode("True");};
+  break;
+    
+
+  case 66:
+  if (yyn == 66)
+    /* "parser.y":264  */
+    {yyval = new BooleanLitNode("False");};
+  break;
+    
+
+
+/* "parser.java":827  */
 
         default: break;
       }
@@ -558,7 +846,7 @@ class YYParser
   `--------------------------------*/
 
   private void yy_symbol_print (String s, int yytype,
-                                 token.Token yyvaluep                                 )
+                                 Object yyvaluep                                 )
   {
     if (yydebug > 0)
     yycdebug (s + (yytype < yyntokens_ ? " token " : " nterm ")
@@ -596,7 +884,7 @@ class YYParser
     
 
     /* Semantic value of the lookahead.  */
-    token.Token yylval = null;
+    Object yylval = null;
 
     yycdebug ("Starting parse\n");
     yyerrstatus_ = 0;
@@ -637,6 +925,11 @@ class YYParser
             yychar = yylexer.yylex ();
             yylval = yylexer.getLVal ();
 
+          }
+
+          if(yychar == 2281337){
+          yychar = yyempty_;
+          continue;
           }
 
         /* Convert token to internal form.  */
@@ -843,7 +1136,7 @@ class YYParser
     return yyvalue == yytable_ninf_;
   }
 
-  private static final byte yypact_ninf_ = -123;
+  private static final byte yypact_ninf_ = -85;
   private static final byte yytable_ninf_ = -1;
 
   /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
@@ -853,8 +1146,18 @@ class YYParser
   {
     return new byte[]
     {
-       3,  -123,     7,  -122,  -122,  -123,     3,     3,     5,     6,
-    -122,  -122,  -123,  -123
+     -13,     3,    10,   -85,   -13,     8,     4,   -85,   -85,    16,
+       3,     7,   -85,    32,   -85,     0,   -85,    33,    42,    46,
+      52,    38,     0,   -85,   -85,   -85,   -85,     2,    48,    49,
+      42,   -85,   -85,   -85,    57,    20,   -85,    35,     3,    58,
+      60,   -85,    71,    -1,   -85,    62,   -85,   -85,    72,    62,
+      62,   -85,   -85,   -85,    50,    59,    35,   -85,   -85,    45,
+     -85,   -85,   -85,   -85,   -85,    74,   -85,   -85,    76,    63,
+      78,   -85,   -85,    62,    61,    65,    64,   -85,   -85,   -85,
+     -85,   -85,    80,    74,   -85,   -85,    35,    60,   -85,    35,
+      62,    35,    90,   -85,    69,   -85,    34,    -3,   -85,    70,
+       6,   -85,   -85,   -85,    60,    35,   -85,   -85,   -85,   -85,
+      26,   -85,    73,   -85,    62,   -85,   -85
     };
   }
 
@@ -866,8 +1169,18 @@ class YYParser
   {
     return new byte[]
     {
-       0,     6,     0,     2,     3,     1,     0,     0,     0,     0,
-       4,     5,     7,     8
+       3,     0,     0,     2,     3,     8,     6,     1,     4,     0,
+       0,     0,    14,     0,     7,    16,     9,     0,     0,     0,
+       0,     0,    16,    18,    19,    20,    15,     0,     0,     0,
+       0,     5,    17,    26,     0,     0,    28,    31,     0,    24,
+       0,    27,     0,     8,    66,     0,    63,    65,     0,     0,
+      49,    60,    61,    64,    35,     0,    31,    33,    34,    37,
+      40,    41,    42,    43,    44,    51,    62,    21,     0,     0,
+      10,    30,    29,     0,     0,     0,     0,    50,    36,    39,
+      32,    38,     0,    52,    53,    25,    31,     0,    45,    31,
+       0,    31,     0,    54,     0,    12,     0,     0,    22,     0,
+       0,    55,    23,    11,     0,    31,    47,    46,    56,    58,
+       0,    13,     0,    57,     0,    48,    59
     };
   }
 
@@ -877,7 +1190,10 @@ class YYParser
   {
     return new byte[]
     {
-    -123,  -123,  -123,    -2
+     -85,   -85,    94,   -85,   -85,     1,   -84,   -85,   -85,    77,
+     -85,   -85,   -85,   -85,   -85,    75,   -85,    66,   -55,   -85,
+      47,    43,   -85,   -85,   -85,   -85,   -85,   -85,   -45,   -85,
+      21,   -85,   -85,   -85,   -85
     };
   }
 
@@ -887,7 +1203,10 @@ class YYParser
   {
     return new byte[]
     {
-      -1,     2,     3,     4
+      -1,     2,     3,     4,    11,    53,    71,    96,    13,    21,
+      22,    23,    54,    24,    69,    28,    35,    36,    55,    56,
+      57,    58,    25,    59,    60,    61,    62,    63,    64,    83,
+      84,   101,   110,    65,    66
     };
   }
 
@@ -899,7 +1218,17 @@ class YYParser
   {
     return new byte[]
     {
-       6,     7,     8,     9,    10,    11,     1,     5,    12,    13
+      74,    80,     6,    95,    76,    77,     9,     1,    33,   105,
+       7,    14,   108,    34,     5,     9,    18,     5,    19,    44,
+     111,    73,    46,    47,   106,    10,    41,    12,    88,    42,
+      20,    94,   113,    15,    97,   114,    99,    51,    52,    67,
+      16,    17,   103,   104,    26,    98,    43,    27,    44,    45,
+     112,    46,    47,    48,    49,   109,    43,    29,    44,    45,
+      50,    46,    47,    30,    49,    31,    51,    52,    48,   116,
+      50,    70,    38,     5,    37,    44,    51,    52,    46,    47,
+      40,    68,    34,    75,    82,    87,    79,    85,    90,    86,
+      89,    92,    91,    51,    52,   100,   102,   107,     8,    32,
+     115,    78,    81,     0,    93,    39,     0,     0,    72
     };
   }
 
@@ -908,29 +1237,55 @@ private static final byte yycheck_[] = yycheck_init();
   {
     return new byte[]
     {
-     122,   123,   124,   125,     6,     7,     3,     0,     3,     3
+      45,    56,     1,    87,    49,    50,     7,    20,     6,    12,
+       0,    10,     6,    11,    11,     7,    16,    11,    18,    13,
+     104,    22,    16,    17,    27,    21,     6,    11,    73,     9,
+      30,    86,     6,    26,    89,     9,    91,    31,    32,    38,
+       8,     9,     8,     9,    11,    90,    11,     5,    13,    14,
+     105,    16,    17,    18,    19,   100,    11,    11,    13,    14,
+      25,    16,    17,    11,    19,    27,    31,    32,    18,   114,
+      25,    11,    23,    11,    26,    13,    31,    32,    16,    17,
+      23,    23,    11,    11,    10,     7,    27,    11,    23,    26,
+      29,    11,    28,    31,    32,     5,    27,    27,     4,    22,
+      27,    54,    59,    -1,    83,    30,    -1,    -1,    42
     };
   }
 
 /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
    symbol of state STATE-NUM.  */
-  private static final short yystos_[] = yystos_init();
-  private static final short[] yystos_init()
+  private static final byte yystos_[] = yystos_init();
+  private static final byte[] yystos_init()
   {
-    return new short[]
+    return new byte[]
     {
-       0,     3,   127,   128,   129,     0,   122,   123,   124,   125,
-     129,   129,     3,     3
+       0,    20,    34,    35,    36,    11,    38,     0,    35,     7,
+      21,    37,    11,    41,    38,    26,     8,     9,    16,    18,
+      30,    42,    43,    44,    46,    55,    11,     5,    48,    11,
+      11,    27,    42,     6,    11,    49,    50,    26,    23,    48,
+      23,     6,     9,    11,    13,    14,    16,    17,    18,    19,
+      25,    31,    32,    38,    45,    51,    52,    53,    54,    56,
+      57,    58,    59,    60,    61,    66,    67,    38,    23,    47,
+      11,    39,    50,    22,    61,    11,    61,    61,    53,    27,
+      51,    54,    10,    62,    63,    11,    26,     7,    61,    29,
+      23,    28,    11,    63,    51,    39,    40,    51,    61,    51,
+       5,    64,    27,     8,     9,    12,    27,    27,     6,    61,
+      65,    39,    51,     6,     9,    27,    61
     };
   }
 
 /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
-  private static final short yyr1_[] = yyr1_init();
-  private static final short[] yyr1_init()
+  private static final byte yyr1_[] = yyr1_init();
+  private static final byte[] yyr1_init()
   {
-    return new short[]
+    return new byte[]
     {
-       0,   126,   127,   128,   128,   128,   129,   129,   129
+       0,    33,    34,    35,    35,    36,    37,    37,    38,    38,
+      39,    39,    40,    40,    41,    41,    42,    42,    43,    43,
+      43,    44,    45,    46,    47,    47,    48,    48,    49,    49,
+      50,    51,    51,    52,    52,    53,    53,    54,    54,    55,
+      56,    56,    56,    56,    56,    57,    58,    59,    59,    60,
+      60,    61,    61,    62,    62,    63,    64,    64,    65,    65,
+      66,    66,    66,    66,    66,    67,    67
     };
   }
 
@@ -940,7 +1295,13 @@ private static final byte yycheck_[] = yycheck_init();
   {
     return new byte[]
     {
-       0,     2,     1,     1,     3,     3,     1,     3,     3
+       0,     2,     1,     0,     2,     6,     0,     2,     1,     4,
+       1,     4,     1,     3,     1,     3,     0,     2,     1,     1,
+       1,     4,     4,     7,     0,     2,     2,     3,     1,     3,
+       3,     0,     2,     1,     1,     0,     2,     0,     2,     5,
+       1,     1,     1,     1,     1,     3,     5,     5,     7,     1,
+       2,     1,     2,     1,     2,     3,     2,     3,     1,     3,
+       1,     1,     1,     1,     1,     1,     1
     };
   }
 
@@ -954,16 +1315,7 @@ private static final byte yycheck_[] = yycheck_init();
        0,   256,   257,   258,   259,   260,   261,   262,   263,   264,
      265,   266,   267,   268,   269,   270,   271,   272,   273,   274,
      275,   276,   277,   278,   279,   280,   281,   282,   283,   284,
-     285,   286,   287,   288,   289,   290,   291,   292,   293,   294,
-     295,   296,   297,   298,   299,   300,   301,   302,   303,   304,
-     305,   306,   307,   308,   309,   310,   311,   312,   313,   314,
-     315,   316,   317,   318,   319,   320,   321,   322,   323,   324,
-     325,   326,   327,   328,   329,   330,   331,   332,   333,   334,
-     335,   336,   337,   338,   339,   340,   341,   342,   343,   344,
-     345,   346,   347,   348,   349,   350,   351,   352,   353,   354,
-     355,   356,   357,   358,   359,   360,   361,   362,   363,   364,
-     365,   366,   367,   368,   369,   370,   371,   372,   373,   374,
-     375,   376,    43,    45,    42,    47
+     285,   286,   287
     };
   }
 
@@ -974,32 +1326,21 @@ private static final byte yycheck_[] = yycheck_init();
   {
     return new String[]
     {
-  "$end", "error", "$undefined", "NUM", "INT", "WHITESPACE",
-  "OPENING_CURLY_BRACES", "CLOSING_CURLY_BRACES", "OPENING_PARENTHESIS",
-  "CLOSING_PARENTHESIS", "OPENING_BRACKETS", "CLOSING_BRACKETS",
-  "DOUBLE_QUOTES", "SINGLE_QUOTES", "SINGLE_QUOTES_2", "COMMA", "DOT",
-  "SEMICOLON", "NEWLINE", "IDENTIFIER", "ABSTRACT", "ARGUMENTS", "BOOLEAN",
-  "BREAK", "BYTE", "CASE", "CATCH", "CHAR", "CONST", "CONTINUE",
-  "DEBUGGER", "DEFAULT", "DELETE", "DO", "DOUBLE", "ELSE", "EVAL", "FALSE",
-  "FINAL", "FINALLY", "FLOAT", "FOR", "FUNCTION", "GOTO", "IF",
-  "IMPLEMENTS", "IN", "INSTANCEOF", "INTERFACE", "LET", "LONG", "NATIVE",
-  "NEW", "NULL", "PACKAGE", "PRIVATE", "PROTECTED", "PUBLIC", "RETURN",
-  "SHORT", "STATIC", "SWITCH", "SYNCHRONIZED", "THIS", "THROW", "THROWS",
-  "TRANSIENT", "TRUE", "TRY", "TYPEOF", "VAR", "VOID", "VOLATILE", "WHILE",
-  "WITH", "YIELD", "CLASS", "ENUM", "EXPORT", "EXTENDS", "IMPORT", "SUPER",
-  "NUMBER_LITERAL", "ASSIGNMENT", "ASSIGNMENT_WITH_INCREASE",
-  "ASSIGNMENT_WITH_DECREASE", "ASSIGNMENT_WITH_MULTIPLICATION",
-  "ASSIGNMENT_WITH_DIVISION", "ASSIGNMENT_WITH_REMAINDER",
-  "ASSIGNMENT_WITH_AND", "ASSIGNMENT_WITH_OR", "ASSIGNMENT_WITH_XOR",
-  "ASSIGNMENT_WITH_LEFT_SHIFT", "ASSIGNMENT_WITH_RIGHT_SHIFT",
-  "ASSIGNMENT_WITH_UNSIGNED_RIGHT_SHIFT", "TYPELESS_EQUALITY",
-  "TYPELESS_INEQUALITY", "EQUALITY", "INEQUALITY", "GREATER", "LESS",
-  "GREATER_OR_EQUAL", "LESS_OR_EQUAL", "PLUS", "MINUS", "MILTIPLICATION",
-  "DIVISION", "REMAINDER", "INCREMENT", "DECREMENT", "BITWISE_AND",
-  "BITWISE_OR", "BITWISE_NOT", "BITWISE_XOR", "BITWISE_LEFT_SHIFT",
-  "BITWISE_RIGHT_SHIFT", "BITWISE_UNSIGNED_RIGHT_SHIFT", "LOGICAL_AND",
-  "LOGICAL_OR", "LOGICAL_NOT", "ARROW", "UNKNOWN", "'+'", "'-'", "'*'",
-  "'/'", "$accept", "EVALUATE", "EXPR", "TERM", null
+  "$end", "error", "$undefined", "OPENING_CURLY_BRACES",
+  "CLOSING_CURLY_BRACES", "OPENING_PARENTHESIS", "CLOSING_PARENTHESIS",
+  "OPENING_BRACKETS", "CLOSING_BRACKETS", "COMMA", "DOT", "IDENTIFIER",
+  "ELSE", "FALSE", "IF", "IN", "THIS", "TRUE", "VAR", "WHILE", "CLASS",
+  "EXTENDS", "ASSIGNMENT", "COLON", "UNKNOWN", "RETURN", "IS", "END",
+  "LOOP", "THEN", "METHOD", "INTEGER", "REAL", "$accept", "Program",
+  "ClassDeclarations", "ClassDeclaration", "Extends", "ClassName",
+  "TypeName", "TypeNameList", "ClassGenerics", "MemberDeclarations",
+  "MemberDeclaration", "FieldDeclaration", "VariableDeclaration",
+  "MethodDeclaration", "MethodReturnType", "Parameters",
+  "ParameterDeclarations", "ParameterDeclaration", "Body", "BodyMember",
+  "VariableDeclarationGroup", "StatementGroup", "ConstructorDeclaration",
+  "Statement", "Assignment", "WhileLoop", "IfStatement", "ReturnStatement",
+  "Expression", "ExpressionCallGroup", "ExpressionCallGroupComponent",
+  "Arguments", "ExpressionsList", "Primary", "BooleanLiteral", null
     };
   }
 
@@ -1009,7 +1350,13 @@ private static final byte yycheck_[] = yycheck_init();
   {
     return new short[]
     {
-       0,   129,   129,   131,   132,   133,   136,   137,   138
+       0,    88,    88,    92,    93,    97,   101,   102,   106,   107,
+     112,   113,   117,   118,   121,   122,   125,   126,   130,   131,
+     132,   136,   139,   143,   147,   148,   152,   153,   157,   158,
+     162,   166,   167,   171,   172,   176,   177,   181,   182,   186,
+     190,   191,   192,   193,   194,   209,   213,   217,   218,   222,
+     223,   227,   228,   233,   234,   238,   243,   244,   250,   251,
+     255,   256,   257,   258,   259,   263,   264
     };
   }
 
@@ -1044,7 +1391,7 @@ private static final byte yycheck_[] = yycheck_init();
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,   124,   122,     2,   123,     2,   125,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
@@ -1068,16 +1415,7 @@ private static final byte yycheck_[] = yycheck_init();
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
       15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
-      25,    26,    27,    28,    29,    30,    31,    32,    33,    34,
-      35,    36,    37,    38,    39,    40,    41,    42,    43,    44,
-      45,    46,    47,    48,    49,    50,    51,    52,    53,    54,
-      55,    56,    57,    58,    59,    60,    61,    62,    63,    64,
-      65,    66,    67,    68,    69,    70,    71,    72,    73,    74,
-      75,    76,    77,    78,    79,    80,    81,    82,    83,    84,
-      85,    86,    87,    88,    89,    90,    91,    92,    93,    94,
-      95,    96,    97,    98,    99,   100,   101,   102,   103,   104,
-     105,   106,   107,   108,   109,   110,   111,   112,   113,   114,
-     115,   116,   117,   118,   119,   120,   121
+      25,    26,    27,    28,    29,    30,    31,    32
     };
   }
 
@@ -1089,20 +1427,25 @@ private static final byte yycheck_[] = yycheck_init();
       return yyundef_token_;
   }
 
-  private static final int yylast_ = 9;
-  private static final int yynnts_ = 4;
+  private static final int yylast_ = 108;
+  private static final int yynnts_ = 35;
   private static final int yyempty_ = -2;
-  private static final int yyfinal_ = 5;
+  private static final int yyfinal_ = 7;
   private static final int yyterror_ = 1;
   private static final int yyerrcode_ = 256;
-  private static final int yyntokens_ = 126;
+  private static final int yyntokens_ = 33;
 
-  private static final int yyuser_token_number_max_ = 376;
+  private static final int yyuser_token_number_max_ = 287;
   private static final int yyundef_token_ = 2;
 
 /* User implementation code.  */
+/* Unqualified %code blocks.  */
+/* "parser.y":12  */
+public ProgramNode root;
+
+/* "parser.java":1442  */
 
 }
 
-/* "parser.y":141  */
+/* "parser.y":267  */
 

@@ -1,6 +1,6 @@
 package ast;
 
-public class VariableDeclNode extends Node{
+public class VariableDeclNode extends CommandNode{
 
     public String name;
     public ExpressionNode initialization;

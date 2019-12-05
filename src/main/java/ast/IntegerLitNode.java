@@ -4,6 +4,10 @@ public class IntegerLitNode extends LiteralNode {
 
     public String value;
 
+    public IntegerLitNode(String value){
+        this.value = value;
+    }
+
     @Override
     public String getTypeName() {
         return "Integer";

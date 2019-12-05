@@ -1,13 +1,12 @@
 package ast;
 
-import java.beans.Expression;
 
 public class AssignmentNode extends StatementNode{
 
     public String varName;
-    public Expression varValue;
+    public ExpressionNode varValue;
 
-    public AssignmentNode(IdentNode varNameId, Expression varValue) {
+    public AssignmentNode(IdentNode varNameId, ExpressionNode varValue) {
         this.varName = varNameId.value;
         this.varValue = varValue;
     }
