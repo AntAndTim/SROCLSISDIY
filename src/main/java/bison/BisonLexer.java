@@ -43,7 +43,10 @@ public class BisonLexer implements YYParser.Lexer {
             return nextToken.getType().getValue();
         }
         try {
-            nextToken = getToken();
+            do {
+                nextToken = getToken();
+            }
+            while (nextToken.getType() == Tokens.SPACE | nextToken.getType() == Tokens.NEW_LINE);
             return nextToken.getType().getValue();
         } catch (EOFException e) {
             return -1;
