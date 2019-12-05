@@ -1,7 +1,7 @@
 %language "Java"
 %code imports
 {
-package parser;
+package bison;
 
 import ast.*;
 import utils.Pair;
@@ -12,39 +12,39 @@ import java.util.ArrayList;
 %code {public ProgramNode root;}
 
 
-%token <token.Token> OPENING_CURLY_BRACES
-%token <token.Token> CLOSING_CURLY_BRACES
-%token <token.Token> OPENING_PARENTHESIS
-%token <token.Token> CLOSING_PARENTHESIS
-%token <token.Token> OPENING_BRACKETS
-%token <token.Token> CLOSING_BRACKETS
-%token <token.Token> COMMA
-%token <token.Token> DOT
-%token <token.Token> IDENTIFIER
-%token <token.Token> ELSE
-%token <token.Token> FALSE
-%token <token.Token> IF
-%token <token.Token> IN
-%token <token.Token> THIS
-%token <token.Token> TRUE
-%token <token.Token> VAR
-%token <token.Token> WHILE
-%token <token.Token> CLASS
-%token <token.Token> EXTENDS
-%token <token.Token> ASSIGNMENT
-%token <token.Token> COLON
-%token <token.Token> UNKNOWN
-%token <token.Token> RETURN
+%token <bison.Token> OPENING_CURLY_BRACES
+%token <bison.Token> CLOSING_CURLY_BRACES
+%token <bison.Token> OPENING_PARENTHESIS
+%token <bison.Token> CLOSING_PARENTHESIS
+%token <bison.Token> OPENING_BRACKETS
+%token <bison.Token> CLOSING_BRACKETS
+%token <bison.Token> COMMA
+%token <bison.Token> DOT
+%token <bison.Token> IDENTIFIER
+%token <bison.Token> ELSE
+%token <bison.Token> FALSE
+%token <bison.Token> IF
+%token <bison.Token> IN
+%token <bison.Token> THIS
+%token <bison.Token> TRUE
+%token <bison.Token> VAR
+%token <bison.Token> WHILE
+%token <bison.Token> CLASS
+%token <bison.Token> EXTENDS
+%token <bison.Token> ASSIGNMENT
+%token <bison.Token> COLON
+%token <bison.Token> UNKNOWN
+%token <bison.Token> RETURN
 
 /*todo tokens*/
-%token <token.Token> IS      /* is  */
-%token <token.Token> END     /* end */
+%token <bison.Token> IS      /* is  */
+%token <bison.Token> END     /* end */
                /* todo ASSIGNMENT(':=') */
-%token <token.Token> LOOP    /* loop */
-%token <token.Token> THEN    /* then */
-%token <token.Token> METHOD  /* method */
-%token <token.Token> INTEGER /* regular int: 1,2,3 ..*/
-%token <token.Token> REAL    /* fp value: 1.1 ,1.2, 5.5 ... */
+%token <bison.Token> LOOP    /* loop */
+%token <bison.Token> THEN    /* then */
+%token <bison.Token> METHOD  /* method */
+%token <bison.Token> INTEGER /* regular int: 1,2,3 ..*/
+%token <bison.Token> REAL    /* fp value: 1.1 ,1.2, 5.5 ... */
 
 
 /* %type <ast.IfStatementNode> IfStatement */

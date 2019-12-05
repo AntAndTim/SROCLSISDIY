@@ -36,7 +36,7 @@
 /* "%code imports" blocks.  */
 /* "parser.y":3  */
 
-package parser;
+package bison;
 
 import ast.*;
 import utils.Pair;
@@ -412,28 +412,28 @@ class YYParser
   case 8:
   if (yyn == 8)
     /* "parser.y":106  */
-    {yyval = new ast.ClassNameNode(new ast.IdentNode(((token.Token)(yystack.valueAt (0))).getValue()), null);};
+    {yyval = new ast.ClassNameNode(new ast.IdentNode(((bison.Token)(yystack.valueAt (0))).getValue()), null);};
   break;
     
 
   case 9:
   if (yyn == 9)
     /* "parser.y":107  */
-    {yyval = new ast.ClassNameNode(new ast.IdentNode(((token.Token)(yystack.valueAt (3))).getValue()), ((ArrayList<IdentNode>)(yystack.valueAt (1))));};
+    {yyval = new ast.ClassNameNode(new ast.IdentNode(((bison.Token)(yystack.valueAt (3))).getValue()), ((ArrayList<IdentNode>)(yystack.valueAt (1))));};
   break;
     
 
   case 10:
   if (yyn == 10)
     /* "parser.y":112  */
-    {yyval = new ast.TypeNode(new ast.IdentNode(((token.Token)(yystack.valueAt (0))).getValue()), null);};
+    {yyval = new ast.TypeNode(new ast.IdentNode(((bison.Token)(yystack.valueAt (0))).getValue()), null);};
   break;
     
 
   case 11:
   if (yyn == 11)
     /* "parser.y":113  */
-    {yyval = new ast.TypeNode(new ast.IdentNode(((token.Token)(yystack.valueAt (3))).getValue()), ((ArrayList<ast.TypeNode>)(yystack.valueAt (1))));};
+    {yyval = new ast.TypeNode(new ast.IdentNode(((bison.Token)(yystack.valueAt (3))).getValue()), ((ArrayList<ast.TypeNode>)(yystack.valueAt (1))));};
   break;
     
 
@@ -454,14 +454,14 @@ class YYParser
   case 14:
   if (yyn == 14)
     /* "parser.y":121  */
-    {ArrayList<IdentNode> list = new ArrayList<IdentNode>(); list.add(new IdentNode(((token.Token)(yystack.valueAt (0))).getValue())); yyval = list;};
+    {ArrayList<IdentNode> list = new ArrayList<IdentNode>(); list.add(new IdentNode(((bison.Token)(yystack.valueAt (0))).getValue())); yyval = list;};
   break;
     
 
   case 15:
   if (yyn == 15)
     /* "parser.y":122  */
-    {((ArrayList<IdentNode>)(yystack.valueAt (2))).add(new IdentNode(((token.Token)(yystack.valueAt (0))).getValue())); yyval = ((ArrayList<IdentNode>)(yystack.valueAt (2)));};
+    {((ArrayList<IdentNode>)(yystack.valueAt (2))).add(new IdentNode(((bison.Token)(yystack.valueAt (0))).getValue())); yyval = ((ArrayList<IdentNode>)(yystack.valueAt (2)));};
   break;
     
 
@@ -503,14 +503,14 @@ class YYParser
   case 21:
   if (yyn == 21)
     /* "parser.y":136  */
-    {yyval = new ast.VariableDeclNode(new IdentNode(((token.Token)(yystack.valueAt (2))).getValue()),((ast.ExpressionNode)(yystack.valueAt (0))));};
+    {yyval = new ast.VariableDeclNode(new IdentNode(((bison.Token)(yystack.valueAt (2))).getValue()),((ast.ExpressionNode)(yystack.valueAt (0))));};
   break;
     
 
   case 22:
   if (yyn == 22)
     /* "parser.y":140  */
-    {yyval = new ast.MethodDeclNode(new ast.IdentNode(((token.Token)(yystack.valueAt (5))).getValue()),((ArrayList<ParamsDeclNode>)(yystack.valueAt (4))),((ast.IdentNode)(yystack.valueAt (3))),new ast.BodyNode(((ArrayList<ast.Node>)(yystack.valueAt (1)))));};
+    {yyval = new ast.MethodDeclNode(new ast.IdentNode(((bison.Token)(yystack.valueAt (5))).getValue()),((ArrayList<ParamsDeclNode>)(yystack.valueAt (4))),((ast.IdentNode)(yystack.valueAt (3))),new ast.BodyNode(((ArrayList<ast.Node>)(yystack.valueAt (1)))));};
   break;
     
 
@@ -524,7 +524,7 @@ class YYParser
   case 24:
   if (yyn == 24)
     /* "parser.y":145  */
-    {yyval = new IdentNode(((token.Token)(yystack.valueAt (0))).getValue());};
+    {yyval = new IdentNode(((bison.Token)(yystack.valueAt (0))).getValue());};
   break;
     
 
@@ -559,7 +559,7 @@ class YYParser
   case 29:
   if (yyn == 29)
     /* "parser.y":159  */
-    {yyval = new ParamsDeclNode(new IdentNode(((token.Token)(yystack.valueAt (2))).getValue()), ((ast.TypeNode)(yystack.valueAt (0))));};
+    {yyval = new ParamsDeclNode(new IdentNode(((bison.Token)(yystack.valueAt (2))).getValue()), ((ast.TypeNode)(yystack.valueAt (0))));};
   break;
     
 
@@ -664,7 +664,7 @@ class YYParser
   case 44:
   if (yyn == 44)
     /* "parser.y":206  */
-    {yyval = new AssignmentNode(new IdentNode(((token.Token)(yystack.valueAt (2))).getValue()), ((ast.ExpressionNode)(yystack.valueAt (0))));};
+    {yyval = new AssignmentNode(new IdentNode(((bison.Token)(yystack.valueAt (2))).getValue()), ((ast.ExpressionNode)(yystack.valueAt (0))));};
   break;
     
 
@@ -734,7 +734,7 @@ class YYParser
   case 54:
   if (yyn == 54)
     /* "parser.y":235  */
-    {Pair<IdentNode, ArrayList<ExpressionNode>> component = new Pair<IdentNode, ArrayList<ExpressionNode>>(new IdentNode(((token.Token)(yystack.valueAt (1))).getValue()), ((ArrayList<ExpressionNode>)(yystack.valueAt (0)))); yyval = component;};
+    {Pair<IdentNode, ArrayList<ExpressionNode>> component = new Pair<IdentNode, ArrayList<ExpressionNode>>(new IdentNode(((bison.Token)(yystack.valueAt (1))).getValue()), ((ArrayList<ExpressionNode>)(yystack.valueAt (0)))); yyval = component;};
   break;
     
 
@@ -769,14 +769,14 @@ class YYParser
   case 59:
   if (yyn == 59)
     /* "parser.y":252  */
-    {yyval = new IntegerLitNode(((token.Token)(yystack.valueAt (0))).getValue());};
+    {yyval = new IntegerLitNode(((bison.Token)(yystack.valueAt (0))).getValue());};
   break;
     
 
   case 60:
   if (yyn == 60)
     /* "parser.y":253  */
-    {yyval = new RealLitNode(((token.Token)(yystack.valueAt (0))).getValue());};
+    {yyval = new RealLitNode(((bison.Token)(yystack.valueAt (0))).getValue());};
   break;
     
 
