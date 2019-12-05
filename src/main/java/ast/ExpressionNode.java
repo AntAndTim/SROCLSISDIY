@@ -23,19 +23,23 @@ public class ExpressionNode extends CommandNode{
         }
     }
 
-    public String getType(){
+    public String getType() throws SemanticException{
         // If call, get return type, otherwise get type of variable/literal
         // Also check if constructor
 
         // Get primary type first
-//        String primaryType = null;
-//        if (this.primary instanceof LiteralNode){
-//            return ((LiteralNode)this.primary).getTypeName();
-//        } else {
-//
-//            this.primary
-//        }
-        throw new UnsupportedOperationException();
+        String currType = this.getPrimaryType();
+        for (int idx=0;idx<this.callNames.size();idx++){
+//            currType this.callNames.get(idx)
+            if (this.callArgs.get(idx) == null){
+                if (!this.context.classTable.fields.get(currType).containsKey(this.callNames.get(idx))){
+                    throw new SemanticException(String.format("Undefined field %s in %s", this.callNames.get(idx), currType), this.getStartPosition());
+                }
+                currType = this.context.classTable.fields.get(currType).get(this.callNames.get(idx)).fieldType.ident.value;
+            }
+            currType = this.getMethodReturnType(currType, this.callNames.get(idx), this.callArgs.get(idx)).retTypeName;
+        }
+        return currType;
     }
 
 
@@ -113,13 +117,17 @@ public class ExpressionNode extends CommandNode{
         return cil.toString();
     }
 
-    public String getPrimaryType(){
+    public String getPrimaryType() throws SemanticException{
         String primaryType = null;
-        if (this.primary instanceof LiteralNode){
+
+        if (this.primary instanceof ClassNameNode){
+            return ((ClassNameNode)primary).ident.value;
+        } else if (this.primary instanceof LiteralNode){
             return ((LiteralNode)this.primary).getTypeName();
+        } else if (this.primary instanceof IdentNode) {
+            return this.getVarDeclByName(((IdentNode) this.primary).value).initialization.getType();
         } else {
-//            this.primary
+            throw new SemanticException("Not supported primary type", this.getStartPosition());
         }
-        throw new UnsupportedOperationException();
     }
 }
