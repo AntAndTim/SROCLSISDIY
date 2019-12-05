@@ -1,5 +1,6 @@
 package ast;
 
+import errors.SemanticException;
 import semantic.ClassTable;
 import semantic.MethodContext;
 
@@ -11,10 +12,13 @@ public abstract class CommandNode extends Node {
     public MethodContext context;
     public ArrayList<Integer> scopesList;
 
-    private int getIndexByName(String name){
+    private int getIndexByName(String name) throws SemanticException{
         return this.context.getIndexByName(name, this.scopesList);
     }
 
+    private VariableDeclNode getVarDeclByName(String name) throws SemanticException{
+        return this.context.getVarDeclByName(name, this.scopesList);
+    }
 
     public void setContext(MethodContext context) {
         this.context = context;

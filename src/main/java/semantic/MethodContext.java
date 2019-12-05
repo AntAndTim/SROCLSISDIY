@@ -51,15 +51,24 @@ public class MethodContext {
      * @return
      * @throws SemanticException
      */
-    public int getIndexByName(String name, ArrayList<Integer> scopesList){
+    public int getIndexByName(String name, ArrayList<Integer> scopesList) throws SemanticException{
         for (int i=scopesList.size()-1; i>=0; i--){
             String localVarName = String.format("%s_%d", name, scopesList.get(i));
             if (this.variableIndexes.containsKey(localVarName)){
                 return this.variableIndexes.get(localVarName);
             }
         }
-//        throw new SemanticException(String.format("Variable %s is undefined", name), "-");
-        return -1;
+        throw new SemanticException(String.format("Variable %s is undefined", name), "-");
+    }
+
+    public VariableDeclNode getVarDeclByName(String name, ArrayList<Integer> scopesList) throws SemanticException{
+        for (int i=scopesList.size()-1; i>=0; i--){
+            String localVarName = String.format("%s_%d", name, scopesList.get(i));
+            if (this.localVariables.containsKey(localVarName)){
+                return this.localVariables.get(localVarName);
+            }
+        }
+        throw new SemanticException(String.format("Variable %s is not defined, but passed to codegen", name), "-");
     }
 
     private boolean findVariable(String name){

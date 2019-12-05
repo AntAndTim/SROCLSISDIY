@@ -1,5 +1,6 @@
 package ast;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import utils.Pair;
 
@@ -24,7 +25,18 @@ public class ExpressionNode extends CommandNode{
     }
 
     public String getType(){
-        throw new NotImplementedException();
+        // If call, get return type, otherwise get type of variable/literal
+        // Also check if constructor
+
+        // Get primary type first
+        String primaryType = null;
+        if (this.primary instanceof LiteralNode){
+            return ((LiteralNode)this.primary).getTypeName();
+        } else {
+
+            this.primary
+        }
+
     }
 
     @Override
