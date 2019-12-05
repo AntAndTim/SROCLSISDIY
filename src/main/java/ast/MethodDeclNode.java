@@ -31,7 +31,7 @@ public class MethodDeclNode extends Node {
     @Override
     public String generateCode() {
         StringBuilder cil = new StringBuilder();
-        cil.append(".method public hidebysig instance ");
+        cil.append(".method public hidebysig virtual ");
         cil.append(retTypeName);
         cil.append(" ");
         cil.append(name);
@@ -47,6 +47,25 @@ public class MethodDeclNode extends Node {
         // cil.append(" cil");
         // cil.append(" managed");
         cil.append("\n{");
+
+        // MAX STACK
+        // LOCALS INIT
+        // Declaring local variables
+        // TODO: Apparently body nodes are not only in actual bodies but also in statements, move declarations
+//        int declarations = 0;
+//        for (int i = 0; i < actionTypes.size(); i++) {
+//            vars.put(((VariableDeclNode) actions.get(i)).name, declarations);
+//            if (actionTypes.get(i) == ActionType.VARIABLE_DECLARATION) declarations++;
+//        }
+//        if (declarations > 0) {
+//            cil.append(String.format(".maxstack %d\n", declarations));
+//            cil.append(".locals init (int32 a_0"); // TODO: REPLACE int32 WITH ACTUAL DATA TYPES
+//            for (int i = 1; i < declarations; i++) { //               |
+//                cil.append(String.format(", int32 a_%d", i)); // Here as well
+//            }
+//            cil.append(")\n");
+//        }
+
         cil.append(body.generateCode());
         cil.append("}\n");
 
