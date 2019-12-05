@@ -260,7 +260,7 @@ Primary
     : INTEGER {$$ = new IntegerLitNode($1.getValue());}
     | REAL    {$$ = new RealLitNode($1.getValue());}
     | BooleanLiteral {$$ = $1;}
-    | THIS {$$ = null;}
+    | THIS {$$ = new ast.IdentNode("this");}
     | ClassName {$$ = $1;}
     ;
 

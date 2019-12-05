@@ -816,7 +816,7 @@ class YYParser
   case 65:
   if (yyn == 65)
     /* "parser.y":263  */
-    {yyval = null;};
+    {yyval = new ast.IdentNode("this");};
   break;
     
 
