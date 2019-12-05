@@ -1,6 +1,7 @@
 package ast;
 
 import errors.SemanticException;
+import semantic.MethodContext;
 
 import java.util.ArrayList;
 
@@ -9,6 +10,7 @@ public class ConstructorDeclNode extends Node {
     // Signature
     public ArrayList<ParamsDeclNode> params;
     public BodyNode body;
+    public MethodContext context;
 
     public ConstructorDeclNode(ArrayList<ParamsDeclNode> paramsDecls, BodyNode body) {
         this.params = paramsDecls;

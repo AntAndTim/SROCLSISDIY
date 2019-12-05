@@ -15,7 +15,7 @@ public class SemanticAnalyzer {
     public void run(ProgramNode root) throws SemanticException {
         indexClasses(root);
         updateClassTable(root);
-
+        updateMethodsContexts(root);
 
     }
 
@@ -82,12 +82,18 @@ public class SemanticAnalyzer {
         }
     }
 
-    public void updateMethodsContexts(ProgramNode root){
+    public void updateMethodsContexts(ProgramNode root) throws SemanticException{
         for (ClassDeclNode currClass : root.programClasses){
             for (MethodDeclNode currMethod : currClass.methods){
-                // TODO : Add context to method
+                MethodContext currContext = new MethodContext(currClass, this.classTable);
+                this.buildContext(currMethod.body, currContext);
+                currMethod.context = currContext;
             }
-            // TODO : Add constructors
+            for (ConstructorDeclNode currCtor : currClass.constructors){
+                MethodContext currContext = new MethodContext(currClass, this.classTable);
+                this.buildContext(currCtor.body, currContext);
+                currCtor.context = currContext;
+            }
         }
     }
 
