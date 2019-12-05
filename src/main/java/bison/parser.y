@@ -80,7 +80,7 @@ import java.util.ArrayList;
 %type <ArrayList<IdentNode>> ClassGenerics
 %type <ast.TypeNode> TypeName
 %type <ArrayList<ast.TypeNode>> TypeNameList
-
+%type <ast.FieldDeclNode> FieldDeclaration
 
 %%
 
@@ -98,18 +98,18 @@ ClassDeclaration
     ;
 
 Extends
-    : /* empty */ {$$ = null;}
+    : /* empty */ {$$ = new ArrayList<ast.ClassNameNode>();}
     | EXTENDS ClassName {$$ = $2;}
     ;
 
 ClassName
-    : IDENTIFIER /* no generics*/ {$$ = new ast.ClassNameNode(new ast.IdentNode($1.getValue()), null);}
+    : IDENTIFIER /* no generics*/ {$$ = new ast.ClassNameNode(new ast.IdentNode($1.getValue()), new ArrayList<IdentNode>());}
     | IDENTIFIER OPENING_BRACKETS ClassGenerics CLOSING_BRACKETS {$$ = new ast.ClassNameNode(new ast.IdentNode($1.getValue()), $3);}
     ;
 
 
 TypeName
-    : IDENTIFIER /* no generics*/ {$$ = new ast.TypeNode(new ast.IdentNode($1.getValue()), null);}
+    : IDENTIFIER /* no generics*/ {$$ = new ast.TypeNode(new ast.IdentNode($1.getValue()), new ArrayList<TypeNode>());}
     | IDENTIFIER OPENING_BRACKETS TypeNameList CLOSING_BRACKETS {$$ = new ast.TypeNode(new ast.IdentNode($1.getValue()), $3);}
     ;
 
@@ -127,10 +127,13 @@ MemberDeclarations
     ;
 
 MemberDeclaration
-    : VariableDeclaration {MemberDeclNode node = new MemberDeclNode(); node.declaration = $1; node.declType = MemberDeclNode.memberType.FIELD; $$ = node;}
-    | MethodDeclaration {MemberDeclNode node = new MemberDeclNode(); node.declaration = $1; node.declType = MemberDeclNode.memberType.FIELD; $$ = node;}
-    | ConstructorDeclaration {MemberDeclNode node = new MemberDeclNode(); node.declaration = $1; node.declType = MemberDeclNode.memberType.FIELD; $$ = node;}
+    : FieldDeclaration {MemberDeclNode node = new MemberDeclNode(); node.declaration = $1; node.declType = MemberDeclNode.memberType.FIELD; $$ = node;}
+    | MethodDeclaration {MemberDeclNode node = new MemberDeclNode(); node.declaration = $1; node.declType = MemberDeclNode.memberType.METHOD; $$ = node;}
+    | ConstructorDeclaration {MemberDeclNode node = new MemberDeclNode(); node.declaration = $1; node.declType = MemberDeclNode.memberType.CONSTRUCTOR; $$ = node;}
     ;
+
+FieldDeclaration
+    : VAR IDENTIFIER COLON ClassName {$$ = new ast.FieldDeclNode(new IdentNode($2.getValue()),$4);}
 
 VariableDeclaration
     : VAR IDENTIFIER COLON Expression {$$ = new ast.VariableDeclNode(new IdentNode($2.getValue()),$4);}
@@ -161,7 +164,7 @@ ParameterDeclaration
 
 Body
     : /* empty */ {$$ = new ArrayList<Node>();}
-    | BodyMember Body {$2.addAll($1);}
+    | BodyMember Body {$2.addAll($1); $$ = $2;}
     ;
 
 BodyMember
@@ -221,7 +224,7 @@ ReturnStatement
     ;
 
 Expression
-    : Primary {$$ = new ExpressionNode($1, null);}
+    : Primary {$$ = new ExpressionNode($1, new ArrayList<Pair<IdentNode, ArrayList<ExpressionNode>>>());}
     | Primary ExpressionCallGroup {$$ = new ExpressionNode($1, $2);}
     ;
 
