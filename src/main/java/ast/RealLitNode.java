@@ -16,7 +16,9 @@ public class RealLitNode extends LiteralNode {
 
     @Override
     public String generateCode() {
-        return null;
+        StringBuilder cil = new StringBuilder();
+        cil.append(String.format("ldc.r8 %f\n", Double.parseDouble(getValue())));
+        return cil.toString();
     }
 
 }
