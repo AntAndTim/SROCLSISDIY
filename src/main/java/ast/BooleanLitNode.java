@@ -20,7 +20,9 @@ public class BooleanLitNode extends LiteralNode {
 
     @Override
     public String generateCode() {
-        return null;
+        StringBuilder cil = new StringBuilder();
+        cil.append(String.format("ldc.i4 %d\n", Boolean.parseBoolean(getValue()) ? 1 : 0));
+        return cil.toString();
     }
 
 }
