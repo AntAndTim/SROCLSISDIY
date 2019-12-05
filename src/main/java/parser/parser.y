@@ -77,6 +77,7 @@ import java.util.ArrayList;
 %type <ArrayList<ExpressionNode>> ExpressionsList
 %type <ast.Node> Primary
 %type <ast.BooleanLitNode> BooleanLiteral
+%type <ArrayList<IdentNode>> ClassGenerics
 
 
 %%
@@ -101,8 +102,12 @@ Extends
 
 ClassName
     : IDENTIFIER /* no generics*/ {$$ = new ast.ClassNameNode(new ast.IdentNode($1.getValue()), null);}
-    | IDENTIFIER OPENING_BRACKETS ClassName CLOSING_BRACKETS {$$ = new ast.ClassNameNode(new ast.IdentNode($1.getValue()), $3);}
+    | IDENTIFIER OPENING_BRACKETS ClassGenerics CLOSING_BRACKETS {$$ = new ast.ClassNameNode(new ast.IdentNode($1.getValue()), $3);}
     ;
+
+ClassGenerics
+    :                     IDENTIFIER {ArrayList<IdentNode> list = new ArrayList<IdentNode>(); list.add(new IdentNode($1.getValue())); $$ = list;}
+    | ClassGenerics COMMA IDENTIFIER {$1.add(new IdentNode($3.getValue())); $$ = $1;}
 
 MemberDeclarations
     : /* empty */ {$$ = new ArrayList<MemberDeclNode>();}
@@ -204,8 +209,8 @@ ReturnStatement
     ;
 
 Expression
-    : Primary {$$ = new ExpressionNode($1, null)}
-    | Primary ExpressionCallGroup {$$ = new ExpressionNode($1, $2)}
+    : Primary {$$ = new ExpressionNode($1, null);}
+    | Primary ExpressionCallGroup {$$ = new ExpressionNode($1, $2);}
     ;
 
 /* one or more */
