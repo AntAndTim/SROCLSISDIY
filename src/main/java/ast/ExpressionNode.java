@@ -1,5 +1,6 @@
 package ast;
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import utils.Pair;
 
 import java.util.ArrayList;
@@ -20,6 +21,10 @@ public class ExpressionNode extends CommandNode{
             this.callNames.add(c.first.value);
             this.callArgs.add(c.second);
         }
+    }
+
+    public String getType(){
+        throw new NotImplementedException();
     }
 
     @Override

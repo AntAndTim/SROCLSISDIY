@@ -93,6 +93,7 @@ public class SemanticAnalyzer {
     private void buildContext(BodyNode body, MethodContext context){
         for (CommandNode command : body.actions){
             command.setContext(context);
+            command.scopesList = new ArrayList<>(context.currentScopesList);
             if (command instanceof IfStatementNode){
                 IfStatementNode statement = (IfStatementNode)command;
                 context.addNewScope();
