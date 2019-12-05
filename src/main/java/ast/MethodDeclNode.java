@@ -1,6 +1,7 @@
 package ast;
 
 import com.sun.org.apache.xpath.internal.Arg;
+import semantic.MethodContext;
 import utils.Pair;
 
 import javax.xml.stream.FactoryConfigurationError;
@@ -20,6 +21,18 @@ public class MethodDeclNode extends Node {
     // TODO : CALCULATE FROM
     public int maxStack;
     public List<Pair<String, String>> localInit;    // First -> type, second -> name
+
+    public MethodContext context;
+
+
+    private ArrayList<String> getLocalsInit(){
+        for (Map.Entry<String, Integer> entry : this.context.variableIndexes.entrySet()){
+            String name = entry.getKey();
+            String index = entry.getValue().toString();
+            String type = this.context.localVariables.get(name).initialization.getType();
+        }
+        return null;
+    }
 
     public MethodDeclNode(IdentNode nameId, ArrayList<ParamsDeclNode> paramsDecls, IdentNode retTypeNameId, BodyNode body) {
         this.name = nameId.value;

@@ -85,7 +85,7 @@ public class SemanticAnalyzer {
     public void updateMethodsContexts(ProgramNode root){
         for (ClassDeclNode currClass : root.programClasses){
             for (MethodDeclNode currMethod : currClass.methods){
-                
+                // TODO : Add context to method
             }
         }
     }
