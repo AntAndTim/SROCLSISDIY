@@ -90,7 +90,7 @@ Program
 
 ClassDeclarations
     : /* empty */                        {$$ = new ArrayList<ClassDeclNode>();}
-    | ClassDeclaration ClassDeclarations { $2.add($1); $$=$2; }
+    | ClassDeclaration ClassDeclarations { $2.add(0, $1); $$=$2; }
     ;
 
 ClassDeclaration
@@ -123,7 +123,7 @@ ClassGenerics
 
 MemberDeclarations
     : /* empty */ {$$ = new ArrayList<MemberDeclNode>();}
-    | MemberDeclaration MemberDeclarations {$2.add($1); $$ = $2;}
+    | MemberDeclaration MemberDeclarations {$2.add(0,$1); $$ = $2;}
     ;
 
 MemberDeclaration
@@ -164,7 +164,7 @@ ParameterDeclaration
 
 Body
     : /* empty */ {$$ = new ArrayList<Node>();}
-    | BodyMember Body {$2.addAll($1); $$ = $2;}
+    | BodyMember Body {$2.addAll(0,$1); $$ = $2;}
     ;
 
 BodyMember
@@ -174,12 +174,12 @@ BodyMember
 
 VariableDeclarationGroup
     : /* empty */ {$$ = new ArrayList<ast.Node>();}
-    | VariableDeclaration VariableDeclarationGroup {$2.add($1); $$ = $2;}
+    | VariableDeclaration VariableDeclarationGroup {$2.add(0,$1); $$ = $2;}
     ;
 
 StatementGroup
     : /* empty */ {$$ = new ArrayList<ast.Node>();}
-    | Statement StatementGroup {$2.add($1); $$ = $2;}
+    | Statement StatementGroup{$2.add(0, $1); $$ = $2;}
     ;
 
 ConstructorDeclaration

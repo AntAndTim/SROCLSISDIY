@@ -384,7 +384,7 @@ class YYParser
   case 4:
   if (yyn == 4)
     /* "parser.y":93  */
-    { ((ArrayList<ClassDeclNode>)(yystack.valueAt (0))).add(((ast.ClassDeclNode)(yystack.valueAt (1)))); yyval=((ArrayList<ClassDeclNode>)(yystack.valueAt (0))); };
+    { ((ArrayList<ClassDeclNode>)(yystack.valueAt (0))).add(0, ((ast.ClassDeclNode)(yystack.valueAt (1)))); yyval=((ArrayList<ClassDeclNode>)(yystack.valueAt (0))); };
   break;
     
 
@@ -475,7 +475,7 @@ class YYParser
   case 17:
   if (yyn == 17)
     /* "parser.y":126  */
-    {((ArrayList<MemberDeclNode>)(yystack.valueAt (0))).add(((ast.MemberDeclNode)(yystack.valueAt (1)))); yyval = ((ArrayList<MemberDeclNode>)(yystack.valueAt (0)));};
+    {((ArrayList<MemberDeclNode>)(yystack.valueAt (0))).add(0,((ast.MemberDeclNode)(yystack.valueAt (1)))); yyval = ((ArrayList<MemberDeclNode>)(yystack.valueAt (0)));};
   break;
     
 
@@ -580,7 +580,7 @@ class YYParser
   case 32:
   if (yyn == 32)
     /* "parser.y":167  */
-    {((ArrayList<ast.Node>)(yystack.valueAt (0))).addAll(((ArrayList<ast.Node>)(yystack.valueAt (1)))); yyval = ((ArrayList<ast.Node>)(yystack.valueAt (0)));};
+    {((ArrayList<ast.Node>)(yystack.valueAt (0))).addAll(0,((ArrayList<ast.Node>)(yystack.valueAt (1)))); yyval = ((ArrayList<ast.Node>)(yystack.valueAt (0)));};
   break;
     
 
@@ -608,7 +608,7 @@ class YYParser
   case 36:
   if (yyn == 36)
     /* "parser.y":177  */
-    {((ArrayList<ast.Node>)(yystack.valueAt (0))).add(((ast.VariableDeclNode)(yystack.valueAt (1)))); yyval = ((ArrayList<ast.Node>)(yystack.valueAt (0)));};
+    {((ArrayList<ast.Node>)(yystack.valueAt (0))).add(0,((ast.VariableDeclNode)(yystack.valueAt (1)))); yyval = ((ArrayList<ast.Node>)(yystack.valueAt (0)));};
   break;
     
 
@@ -622,7 +622,7 @@ class YYParser
   case 38:
   if (yyn == 38)
     /* "parser.y":182  */
-    {((ArrayList<ast.Node>)(yystack.valueAt (0))).add(((ast.Node)(yystack.valueAt (1)))); yyval = ((ArrayList<ast.Node>)(yystack.valueAt (0)));};
+    {((ArrayList<ast.Node>)(yystack.valueAt (0))).add(0, ((ast.Node)(yystack.valueAt (1)))); yyval = ((ArrayList<ast.Node>)(yystack.valueAt (0)));};
   break;
     
 
@@ -924,12 +924,10 @@ class YYParser
             yycdebug ("Reading a token: ");
             yychar = yylexer.yylex ();
             yylval = yylexer.getLVal ();
-
-          }
-
-          if(yychar == 2281337){
-          yychar = yyempty_;
-          continue;
+            if(yychar == 2281337){
+              yychar = yyempty_;
+              continue;
+            }
           }
 
         /* Convert token to internal form.  */

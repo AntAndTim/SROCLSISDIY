@@ -4,6 +4,9 @@ class test extends stuff is
 
     method huy ( ) : a is
     var golovka : s
+    if True then golovka := 1 else golovka := 2 end
+    var kek : k
+    var qeq : q
 
     end
 end
