@@ -87,20 +87,21 @@ public class ExpressionNode extends CommandNode{
 
         for (int i = 0; i < callNames.size(); i++) {
             String callName = callNames.get(i);
-            var args = callArgs.get(i);
+            ArrayList<ExpressionNode> args = callArgs.get(i);
             if (args == null) {
                 String varType = getVarDeclByName(callName).initialization.getType();
                 cil.append(String.format("ldfld %s %s::%s\n", varType, lastObjectType, callName));
                 lastObjectType = varType;
             } else {
-                for (var arg : args) {
-                    arg.generateCode();
+                for (int j = 0; j < args.size(); j++)  {
+                    args.get(j).generateCode();
                 }
 
-                var method = getMethodReturnType(lastObjectType, callName, args);
+                MethodDeclNode method = getMethodReturnType(lastObjectType, callName, args);
                 cil.append(String.format("callvirt instance %s %s::%s(", method.retTypeName, lastObjectType, callName));
                 boolean first = false;
-                for (var param : method.params) {
+                for (int j = 0; j < args.size(); j++) {
+                    ParamsDeclNode param = method.params.get(j);
                     if (!first) {
                         cil.append(param.paramType.ident.value);
                         first = true;
