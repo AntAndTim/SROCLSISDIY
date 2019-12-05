@@ -25,12 +25,14 @@ public class MethodDeclNode extends Node {
 
 
     private ArrayList<String> getLocalsInit() throws SemanticException{
+        ArrayList<String> res = new ArrayList<>();
         for (Map.Entry<String, Integer> entry : this.context.variableIndexes.entrySet()){
             String name = entry.getKey();
             String index = entry.getValue().toString();
             String type = this.context.localVariables.get(name).initialization.getType();
+            res.add(String.format("[%s] %s %s", index, type, name));
         }
-        return null;
+        return res;
     }
 
     public MethodDeclNode(IdentNode nameId, ArrayList<ParamsDeclNode> paramsDecls, IdentNode retTypeNameId, BodyNode body) {
