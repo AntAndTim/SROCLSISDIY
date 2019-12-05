@@ -1,6 +1,8 @@
 package ast;
 
 
+import errors.SemanticException;
+
 public class AssignmentNode extends StatementNode{
 
     public String varName;
@@ -12,7 +14,7 @@ public class AssignmentNode extends StatementNode{
     }
 
     @Override
-    public String generateCode() {
+    public String generateCode() throws SemanticException {
         return null;
     }
 }

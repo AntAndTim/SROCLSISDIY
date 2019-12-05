@@ -1,5 +1,7 @@
 package ast;
 
+import errors.SemanticException;
+
 public class ReturnStatement extends StatementNode {
 
     public ExpressionNode returnVal;
@@ -9,7 +11,7 @@ public class ReturnStatement extends StatementNode {
     }
 
     @Override
-    public String generateCode() {
+    public String generateCode() throws SemanticException {
         StringBuilder cil = new StringBuilder();
         cil.append(returnVal);
         cil.append("ret\n");

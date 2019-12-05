@@ -1,9 +1,6 @@
 package ast;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import errors.SemanticException;
-import semantic.MethodContext;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import utils.Pair;
 
 import java.util.ArrayList;
@@ -114,5 +111,15 @@ public class ExpressionNode extends CommandNode{
             }
         }
         return cil.toString();
+    }
+
+    public String getPrimaryType(){
+        String primaryType = null;
+        if (this.primary instanceof LiteralNode){
+            return ((LiteralNode)this.primary).getTypeName();
+        } else {
+//            this.primary
+        }
+        throw new UnsupportedOperationException();
     }
 }

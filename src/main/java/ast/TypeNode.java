@@ -1,5 +1,7 @@
 package ast;
 
+import errors.SemanticException;
+
 import java.util.ArrayList;
 
 public class TypeNode extends Node{
@@ -33,7 +35,7 @@ public class TypeNode extends Node{
     }
 
     @Override
-    public String generateCode() {
+    public String generateCode() throws SemanticException {
         return null;
     }
 }

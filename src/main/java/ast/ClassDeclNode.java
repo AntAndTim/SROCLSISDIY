@@ -1,5 +1,7 @@
 package ast;
 
+import errors.SemanticException;
+
 import java.util.ArrayList;
 
 public class ClassDeclNode extends Node{
@@ -16,7 +18,7 @@ public class ClassDeclNode extends Node{
     public int maxStack;
 
     @Override
-    public String generateCode() {
+    public String generateCode() throws SemanticException {
         StringBuilder cil = new StringBuilder();
         cil.append("{\n");
 

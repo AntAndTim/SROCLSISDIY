@@ -1,5 +1,7 @@
 package ast;
 
+import errors.SemanticException;
+
 public class RealLitNode extends LiteralNode {
 
     public String value;
@@ -19,7 +21,7 @@ public class RealLitNode extends LiteralNode {
     }
 
     @Override
-    public String generateCode() {
+    public String generateCode() throws SemanticException {
         StringBuilder cil = new StringBuilder();
         cil.append(String.format("ldc.r8 %f\n", Double.parseDouble(getValue())));
         return cil.toString();

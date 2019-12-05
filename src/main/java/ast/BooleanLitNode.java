@@ -1,5 +1,7 @@
 package ast;
 
+import errors.SemanticException;
+
 public class BooleanLitNode extends LiteralNode {
 
     String value;
@@ -19,7 +21,7 @@ public class BooleanLitNode extends LiteralNode {
     }
 
     @Override
-    public String generateCode() {
+    public String generateCode() throws SemanticException {
         StringBuilder cil = new StringBuilder();
         cil.append(String.format("ldc.i4 %d\n", Boolean.parseBoolean(getValue()) ? 1 : 0));
         return cil.toString();

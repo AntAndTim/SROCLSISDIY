@@ -1,5 +1,7 @@
 package ast;
 
+import errors.SemanticException;
+
 public class IdentNode extends Node{
 
     public String value;
@@ -9,7 +11,7 @@ public class IdentNode extends Node{
     }
 
     @Override
-    public String generateCode() {
+    public String generateCode() throws SemanticException {
         return value;
     }
 }

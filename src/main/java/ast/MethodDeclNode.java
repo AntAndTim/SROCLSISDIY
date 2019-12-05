@@ -1,12 +1,11 @@
 package ast;
 
 // import com.sun.org.apache.xpath.internal.Arg;
+import errors.SemanticException;
 import semantic.MethodContext;
 import utils.Pair;
 
-import javax.xml.stream.FactoryConfigurationError;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -42,7 +41,7 @@ public class MethodDeclNode extends Node {
     }
 
     @Override
-    public String generateCode() {
+    public String generateCode() throws SemanticException {
         StringBuilder cil = new StringBuilder();
         cil.append(".method public hidebysig virtual ");
         cil.append(retTypeName);

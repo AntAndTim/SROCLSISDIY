@@ -1,5 +1,7 @@
 package ast;
 
+import errors.SemanticException;
+
 public class IfStatementNode extends StatementNode {
 
     public ExpressionNode condition;
@@ -19,7 +21,7 @@ public class IfStatementNode extends StatementNode {
     }
 
     @Override
-    public String generateCode() {
+    public String generateCode() throws SemanticException {
         StringBuilder cil = new StringBuilder();
         cil.append(condition.generateCode());
         // Skip the true branch and jump directly to false if condition is not true

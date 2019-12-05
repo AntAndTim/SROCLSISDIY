@@ -1,11 +1,9 @@
 package ast;
 
 import errors.SemanticException;
-import semantic.ClassTable;
 import semantic.MethodContext;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 public abstract class CommandNode extends Node {
 
