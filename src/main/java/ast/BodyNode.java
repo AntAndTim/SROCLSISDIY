@@ -23,6 +23,7 @@ public class BodyNode extends Node {
 
     public BodyNode(ArrayList<Node> actions) {
 //        this.actions = actions;
+        this.actions = new ArrayList<CommandNode>();
         for (Node currAction : actions){
             this.actions.add((CommandNode)currAction);
         }
