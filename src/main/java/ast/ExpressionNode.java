@@ -126,12 +126,12 @@ public class ExpressionNode extends CommandNode{
     public String getPrimaryType() throws SemanticException{
         String primaryType = null;
 
-        if (this.primary instanceof ClassNameNode){
+        if (this.primary instanceof TypeNode){
 //            return ((ClassNameNode)primary).ident.value;
 //            return this.getVarDeclByName(((IdentNode) this.primary).value).initialization.getType();
-            String name = ((ClassNameNode)primary).ident.value;
+            String name = ((TypeNode)primary).ident.value;
             // XXX : Ignoring generics for now TODO : Update to use them
-            ArrayList<IdentNode> generics = ((ClassNameNode)primary).generics;
+            ArrayList<TypeNode> generics = ((TypeNode)primary).generics;
             // Check if name is class
             if (this.context.classTable.table.keySet().contains(name)){
                 if (!this.callNames.get(0).equals("")){
