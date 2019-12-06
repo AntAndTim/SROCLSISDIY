@@ -46,7 +46,7 @@ public class MethodDeclNode extends Node {
     public String generateCode() throws SemanticException {
         StringBuilder cil = new StringBuilder();
         cil.append(".method public hidebysig virtual ");
-        cil.append(retTypeName);
+        cil.append(retTypeName != null ? retTypeName : "void");
         cil.append(" ");
         cil.append(name);
         cil.append("(");

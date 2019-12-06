@@ -102,7 +102,11 @@ public class ExpressionNode extends CommandNode{
                 }
 
                 MethodDeclNode method = getMethodReturnType(lastObjectType, callName, args);
-                cil.append(String.format("callvirt instance %s %s::%s(", method.retTypeName, lastObjectType, callName));
+                cil.append(String.format("callvirt instance %s %s::%s(",
+                        method.retTypeName != null ? method.retTypeName : "void",
+                        lastObjectType,
+                        callName));
+
                 boolean first = false;
                 for (int j = 0; j < args.size(); j++) {
                     ParamsDeclNode param = method.params.get(j);
