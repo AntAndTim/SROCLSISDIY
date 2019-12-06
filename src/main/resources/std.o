@@ -1,0 +1,147 @@
+class Integer extends AnyValue is
+    this(p: Integer)
+        is end
+    this(p: Real)
+        is end
+    var Min : Integer
+    var Max : Integer
+    method toReal : Real
+        is end
+    method toBoolean : Boolean
+        is end
+    method UnaryMinus : Integer
+        is end
+    method Plus(p:Integer) : Integer
+        is end
+    method Plus(p:Real) : Real
+        is end
+    method Minus(p: Integer) : Integer
+        is end
+    method Minus(p: Real) : Real
+        is end
+    method Mult(p: Integer) : Integer
+        is end
+    method Mult(p: Real) : Real
+        is end
+    method Div(p: Integer) : Integer
+        is end
+    method Div(p: Real) : Real
+        is end
+    method Rem(p: Integer) : Integer
+        is end
+    method Less(p: Integer) : Boolean
+        is end
+    method Less(p: Real) : Boolean
+        is end
+    method LessEqual(p: Integer) : Boolean
+        is end
+    method LessEqual(p: Real) : Boolean
+        is end
+    method Greater(p: Integer) : Boolean
+        is end
+    method Greater(p: Real) : Boolean
+        is end
+    method GreaterEqual(p: Integer) : Boolean
+        is end
+    method GreaterEqual(p: Real) : Boolean
+        is end
+    method Equal(p: Integer) : Boolean
+        is end
+    method Equal(p: Real) : Boolean
+        is end
+end
+
+class Real extends AnyValue is
+    this(p: Real)
+        is end
+    this(p: Integer)
+        is end
+    var Min : Real
+    var Max : Real
+    var Epsilon : Real
+    method toInteger : Integer
+        is end
+    method UnaryMinus : Real
+        is end
+    method Plus(p:Real) : Real
+        is end
+    method Plus(p:Integer) : Real
+        is end
+    method Minus(p: Real) : Real
+        is end
+    method Minus(p: Integer) : Real
+        is end
+    method Mult(p: Real) : Real
+        is end
+    method Mult(p: Integer) : Real
+        is end
+    method Div(p: Integer) : Real
+        is end
+    method Div(p: Real) : Real
+        is end
+    method Rem(p: Integer) : Real
+        is end
+    method Less(p: Real) : Boolean
+        is end
+    method Less(p: Integer) : Boolean
+        is end
+    method LessEqual(p: Real) : Boolean
+        is end
+    method LessEqual(p: Integer) : Boolean
+        is end
+    method Greater(p: Real) : Boolean
+        is end
+    method Greater(p: Integer) : Boolean
+        is end
+    method GreaterEqual(p: Real) : Boolean
+        is end
+    method GreaterEqual(p: Integer) : Boolean
+        is end
+    method Equal(p: Real) : Boolean
+        is end
+    method Equal(p: Integer) : Boolean
+        is end
+end
+
+class Boolean extends AnyValue is
+    this(Boolean)
+        is end
+    method toInteger() : Integer
+        is end
+    method Or(p: Boolean) : Boolean
+        is end
+    method And(p: Boolean) : Boolean
+        is end
+    method Xor(p: Boolean) : Boolean
+        is end
+    method Not : Boolean
+        is end
+end
+
+class Array[T] extends AnyRef is
+    this(l: Integer)
+        is end
+    method toList : List
+        is end
+    method Length : Integer
+        is end
+    method get(i: Integer) : T
+        is end
+    method set(i: Integer, v: T)
+        is end
+end
+
+class List[T] extends AnyRef is
+    this()
+        is end
+    this(p: T)
+        is end
+    this(p: T, count: Integer)
+        is end
+    method append(v: T) : List
+        is end
+    method head() : T
+        is end
+    method tail() : List
+        is end
+end
