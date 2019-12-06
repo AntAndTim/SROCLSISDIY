@@ -25,6 +25,10 @@ public class ProgramNode extends Node {
                 "    callvirt instance void class <CLASS>::main()\n" +
                 "    ret\n" +
                 "}\n");
+
+        for (int i = 0; i < programClasses.size(); i++) {
+            cil.append(programClasses.get(i).generateCode());
+        }
         return cil.toString();
     }
 }
