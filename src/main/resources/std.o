@@ -1,3 +1,12 @@
+class Class is
+end
+
+class AnyValue extends Class is
+end
+
+class AnyRef extends Class is
+end
+
 class Integer extends AnyValue is
     this(p: Integer)
         is end
