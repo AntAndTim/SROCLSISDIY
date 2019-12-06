@@ -1,5 +1,5 @@
 class test extends stuff is
-    var kek : zalupa
+    var kek : Integer
     var lol : chlen
 
     method huy() : a is
@@ -29,6 +29,10 @@ class test extends stuff is
 
 
         return max
+    end
+
+    this(A: Integer) is
+    kek := A
     end
 
 end
