@@ -1,9 +1,11 @@
 package semantic;
 
 import ast.*;
+import bison.ParserWrapper;
 import errors.SemanticException;
 
 import java.io.FileReader;
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
@@ -15,15 +17,17 @@ public class SemanticAnalyzer {
     public void run(ProgramNode root) throws SemanticException {
         indexClasses(root);
         updateClassTable(root);
-
+        updateMethodsContexts(root);
 
     }
 
     public void indexClasses(ProgramNode root) throws SemanticException {
 
-        this.classTable = new ClassTable(new ProgramNode(new ArrayList<>()));
-        // TODO : Add parsing of standard library
-//        this.classTable = new ClassTable();
+        try {
+            this.classTable = new ClassTable(ParserWrapper.parseProgram(this.predefinedClassesPath));
+        } catch (IOException exp){
+            throw new SemanticException("Can't load standard library", "-");
+        }
 
         for (ClassDeclNode classDecl : root.programClasses){
             this.classTable.addClass(classDecl);
@@ -82,12 +86,18 @@ public class SemanticAnalyzer {
         }
     }
 
-    public void updateMethodsContexts(ProgramNode root){
+    public void updateMethodsContexts(ProgramNode root) throws SemanticException{
         for (ClassDeclNode currClass : root.programClasses){
             for (MethodDeclNode currMethod : currClass.methods){
-                // TODO : Add context to method
+                MethodContext currContext = new MethodContext(currClass, this.classTable);
+                this.buildContext(currMethod.body, currContext);
+                currMethod.context = currContext;
             }
-            // TODO : Add constructors
+            for (ConstructorDeclNode currCtor : currClass.constructors){
+                MethodContext currContext = new MethodContext(currClass, this.classTable);
+                this.buildContext(currCtor.body, currContext);
+                currCtor.context = currContext;
+            }
         }
     }
 
