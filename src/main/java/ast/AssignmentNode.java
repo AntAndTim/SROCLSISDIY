@@ -17,6 +17,7 @@ public class AssignmentNode extends StatementNode{
     public String generateCode() throws SemanticException {
         StringBuilder cil = new StringBuilder();
         if (context.classTable.checkIfParentOf(varValue.getType(), "AnyValue")){
+            return "";
             // TODO
         } else {
             cil.append(varValue.generateCode());
