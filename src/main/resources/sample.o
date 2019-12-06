@@ -1,0 +1,13 @@
+class Test is
+
+this() is
+end
+
+end
+
+class Main is
+    method Main() : Integer is
+    var t : Test
+    t := Test()
+    end
+end
