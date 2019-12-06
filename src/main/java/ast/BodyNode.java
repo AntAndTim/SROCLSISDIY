@@ -65,8 +65,4 @@ public class BodyNode extends Node {
 
         return cil.toString();
     }
-
-    public int getLocalIndexByName(String name){
-        return 0; // TODO
-    }
 }

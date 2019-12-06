@@ -87,7 +87,7 @@ public class ExpressionNode extends CommandNode{
         StringBuilder cil = new StringBuilder();
         cil.append(primary.generateCode());
 
-        String lastObjectType = getType(); // так незя
+        String lastObjectType = getPrimaryType();
 
         for (int i = 0; i < callNames.size(); i++) {
             String callName = callNames.get(i);
