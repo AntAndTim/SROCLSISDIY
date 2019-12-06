@@ -109,7 +109,7 @@ TypeName
     ;
 
 TypeNameList
-    :                     TypeName {ArrayList<TypeNode> list = new ArrayList<TypeNode>(); list.add($1); $$ = list;}
+    :                    TypeName {ArrayList<TypeNode> list = new ArrayList<TypeNode>(); list.add($1); $$ = list;}
     | TypeNameList COMMA TypeName {$1.add($3); $$ = $1;}
 
 ClassGenerics
@@ -221,11 +221,11 @@ ReturnStatement
 Expression
     : Primary {$$ = new ExpressionNode($1, new ArrayList<Pair<IdentNode, ArrayList<ExpressionNode>>>());}
     | Primary ExpressionCallGroup {$$ = new ExpressionNode($1, $2);}
-    | ClassName Arguments
+    | TypeName Arguments
     {ArrayList<Pair<IdentNode, ArrayList<ExpressionNode>>> list = new ArrayList<Pair<IdentNode, ArrayList<ExpressionNode>>>();
      list.add(new Pair<IdentNode, ArrayList<ExpressionNode>>($1.ident, $2));
      $$ = new ExpressionNode($1, list);}
-    | ClassName Arguments ExpressionCallGroup
+    | TypeName Arguments ExpressionCallGroup
     {ArrayList<Pair<IdentNode, ArrayList<ExpressionNode>>> list = new ArrayList<Pair<IdentNode, ArrayList<ExpressionNode>>>();
     list.add(new Pair<IdentNode, ArrayList<ExpressionNode>>($1.ident, $2));
     list.addAll($3);
@@ -261,7 +261,7 @@ Primary
     | REAL    {$$ = new RealLitNode($1.getValue());}
     | BooleanLiteral {$$ = $1;}
     | THIS {$$ = new ast.IdentNode("this");}
-    | ClassName {$$ = $1;}
+    | TypeName {$$ = $1;}
     ;
 
 BooleanLiteral
