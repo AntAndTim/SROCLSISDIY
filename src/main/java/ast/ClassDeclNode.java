@@ -17,9 +17,12 @@ public class ClassDeclNode extends Node{
 
     public int maxStack;
 
+    private ClassNameNode nameNode;
+
     @Override
     public String generateCode() throws SemanticException {
         StringBuilder cil = new StringBuilder();
+        cil.append(nameNode.generateCode());
         cil.append("{\n");
 
         // Fields
@@ -40,6 +43,7 @@ public class ClassDeclNode extends Node{
 
     public ClassDeclNode(ClassNameNode cName, ClassNameNode parentName, ArrayList<MemberDeclNode> members) {
         // Class identification
+        this.nameNode = cName;
         this.generics = new ArrayList<>();
         name = cName.ident.value;
         for (IdentNode genericIdent : cName.generics){

@@ -15,14 +15,14 @@ public class ProgramNode extends Node {
     @Override
     public String generateCode() throws SemanticException {
         StringBuilder cil = new StringBuilder();
-        cil.append(".method static void Main()\n" +
+        cil.append(".method static void __main()\n" +
                 "{\n" +
                 "    .entrypoint\n" +
                 "    .maxstack 1\n" +
-                "    newobj instance void class <CLASS>::.ctor()\n" +
+                "    newobj instance void class Main::.ctor()\n" +
                 "    stloc.0\n" +
                 "    ldloc.0\n" +
-                "    callvirt instance void class <CLASS>::main()\n" +
+                "    callvirt instance void class Main::main()\n" +
                 "    ret\n" +
                 "}\n");
 
