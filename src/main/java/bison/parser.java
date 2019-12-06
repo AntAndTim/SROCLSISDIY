@@ -721,7 +721,7 @@ class YYParser
   if (yyn == 52)
     /* "parser.y":225  */
     {ArrayList<Pair<IdentNode, ArrayList<ExpressionNode>>> list = new ArrayList<Pair<IdentNode, ArrayList<ExpressionNode>>>();
-     list.add(new Pair<IdentNode, ArrayList<ExpressionNode>>(((ast.TypeNode)(yystack.valueAt (1))).ident, ((ArrayList<ExpressionNode>)(yystack.valueAt (0)))));
+     list.add(new Pair<IdentNode, ArrayList<ExpressionNode>>(new IdentNode(""), ((ArrayList<ExpressionNode>)(yystack.valueAt (0)))));
      yyval = new ExpressionNode(((ast.TypeNode)(yystack.valueAt (1))), list);};
   break;
     
@@ -730,7 +730,7 @@ class YYParser
   if (yyn == 53)
     /* "parser.y":229  */
     {ArrayList<Pair<IdentNode, ArrayList<ExpressionNode>>> list = new ArrayList<Pair<IdentNode, ArrayList<ExpressionNode>>>();
-    list.add(new Pair<IdentNode, ArrayList<ExpressionNode>>(((ast.TypeNode)(yystack.valueAt (2))).ident, ((ArrayList<ExpressionNode>)(yystack.valueAt (1)))));
+    list.add(new Pair<IdentNode, ArrayList<ExpressionNode>>(new IdentNode(""), ((ArrayList<ExpressionNode>)(yystack.valueAt (1)))));
     list.addAll(((ArrayList<Pair<IdentNode, ArrayList<ExpressionNode>>>)(yystack.valueAt (0))));
     yyval = new ExpressionNode(((ast.TypeNode)(yystack.valueAt (2))), list);};
   break;

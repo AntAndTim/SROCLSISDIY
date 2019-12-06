@@ -223,11 +223,11 @@ Expression
     | Primary ExpressionCallGroup {$$ = new ExpressionNode($1, $2);}
     | TypeName Arguments
     {ArrayList<Pair<IdentNode, ArrayList<ExpressionNode>>> list = new ArrayList<Pair<IdentNode, ArrayList<ExpressionNode>>>();
-     list.add(new Pair<IdentNode, ArrayList<ExpressionNode>>($1.ident, $2));
+     list.add(new Pair<IdentNode, ArrayList<ExpressionNode>>(new IdentNode(""), $2));
      $$ = new ExpressionNode($1, list);}
     | TypeName Arguments ExpressionCallGroup
     {ArrayList<Pair<IdentNode, ArrayList<ExpressionNode>>> list = new ArrayList<Pair<IdentNode, ArrayList<ExpressionNode>>>();
-    list.add(new Pair<IdentNode, ArrayList<ExpressionNode>>($1.ident, $2));
+    list.add(new Pair<IdentNode, ArrayList<ExpressionNode>>(new IdentNode(""), $2));
     list.addAll($3);
     $$ = new ExpressionNode($1, list);}
     ;
