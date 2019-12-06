@@ -83,24 +83,28 @@ public class SemanticAnalyzer {
     private void buildContext(BodyNode body, MethodContext context) throws SemanticException{
         for (CommandNode command : body.actions){
             command.setContext(context);
-            command.scopesList = new ArrayList<>(context.currentScopesList);
+//            command.scopesList = new ArrayList<>(context.currentScopesList);
             if (command instanceof IfStatementNode){
                 IfStatementNode statement = (IfStatementNode)command;
                 statement.condition.setContext(context);
+
                 context.addNewScope();
                 buildContext(statement.trueBranch, context);
                 context.killPreviousScope();
+
                 context.addNewScope();
                 buildContext(statement.falseBranch, context);
                 context.killPreviousScope();
             } else if (command instanceof WhileLoopNode){
                 WhileLoopNode statement = (WhileLoopNode) command;
                 statement.condition.setContext(context);
+
                 context.addNewScope();
                 buildContext(statement.body, context);
                 context.killPreviousScope();
             } else if (command instanceof AssignmentNode){
                 AssignmentNode statement = (AssignmentNode) command;
+                statement.setContext(context);
                 statement.varValue.setContext(context);
                 this.checkExpression(statement.varValue, context);
             } else if (command instanceof ExpressionNode){

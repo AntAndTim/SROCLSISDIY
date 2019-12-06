@@ -20,6 +20,7 @@ public abstract class CommandNode extends Node {
 
     public void setContext(MethodContext context) {
         this.context = context;
+        this.scopesList = new ArrayList<>(context.currentScopesList);
     }
 
     @Override

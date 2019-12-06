@@ -63,7 +63,7 @@ public class ExpressionNode extends CommandNode{
                 }
                 boolean argsOK = true;
                 for (int i = 0; i < args.size(); i++) {
-                    if (!args.get(i).getType().equals(method.params.get(i).paramType)) {
+                    if (!args.get(i).getType().equals(method.params.get(i).paramType.ident.value)) {
                         argsOK = false;
                         break;
                     }
@@ -79,7 +79,7 @@ public class ExpressionNode extends CommandNode{
         for (ExpressionNode currArg : args){
             argTypes.add(currArg.getType());
         }
-        throw new SemanticException(String.format("Method %s.%s with arguments %s", clsName, name, argTypes.toString()), this.getStartPosition());
+        throw new SemanticException(String.format("Method %s.%s with arguments %s does not exist", clsName, name, argTypes.toString()), this.getStartPosition());
     }
 
 
@@ -127,7 +127,28 @@ public class ExpressionNode extends CommandNode{
         String primaryType = null;
 
         if (this.primary instanceof ClassNameNode){
-            return ((ClassNameNode)primary).ident.value;
+//            return ((ClassNameNode)primary).ident.value;
+//            return this.getVarDeclByName(((IdentNode) this.primary).value).initialization.getType();
+            String name = ((ClassNameNode)primary).ident.value;
+            // XXX : Ignoring generics for now TODO : Update to use them
+            ArrayList<IdentNode> generics = ((ClassNameNode)primary).generics;
+            // Check if name is class
+            if (this.context.classTable.table.keySet().contains(name)){
+                if (!this.callNames.get(0).equals("")){
+                    throw new SemanticException("Static calls are not allowed", this.getStartPosition());
+                }
+                return name;
+            } else {
+                // Field or local var. Check field first
+                if (this.context.classTable.fields.get(this.context.myClass.name).containsKey(name)){
+                    // XXX : Generics are missed here
+                    return this.context.classTable.fields.get(this.context.myClass.name).get(name).fieldType.ident.value;
+                } else {
+                    return this.getVarDeclByName(name).initialization.getType();
+                }
+
+            }
+
         } else if (this.primary instanceof LiteralNode){
             return ((LiteralNode)this.primary).getTypeName();
         } else if (this.primary instanceof IdentNode) {
