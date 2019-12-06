@@ -36,6 +36,6 @@ public class TypeNode extends Node{
 
     @Override
     public String generateCode() throws SemanticException {
-        return null;
+        return "";
     }
 }

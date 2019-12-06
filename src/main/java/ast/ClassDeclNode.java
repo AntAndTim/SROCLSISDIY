@@ -83,6 +83,7 @@ public class ClassDeclNode extends Node{
     public ClassDeclNode(ClassNameNode cName, ArrayList<MemberDeclNode> members) {
         // Class identification
         this.generics = new ArrayList<>();
+        this.nameNode = cName;
         name = cName.ident.value;
         for (IdentNode genericIdent : cName.generics){
             generics.add(genericIdent.value);

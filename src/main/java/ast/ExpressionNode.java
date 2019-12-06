@@ -158,13 +158,14 @@ public class ExpressionNode extends CommandNode{
                 lastObjectType = varType;
             } else {
                 for (int j = 0; j < args.size(); j++)  {
-                    args.get(j).generateCode();
+                    String arg = args.get(j).generateCode();
+                    if (arg != null) cil.append(arg);
                 }
 
                 if (i == 0){
 
                     ConstructorDeclNode ctorDecl = this.getConstructor(lastObjectType, args);
-                    cil.append(String.format("callvirt instance void .ctor("));
+                    cil.append(String.format("newobj instance void %s::.ctor(", lastObjectType));
 
                     boolean first = false;
                     for (int j = 0; j < args.size(); j++) {

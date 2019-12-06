@@ -25,6 +25,6 @@ public abstract class CommandNode extends Node {
 
     @Override
     public String generateCode() throws SemanticException {
-        return null;
+        return "";
     }
 }

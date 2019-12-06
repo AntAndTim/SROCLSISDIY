@@ -19,6 +19,6 @@ public class MemberDeclNode extends Node {
             MethodDeclNode method = (MethodDeclNode)this.declaration;
         }
 
-        return null;
+        return "";
     }
 }

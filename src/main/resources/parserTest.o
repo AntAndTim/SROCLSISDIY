@@ -1,19 +1,5 @@
 class test extends stuff is
-    var kek : Integer
-    var lol : chlen
-
-    method huy() : a is
-
-    var golovka : Integer
-    if True then golovka := 1 else golovka := 2 end
-    var kek : k
-    var qeq : q
-    kek := Integer(1).Minify()
-
-    end
-
-
-
+    var counter : Integer
     method MaxInt(a: Array[Integer]) : Integer is
         var max : Integer
         var i : Integer
@@ -27,12 +13,11 @@ class test extends stuff is
 
         var a : Array[Integer]
 
-
         return max
     end
 
     this(A: Integer) is
-    kek := A
+    counter := A
     end
 
 end

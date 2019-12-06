@@ -75,7 +75,7 @@ public class MethodDeclNode extends Node {
             for (int i = 1; i < locals.size(); i++) { //               |
                 cil.append(String.format(", %s", locals.get(i))); // Here as well
             }
-            cil.append(")\n");
+            if (locals.size() > 0) cil.append(")\n");
         }
 
         cil.append(body.generateCode());
