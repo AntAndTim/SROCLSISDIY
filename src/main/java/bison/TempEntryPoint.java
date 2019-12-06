@@ -5,6 +5,8 @@ import errors.SemanticException;
 import semantic.SemanticAnalyzer;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class TempEntryPoint {
 
@@ -17,6 +19,8 @@ public class TempEntryPoint {
         SemanticAnalyzer analyzer = new SemanticAnalyzer();
         analyzer.run(node);
         System.out.println("Completed");
-        System.out.println(node.generateCode());
+        String output = node.generateCode();
+        System.out.println(output);
+        Files.write(Paths.get("./output.il"), output.getBytes());
     }
 }

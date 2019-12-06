@@ -2,6 +2,7 @@ package ast;
 
 import errors.SemanticException;
 
+import java.nio.file.Files;
 import java.util.ArrayList;
 
 public class ProgramNode extends Node {
@@ -15,6 +16,7 @@ public class ProgramNode extends Node {
     @Override
     public String generateCode() throws SemanticException {
         StringBuilder cil = new StringBuilder();
+        cil.append(StandardLibrary.LIB);
         cil.append(".method static void __main()\n" +
                 "{\n" +
                 "    .entrypoint\n" +
