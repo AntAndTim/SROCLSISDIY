@@ -56,21 +56,23 @@ public class ExpressionNode extends CommandNode{
     }
 
     public MethodDeclNode getMethodReturnType(String clsName, String name, ArrayList<ExpressionNode> args) throws SemanticException{
-        for (MethodDeclNode method : this.context.classTable.methods.get(clsName).get(name)){
-            if (args.size() != method.params.size()){
-                continue;
-            }
-            boolean argsOK = true;
-            for (int i=0;i<args.size();i++){
-                if (!args.get(i).getType().equals(method.params.get(i).paramType)){
-                    argsOK = false;
-                    break;
+        if (this.context.classTable.methods.get(clsName).containsKey(name)) {
+            for (MethodDeclNode method : this.context.classTable.methods.get(clsName).get(name)) {
+                if (args.size() != method.params.size()) {
+                    continue;
                 }
+                boolean argsOK = true;
+                for (int i = 0; i < args.size(); i++) {
+                    if (!args.get(i).getType().equals(method.params.get(i).paramType)) {
+                        argsOK = false;
+                        break;
+                    }
+                }
+                if (!argsOK) {
+                    continue;
+                }
+                return method;
             }
-            if (!argsOK){
-                continue;
-            }
-            return method;
         }
 
         ArrayList<String> argTypes = new ArrayList<>();

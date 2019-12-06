@@ -75,6 +75,10 @@ public class ClassTable {
             throw new SemanticException(msg, clsNode.getStartPosition());
         }
         this.table.put(clsNode.name, clsNode);
+
+        this.fields.put(clsNode.name, new HashMap<>());
+        this.methods.put(clsNode.name, new HashMap<>());
+        this.constructors.put(clsNode.name, new ArrayList<>());
     }
 
     public ClassDeclNode get(String name){
@@ -95,6 +99,9 @@ public class ClassTable {
             this.table.put(classDecl.name, classDecl);
             this.predefined.add(classDecl.name);
         }
+
+        // XXX : Not very nice to do like this
+        this.table.get("Class").parent = null;
 
     }
 
