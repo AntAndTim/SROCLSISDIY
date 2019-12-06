@@ -38,6 +38,7 @@ public class MethodDeclNode extends Node {
     public MethodDeclNode(IdentNode nameId, ArrayList<ParamsDeclNode> paramsDecls, IdentNode retTypeNameId, BodyNode body) {
         this.name = nameId.value;
         this.params = paramsDecls;
+        if(retTypeNameId != null)
         this.retTypeName = retTypeNameId.value;
         this.body = body;
     }
