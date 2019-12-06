@@ -86,7 +86,8 @@ public class SemanticAnalyzer {
 //            command.scopesList = new ArrayList<>(context.currentScopesList);
             if (command instanceof IfStatementNode){
                 IfStatementNode statement = (IfStatementNode)command;
-                statement.condition.setContext(context);
+//                statement.condition.setContext(context);
+                this.checkAndUpdate(statement.condition, context);
 
                 context.addNewScope();
                 buildContext(statement.trueBranch, context);
@@ -97,7 +98,7 @@ public class SemanticAnalyzer {
                 context.killPreviousScope();
             } else if (command instanceof WhileLoopNode){
                 WhileLoopNode statement = (WhileLoopNode) command;
-                statement.condition.setContext(context);
+                this.checkAndUpdate(statement.condition, context);
 
                 context.addNewScope();
                 buildContext(statement.body, context);
@@ -105,13 +106,12 @@ public class SemanticAnalyzer {
             } else if (command instanceof AssignmentNode){
                 AssignmentNode statement = (AssignmentNode) command;
                 statement.setContext(context);
-                statement.varValue.setContext(context);
-                this.checkExpression(statement.varValue, context);
+                this.checkAndUpdate(statement.varValue, context);
             } else if (command instanceof ExpressionNode){
-                this.checkExpression((ExpressionNode)command, context);
+                this.checkAndUpdate((ExpressionNode)command, context);
             } else if (command instanceof VariableDeclNode){
                 ((VariableDeclNode) command).initialization.setContext(context);
-                this.checkExpression(((VariableDeclNode) command).initialization, context);
+                this.checkAndUpdate(((VariableDeclNode) command).initialization, context);
                 context.addVariable((VariableDeclNode)command);
             } else {
                 throw new SemanticException("Undefined node type %s", command.getStartPosition());
@@ -119,8 +119,9 @@ public class SemanticAnalyzer {
         }
     }
 
-    public boolean checkExpression(ExpressionNode mainExpr, MethodContext context) throws SemanticException{
+    public boolean checkAndUpdate(ExpressionNode mainExpr, MethodContext context) throws SemanticException{
         for (ExpressionNode expr : mainExpr.getAllNestedExpressions()){
+            expr.setContext(context);
             if (expr.primary instanceof IdentNode) {
                 // Just try to find this variable, it will throw semantic error if it is not defined
                 context.getVarDeclByName(((IdentNode) expr.primary).value, context.currentScopesList);
