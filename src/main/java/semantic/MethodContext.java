@@ -5,10 +5,7 @@ import ast.ParamsDeclNode;
 import ast.VariableDeclNode;
 import errors.SemanticException;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 public class MethodContext {
 
@@ -20,6 +17,7 @@ public class MethodContext {
     public ClassTable classTable;
     public ClassDeclNode myClass;
     public ArrayList<Integer> currentScopesList;
+    public HashSet<String> unavailableNames;
 
     int lastVariableIndex = -1;
     private int currScope = 0;
@@ -40,6 +38,30 @@ public class MethodContext {
         for (int i=0;i<methodClass.generics.size();i++){
             this.generics.put(methodClass.generics.get(i), i);
         }
+
+        // Unavailable variable names
+        this.unavailableNames = new HashSet<>();
+
+        for (String className : this.classTable.fields.keySet()){
+            this.unavailableNames.add(className);
+        }
+
+        for (String fieldName : this.classTable.fields.get(this.myClass).keySet()){
+            this.unavailableNames.add(fieldName);
+        }
+
+        unavailableNames.add("this");
+        unavailableNames.add("is");
+        unavailableNames.add("end");
+        unavailableNames.add("method");
+        unavailableNames.add("var");
+        unavailableNames.add("class");
+        unavailableNames.add("extends");
+        unavailableNames.add("while");
+        unavailableNames.add("loop");
+        unavailableNames.add("if");
+        unavailableNames.add("else");
+        unavailableNames.add("return");
 
     }
 
@@ -89,8 +111,10 @@ public class MethodContext {
         // and then declared in the main body, we should throw UnsupportedException
         // Need to make some tricky naming (or even not if variables are accessed by
         // indexes).
-        if (findVariable(newVariable.name)){
-            throw new SemanticException(String.format("Variable %s is already declared", newVariable.name), newVariable.getStartPosition());
+
+//        if (findVariable(newVariable.name) || this.classTable.fields.get(this.myClass).containsKey(newVariable.name)
+        if (findVariable(newVariable.name) || this.unavailableNames.contains(newVariable.name)){
+            throw new SemanticException(String.format("Variable %s is already declared or it is a keyword", newVariable.name), newVariable.getStartPosition());
         }
 
         this.lastVariableIndex++;

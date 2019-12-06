@@ -1,9 +1,11 @@
 package semantic;
 
 import ast.*;
+import bison.ParserWrapper;
 import errors.SemanticException;
 
 import java.io.FileReader;
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
@@ -21,9 +23,11 @@ public class SemanticAnalyzer {
 
     public void indexClasses(ProgramNode root) throws SemanticException {
 
-        this.classTable = new ClassTable(new ProgramNode(new ArrayList<>()));
-        // TODO : Add parsing of standard library
-//        this.classTable = new ClassTable();
+        try {
+            this.classTable = new ClassTable(ParserWrapper.parseProgram(this.predefinedClassesPath));
+        } catch (IOException exp){
+            throw new SemanticException("Can't load standard library", "-");
+        }
 
         for (ClassDeclNode classDecl : root.programClasses){
             this.classTable.addClass(classDecl);
