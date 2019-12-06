@@ -15,7 +15,7 @@ public class TempEntryPoint {
         parser.parse();
         ProgramNode node = parser.root;
         SemanticAnalyzer analyzer = new SemanticAnalyzer();
-        //analyzer.run(node);
+        analyzer.run(node);
         System.out.print("Completed");
     }
 }

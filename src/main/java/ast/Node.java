@@ -3,10 +3,10 @@ package ast;
 import errors.SemanticException;
 
 public abstract class Node {
-    private Integer startLine;
-    private Integer startOffset;
-    private Integer endLine;
-    private Integer endOffset;
+    private Integer startLine =0;
+    private Integer startOffset =0;
+    private Integer endLine= 0;
+    private Integer endOffset= 0;
 
     public String getStartPosition(){
         return startLine.toString() + " " + startOffset.toString();
