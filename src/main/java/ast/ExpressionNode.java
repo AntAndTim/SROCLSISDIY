@@ -31,13 +31,47 @@ public class ExpressionNode extends CommandNode{
         String currType = this.getPrimaryType();
         for (int idx=0;idx<this.callNames.size();idx++){
 //            currType this.callNames.get(idx)
-            if (this.callArgs.get(idx) == null){
+            if (this.callArgs.get(idx) == null){    // Field
                 if (!this.context.classTable.fields.get(currType).containsKey(this.callNames.get(idx))){
                     throw new SemanticException(String.format("Undefined field %s in %s", this.callNames.get(idx), currType), this.getStartPosition());
                 }
                 currType = this.context.classTable.fields.get(currType).get(this.callNames.get(idx)).fieldType.ident.value;
+            } else if (this.callNames.get(idx).equals("")){ // Constructor
+                if (idx == 0) {
+                    if (!this.context.classTable.table.containsKey(currType)){
+                        throw new SemanticException(String.format("Invalid class name %s", currType), this.getStartPosition());
+                    } else {
+                        // Check if any constructor has types which conform with given ones
+                        boolean argsOk = false;
+                        for (ConstructorDeclNode ctorDecl : this.context.classTable.constructors.get(currType)){
+                            // Compare types
+                            if (ctorDecl.params.size() != this.callArgs.get(0).size()){
+                                continue;
+                            }
+
+                            argsOk = true;
+
+                            for (int i = 0;i< this.callArgs.get(0).size();i++) {
+                                if (ctorDecl.params.get(0).paramType.ident.value.equals(callArgs.get(0).get(i).getType())){
+                                    argsOk = false;
+                                }
+                            }
+
+                            if (argsOk){
+                                break;
+                            }
+                        }
+                        if (!argsOk){
+                            throw new SemanticException("Such constructors signature doesn't exist", this.getStartPosition());
+                        }
+                    }
+
+                } else {
+                    throw new SemanticException("Empty call name", this.getStartPosition());
+                }
+            } else {    // Method
+                currType = this.getMethodReturnType(currType, this.callNames.get(idx), this.callArgs.get(idx)).retTypeName;
             }
-            currType = this.getMethodReturnType(currType, this.callNames.get(idx), this.callArgs.get(idx)).retTypeName;
         }
         return currType;
     }
@@ -53,6 +87,30 @@ public class ExpressionNode extends CommandNode{
             }
         }
         return res;
+    }
+
+    public ConstructorDeclNode getConstructor(String currType, ArrayList<ExpressionNode> args) throws SemanticException{
+        boolean argsOk = false;
+        for (ConstructorDeclNode ctorDecl : this.context.classTable.constructors.get(currType)){
+            // Compare types
+            if (ctorDecl.params.size() != this.callArgs.get(0).size()){
+                continue;
+            }
+
+            argsOk = true;
+
+            for (int i = 0;i< this.callArgs.get(0).size();i++) {
+                if (ctorDecl.params.get(0).paramType.ident.value.equals(args.get(i).getType())){
+                    argsOk = false;
+                }
+            }
+
+            if (argsOk){
+                return ctorDecl;
+            }
+        }
+        throw new SemanticException("Such constructors signature doesn't exist", this.getStartPosition());
+
     }
 
     public MethodDeclNode getMethodReturnType(String clsName, String name, ArrayList<ExpressionNode> args) throws SemanticException{
@@ -101,6 +159,23 @@ public class ExpressionNode extends CommandNode{
             } else {
                 for (int j = 0; j < args.size(); j++)  {
                     args.get(j).generateCode();
+                }
+
+                if (i == 0){
+
+                    ConstructorDeclNode ctorDecl = this.getConstructor(lastObjectType, args);
+                    cil.append(String.format("callvirt instance void .ctor("));
+
+                    boolean first = false;
+                    for (int j = 0; j < args.size(); j++) {
+                        ParamsDeclNode param = ctorDecl.params.get(j);
+                        if (!first) {
+                            cil.append(param.paramType.ident.value);
+                            first = true;
+                        } else cil.append(", " + param.paramType.ident.value);
+                    }
+                    cil.append(")\n");
+                    continue;
                 }
 
                 MethodDeclNode method = getMethodReturnType(lastObjectType, callName, args);

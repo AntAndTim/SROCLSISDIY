@@ -11,7 +11,7 @@ end
 
 class Main is
     method Main() : Integer is
-        var t : 44
+        var t : Integer(44)
         t := t.Plus(23)
         if t.GreaterEqual(50) then
             var k : 10
