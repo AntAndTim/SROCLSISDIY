@@ -9,7 +9,7 @@ public class ParserWrapper {
 
     public static ProgramNode parseProgram(String inputFile) throws IOException{
 
-        YYParser.Lexer lexer = new BisonLexer(TempEntryPoint.class.getClassLoader().getResourceAsStream(inputFile));
+        YYParser.Lexer lexer = new BisonLexer(ParserWrapper.class.getClassLoader().getResourceAsStream(inputFile));
         YYParser parser = new YYParser(lexer);
         parser.setDebugLevel(0);
         parser.parse();

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class SemanticAnalyzer {
 
     ClassTable classTable;
-    final String predefinedClassesPath = "std.txt";
+    final String predefinedClassesPath = "std.o";
 
     public void run(ProgramNode root) throws SemanticException {
         indexClasses(root);
