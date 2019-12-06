@@ -17,5 +17,6 @@ public class TempEntryPoint {
         SemanticAnalyzer analyzer = new SemanticAnalyzer();
         analyzer.run(node);
         System.out.print("Completed");
+        System.out.println(node.generateCode());
     }
 }

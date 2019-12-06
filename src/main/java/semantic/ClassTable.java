@@ -88,6 +88,7 @@ public class ClassTable {
         this.predefined = new HashSet<>();
         this.methods = new HashMap<>();
         this.constructors = new HashMap<>();
+        this.fields = new HashMap<>();
 
         // Initialize std classes
         for (ClassDeclNode classDecl : predefinedClasses.programClasses){

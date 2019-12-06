@@ -46,7 +46,10 @@ public class MethodContext {
             this.unavailableNames.add(className);
         }
 
-        for (String fieldName : this.classTable.fields.get(this.myClass).keySet()){
+        System.out.println(this.classTable.get("Integer"));
+        System.out.println(this.classTable.fields.put("JK", new HashMap<>()));
+
+        for (String fieldName : this.classTable.fields.get(this.myClass.name).keySet()){
             this.unavailableNames.add(fieldName);
         }
 

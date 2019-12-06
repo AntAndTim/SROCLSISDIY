@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SemanticAnalyzer {
 
@@ -41,6 +42,12 @@ public class SemanticAnalyzer {
      */
     public void updateClassTable(ProgramNode root) throws SemanticException {
         for (ClassDeclNode classDecl : root.programClasses){
+
+            this.classTable.fields.put(classDecl.name, new HashMap<>());
+            this.classTable.methods.put(classDecl.name, new HashMap<>());
+            this.classTable.constructors.put(classDecl.name, new ArrayList<>());
+
+
             // Get methods to add
             ClassDeclNode currParentNode = this.classTable.get(classDecl.parent);
             while (currParentNode != null) {
@@ -74,7 +81,7 @@ public class SemanticAnalyzer {
                 // Also add missing fields
                 for (FieldDeclNode parentField : currParentNode.fields){
                     for (FieldDeclNode currClassField: classDecl.fields){
-                        if (currClassField.name == parentField.name){
+                        if (currClassField.name.equals(parentField.name)){
                             throw new SemanticException(String.format("Field %s is already declared in parent", currClassField.name), currClassField.getStartPosition());
                         }
                     }
