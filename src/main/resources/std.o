@@ -5,11 +5,11 @@ class Integer extends AnyValue is
         is end
     var Min : Integer
     var Max : Integer
-    method toReal : Real
+    method toReal() : Real
         is end
-    method toBoolean : Boolean
+    method toBoolean() : Boolean
         is end
-    method UnaryMinus : Integer
+    method UnaryMinus() : Integer
         is end
     method Plus(p:Integer) : Integer
         is end
@@ -59,9 +59,9 @@ class Real extends AnyValue is
     var Min : Real
     var Max : Real
     var Epsilon : Real
-    method toInteger : Integer
+    method toInteger() : Integer
         is end
-    method UnaryMinus : Real
+    method UnaryMinus() : Real
         is end
     method Plus(p:Real) : Real
         is end
@@ -104,7 +104,7 @@ class Real extends AnyValue is
 end
 
 class Boolean extends AnyValue is
-    this(Boolean)
+    this(b: Boolean)
         is end
     method toInteger() : Integer
         is end
@@ -114,16 +114,16 @@ class Boolean extends AnyValue is
         is end
     method Xor(p: Boolean) : Boolean
         is end
-    method Not : Boolean
+    method Not() : Boolean
         is end
 end
 
 class Array[T] extends AnyRef is
     this(l: Integer)
         is end
-    method toList : List
+    method toList() : List
         is end
-    method Length : Integer
+    method Length() : Integer
         is end
     method get(i: Integer) : T
         is end
