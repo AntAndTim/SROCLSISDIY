@@ -1,0 +1,24 @@
+class Test is
+
+this() is
+end
+
+method new() : Test is
+
+end
+
+end
+
+class Main is
+    method Main() : Integer is
+        var t : Integer(44)
+        t := t.Plus(23)
+        if t.GreaterEqual(50) then
+            var k : 10
+            k := k.Mult(3)
+            t := t.Plus(k)
+        else
+            var c : 20
+        end
+    end
+end

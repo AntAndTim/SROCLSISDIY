@@ -1,135 +1,195 @@
 %language "Java"
-%define api.value.type {bison.Token}
+%code imports
+{
+package bison;
 
-%token OPENING_CURLY_BRACES
-%token CLOSING_CURLY_BRACES
-%token OPENING_PARENTHESIS
-%token CLOSING_PARENTHESIS
-%token OPENING_BRACKETS
-%token CLOSING_BRACKETS
-%token COMMA
-%token DOT
-%token IDENTIFIER
-%token ELSE
-%token FALSE
-%token IF
-%token IN
-%token THIS
-%token TRUE
-%token VAR
-%token WHILE
-%token CLASS
-%token EXTENDS
-%token ASSIGNMENT
-%token COLON
-%token UNKNOWN
-%token RETURN
+import ast.*;
+import utils.Pair;
+
+import java.util.ArrayList;
+}
+
+%code {public ProgramNode root;}
+
+
+%token <bison.Token> OPENING_CURLY_BRACES
+%token <bison.Token> CLOSING_CURLY_BRACES
+%token <bison.Token> OPENING_PARENTHESIS
+%token <bison.Token> CLOSING_PARENTHESIS
+%token <bison.Token> OPENING_BRACKETS
+%token <bison.Token> CLOSING_BRACKETS
+%token <bison.Token> COMMA
+%token <bison.Token> DOT
+%token <bison.Token> IDENTIFIER
+%token <bison.Token> ELSE
+%token <bison.Token> FALSE
+%token <bison.Token> IF
+%token <bison.Token> IN
+%token <bison.Token> THIS
+%token <bison.Token> TRUE
+%token <bison.Token> VAR
+%token <bison.Token> WHILE
+%token <bison.Token> CLASS
+%token <bison.Token> EXTENDS
+%token <bison.Token> ASSIGNMENT
+%token <bison.Token> COLON
+%token <bison.Token> UNKNOWN
+%token <bison.Token> RETURN
 
 /*todo tokens*/
-%token IS      /* is  */
-%token END     /* end */
+%token <bison.Token> IS      /* is  */
+%token <bison.Token> END     /* end */
                /* todo ASSIGNMENT(':=') */
-%token LOOP    /* loop */
-%token THEN    /* then */
-%token METHOD  /* method */
-%token INTEGER /* regular int: 1,2,3 ..*/
-%token REAL    /* fp value: 1.1 ,1.2, 5.5 ... */
+%token <bison.Token> LOOP    /* loop */
+%token <bison.Token> THEN    /* then */
+%token <bison.Token> METHOD  /* method */
+%token <bison.Token> INTEGER /* regular int: 1,2,3 ..*/
+%token <bison.Token> REAL    /* fp value: 1.1 ,1.2, 5.5 ... */
+
+
+/* %type <ast.IfStatementNode> IfStatement */
+%type <ArrayList<ClassDeclNode>> ClassDeclarations
+%type <ast.ClassDeclNode> ClassDeclaration
+%type <ast.ClassNameNode> ClassName
+%type <ArrayList<MemberDeclNode>> MemberDeclarations
+%type <ast.MemberDeclNode> MemberDeclaration
+%type <ast.VariableDeclNode> VariableDeclaration
+%type <ast.MethodDeclNode> MethodDeclaration
+%type <ast.ConstructorDeclNode> ConstructorDeclaration
+%type <ast.IdentNode> MethodReturnType
+%type <ArrayList<ParamsDeclNode>> Parameters
+%type <ArrayList<ParamsDeclNode>> ParameterDeclarations
+%type <ast.ParamsDeclNode> ParameterDeclaration
+%type <ArrayList<ast.Node>> Body
+%type <ArrayList<ast.Node>> BodyMember
+%type <ArrayList<ast.Node>> VariableDeclarationGroup
+%type <ArrayList<ast.Node>> StatementGroup
+%type <ast.Node> Statement
+%type <ast.AssignmentNode> Assignment
+%type <ast.WhileLoopNode> WhileLoop
+%type <ast.IfStatementNode> IfStatement
+%type <ast.ReturnStatement> ReturnStatement
+%type <ast.ExpressionNode> Expression
+%type <ArrayList<Pair<IdentNode, ArrayList<ExpressionNode>>>> ExpressionCallGroup
+%type <Pair<IdentNode, ArrayList<ExpressionNode>>> ExpressionCallGroupComponent
+%type <ArrayList<ExpressionNode>> Arguments
+%type <ArrayList<ExpressionNode>> ExpressionsList
+%type <ast.Node> Primary
+%type <ast.BooleanLitNode> BooleanLiteral
+%type <ArrayList<IdentNode>> ClassGenerics
+%type <ast.TypeNode> TypeName
+%type <ArrayList<ast.TypeNode>> TypeNameList
+%type <ast.FieldDeclNode> FieldDeclaration
 
 %%
 
 Program
-    : ClassDeclarations
+    : ClassDeclarations {root = new ProgramNode($1);}
     ;
 
 ClassDeclarations
-    : /* empty */
-    | ClassDeclaration ClassDeclarations
+    : /* empty */                        {$$ = new ArrayList<ClassDeclNode>();}
+    | ClassDeclaration ClassDeclarations { $2.add(0, $1); $$=$2; }
     ;
 
 ClassDeclaration
-    : CLASS ClassName Extends IS MemberDeclarations END
-    ;
-
-Extends
-    : /* empty */
-    | EXTENDS ClassName
+    : CLASS ClassName IS MemberDeclarations END {$$ = new ClassDeclNode($2, $4);}
+    | CLASS ClassName EXTENDS ClassName IS MemberDeclarations END {$$ = new ClassDeclNode($2, $4, $6);}
     ;
 
 ClassName
-    : IDENTIFIER /* no generics*/
-    | IDENTIFIER OPENING_BRACKETS ClassName CLOSING_BRACKETS
+    : IDENTIFIER /* no generics*/ {$$ = new ast.ClassNameNode(new ast.IdentNode($1.getValue()), new ArrayList<IdentNode>());}
+    | IDENTIFIER OPENING_BRACKETS ClassGenerics CLOSING_BRACKETS {$$ = new ast.ClassNameNode(new ast.IdentNode($1.getValue()), $3);}
     ;
 
+
+TypeName
+    : IDENTIFIER /* no generics*/ {$$ = new ast.TypeNode(new ast.IdentNode($1.getValue()), new ArrayList<TypeNode>());}
+    | IDENTIFIER OPENING_BRACKETS TypeNameList CLOSING_BRACKETS {$$ = new ast.TypeNode(new ast.IdentNode($1.getValue()), $3);}
+    ;
+
+TypeNameList
+    :                    TypeName {ArrayList<TypeNode> list = new ArrayList<TypeNode>(); list.add($1); $$ = list;}
+    | TypeNameList COMMA TypeName {$1.add($3); $$ = $1;}
+
+ClassGenerics
+    :                     IDENTIFIER {ArrayList<IdentNode> list = new ArrayList<IdentNode>(); list.add(new IdentNode($1.getValue())); $$ = list;}
+    | ClassGenerics COMMA IDENTIFIER {$1.add(new IdentNode($3.getValue())); $$ = $1;}
+
 MemberDeclarations
-    : /* empty */
-    | MemberDeclaration MemberDeclarations
+    : /* empty */ {$$ = new ArrayList<MemberDeclNode>();}
+    | MemberDeclaration MemberDeclarations {$2.add(0,$1); $$ = $2;}
     ;
 
 MemberDeclaration
-    : VariableDeclaration
-    | MethodDeclaration
-    | ConstructorDeclaration
+    : FieldDeclaration {MemberDeclNode node = new MemberDeclNode(); node.declaration = $1; node.declType = MemberDeclNode.memberType.FIELD; $$ = node;}
+    | MethodDeclaration {MemberDeclNode node = new MemberDeclNode(); node.declaration = $1; node.declType = MemberDeclNode.memberType.METHOD; $$ = node;}
+    | ConstructorDeclaration {MemberDeclNode node = new MemberDeclNode(); node.declaration = $1; node.declType = MemberDeclNode.memberType.CONSTRUCTOR; $$ = node;}
     ;
 
+FieldDeclaration
+    : VAR IDENTIFIER COLON ClassName {$$ = new ast.FieldDeclNode(new IdentNode($2.getValue()),$4);}
+
 VariableDeclaration
-    : VAR IDENTIFIER COLON Expression
+    : VAR IDENTIFIER COLON Expression {$$ = new ast.VariableDeclNode(new IdentNode($2.getValue()),$4);}
     ;
 
 MethodDeclaration
-    : METHOD IDENTIFIER Parameters MethodReturnType IS Body END
+    : METHOD IDENTIFIER Parameters MethodReturnType IS Body END {$$ = new ast.MethodDeclNode(new ast.IdentNode($2.getValue()),$3,$4,new ast.BodyNode($6));}
     ;
 
 MethodReturnType
-    : /* empty */
-    | COLON IDENTIFIER
+    : /* empty */ {$$ = null;}
+    | COLON IDENTIFIER {$$ = new IdentNode($2.getValue());}
     ;
 
 Parameters
-    : OPENING_PARENTHESIS                       CLOSING_PARENTHESIS
-    | OPENING_PARENTHESIS ParameterDeclarations CLOSING_PARENTHESIS
+    : OPENING_PARENTHESIS                       CLOSING_PARENTHESIS {$$ = new ArrayList<ParamsDeclNode>();}
+    | OPENING_PARENTHESIS ParameterDeclarations CLOSING_PARENTHESIS {$$ = $2;}
     ;
 
 ParameterDeclarations
-    : ParameterDeclaration
-    | ParameterDeclarations COMMA ParameterDeclaration
+    : ParameterDeclaration {ArrayList<ParamsDeclNode> params = new ArrayList<ParamsDeclNode>(); params.add($1); $$ = params;}
+    | ParameterDeclarations COMMA ParameterDeclaration { $1.add($3); }
     ;
 
 ParameterDeclaration
-    : IDENTIFIER COLON ClassName
+    : IDENTIFIER COLON TypeName {$$ = new ParamsDeclNode(new IdentNode($1.getValue()), $3);}
     ;
 
 Body
-    : /* empty */
-    | BodyMember Body
+    : /* empty */ {$$ = new ArrayList<Node>();}
+    | BodyMember Body {$2.addAll(0,$1); $$ = $2;}
     ;
 
 BodyMember
-    : VariableDeclarationGroup
-    | StatementGroup
+    : VariableDeclarationGroup {$$ = $1;}
+    | StatementGroup {$$ = $1;}
     ;
 
 VariableDeclarationGroup
-    : /* empty */
-    | VariableDeclaration VariableDeclarationGroup
+    : /* empty */ {$$ = new ArrayList<ast.Node>();}
+    | VariableDeclaration VariableDeclarationGroup {$2.add(0,$1); $$ = $2;}
     ;
 
 StatementGroup
-    : /* empty */
-    | Statement StatementGroup
+    : /* empty */ {$$ = new ArrayList<ast.Node>();}
+    | Statement StatementGroup{$2.add(0, $1); $$ = $2;}
     ;
 
 ConstructorDeclaration
-    : THIS Parameters IS Body END
+    : THIS Parameters IS Body END {$$ = new ast.ConstructorDeclNode($2,new BodyNode($4));}
     ;
 
 Statement
-    : Assignment
-    | WhileLoop
-    | IfStatement
-    | ReturnStatement
-    | CallStatement
+    : Assignment {$$ = $1;}
+    | WhileLoop {$$ = $1;}
+    | IfStatement {$$ = $1;}
+    | ReturnStatement {$$ = $1;}
+    | Expression {$$ = $1;}
     ;
 
+/*
 CallStatement
     : CompoundName OPENING_PARENTHESIS             CLOSING_PARENTHESIS
     | CompoundName OPENING_PARENTHESIS Parameters  CLOSING_PARENTHESIS
@@ -138,65 +198,75 @@ CallStatement
 CompoundName
     :                  IDENTIFIER
     | CompoundName DOT IDENTIFIER
-    ;
+    ;*/
 
 Assignment
-    : IDENTIFIER ASSIGNMENT Expression
+    : IDENTIFIER ASSIGNMENT Expression {$$ = new AssignmentNode(new IdentNode($1.getValue()), $3);}
     ;
 
 WhileLoop
-    : WHILE Expression LOOP Body END
+    : WHILE Expression LOOP Body END {$$ = new WhileLoopNode($2, new BodyNode($4));}
     ;
 
 IfStatement
-    : IF Expression THEN Body END
-    | IF Expression THEN Body ELSE Body END
+    : IF Expression THEN Body END {$$ = new IfStatementNode($2, new BodyNode($4));}
+    | IF Expression THEN Body ELSE Body END {$$ = new IfStatementNode($2, new BodyNode($4), new BodyNode($6));}
     ;
 
 ReturnStatement
-    : RETURN
-    | RETURN Expression
+    : RETURN {$$ = new ReturnStatement(null);}
+    | RETURN Expression {$$ = new ReturnStatement($2);}
     ;
 
 Expression
-    : Primary
-    | Primary ExpressionCallGroup
+    : Primary {$$ = new ExpressionNode($1, new ArrayList<Pair<IdentNode, ArrayList<ExpressionNode>>>());}
+    | Primary ExpressionCallGroup {$$ = new ExpressionNode($1, $2);}
+    | TypeName Arguments
+    {ArrayList<Pair<IdentNode, ArrayList<ExpressionNode>>> list = new ArrayList<Pair<IdentNode, ArrayList<ExpressionNode>>>();
+     list.add(new Pair<IdentNode, ArrayList<ExpressionNode>>(new IdentNode(""), $2));
+     $$ = new ExpressionNode($1, list);}
+    | TypeName Arguments ExpressionCallGroup
+    {ArrayList<Pair<IdentNode, ArrayList<ExpressionNode>>> list = new ArrayList<Pair<IdentNode, ArrayList<ExpressionNode>>>();
+    list.add(new Pair<IdentNode, ArrayList<ExpressionNode>>(new IdentNode(""), $2));
+    list.addAll($3);
+    $$ = new ExpressionNode($1, list);}
     ;
 
 /* one or more */
 ExpressionCallGroup
-    :                      ExpressionCallGroupComponent
-    | ExpressionCallGroup  ExpressionCallGroupComponent
+    :                      ExpressionCallGroupComponent {ArrayList<Pair<IdentNode, ArrayList<ExpressionNode>>> list = new ArrayList<Pair<IdentNode, ArrayList<ExpressionNode>>>(); list.add($1); $$ = list;}
+    | ExpressionCallGroupComponent ExpressionCallGroup   {$2.add($1); $$ = $2;}
     ;
 
 ExpressionCallGroupComponent
-    : DOT IDENTIFIER Arguments
+    : DOT IDENTIFIER {Pair<IdentNode, ArrayList<ExpressionNode>> component = new Pair<IdentNode, ArrayList<ExpressionNode>>(new IdentNode($2.getValue()), new ArrayList<ExpressionNode>()); $$ = component;}
+    | DOT IDENTIFIER Arguments {Pair<IdentNode, ArrayList<ExpressionNode>> component = new Pair<IdentNode, ArrayList<ExpressionNode>>(new IdentNode($2.getValue()), $3); $$ = component;}
     ;
 
 /* zero or more */
 Arguments
-    : OPENING_PARENTHESIS    /* empty */  CLOSING_PARENTHESIS
-    | OPENING_PARENTHESIS ExpressionsList CLOSING_PARENTHESIS
+    : OPENING_PARENTHESIS    /* empty */  CLOSING_PARENTHESIS {$$ = new ArrayList<ExpressionNode>();}
+    | OPENING_PARENTHESIS ExpressionsList CLOSING_PARENTHESIS {$$ = $2;}
     ;
 
 /*one or more*/
 /* expression, expression, expression */
 ExpressionsList
-    :                       Expression
-    | ExpressionsList COMMA Expression
+    :                       Expression {ArrayList<ExpressionNode> list = new ArrayList<ExpressionNode>(); list.add($1); $$ = list;}
+    | ExpressionsList COMMA Expression {$1.add($3); $$ = $1;}
     ;
 
 Primary
-    : INTEGER
-    | REAL
-    | BooleanLiteral
-    | THIS
-    | ClassName
+    : INTEGER {$$ = new IntegerLitNode($1.getValue());}
+    | REAL    {$$ = new RealLitNode($1.getValue());}
+    | BooleanLiteral {$$ = $1;}
+    | THIS {$$ = new ast.IdentNode("this");}
+    | TypeName {$$ = $1;}
     ;
 
 BooleanLiteral
-    : TRUE
-    | FALSE
+    : TRUE {$$ = new BooleanLitNode("True");}
+    | FALSE {$$ = new BooleanLitNode("False");}
     ;
 
 %%

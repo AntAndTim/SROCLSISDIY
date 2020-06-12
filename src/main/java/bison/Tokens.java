@@ -31,8 +31,8 @@ public enum Tokens implements TokenType {
     METHOD("method", YYParser.Lexer.METHOD),
     INTEGER("INTEGER", YYParser.Lexer.INTEGER),
     REAL("REAL", YYParser.Lexer.REAL),
-    SPACE(" ", 0),
-    NEW_LINE("\n", 0);
+    SPACE(" ", 2281337),
+    NEW_LINE("\n", 2281337);
 
     private final String name;
     private final int type;
